@@ -1,11 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { GURU_CREATE_URL, GURU_DELETE_URL, GURU_RECORD_URL, GURU_VIEW_URL } from "../url/linkURL";
+import { GURU_CREATE_URL, GURU_DELETE_URL, GURU_EDIT_URL, GURU_RECORD_URL, GURU_UPDATE_URL, GURU_VIEW_URL } from "../url/linkURL";
 
 
 const initialState = {
     items: {},
     createCheck: {},
+    editCheck: {},
+    updateCheck: {},
     deleteCheck: false,
     pending: false,
     error: '',
@@ -46,6 +48,28 @@ export const guruCreate = createAsyncThunk('guruCreate', async (initialCreate) =
     }
 });
 
+export const guruEdit = createAsyncThunk('guruEdit', async (initialEdit) => {
+    try {
+        const res = await axios.get(GURU_EDIT_URL + initialEdit + '/edit', {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
+export const guruUpdate = createAsyncThunk('guruUpdate', async (initialIdUpdate, initialDataUpdate) => {
+    try {
+        const res = await axios.post(GURU_UPDATE_URL + initialIdUpdate, { initialDataUpdate }, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
 
 const GuruSlice = createSlice({
     name: 'guru',
@@ -57,6 +81,9 @@ const GuruSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+
+            //? GURU RECORD
+
             .addCase(guruRecord.pending, (state) => {
                 state.pending = true;
             })
@@ -69,9 +96,23 @@ const GuruSlice = createSlice({
                 state.error = action.error.message;
                 state.checkError = true;
             })
+
+            //? GURU DELETE
+
+            .addCase(guruDelete.pending, (state) => {
+                state.pending = true;
+            })
             .addCase(guruDelete.fulfilled, (state, action) => {
+                state.pending = false;
                 state.deleteCheck = action.item;
             })
+            .addCase(guruDelete.rejected, (state, action) => {
+                state.pending = false;
+                state.error = action.error;
+            })
+
+            //? GURU CREATE
+
             .addCase(guruCreate.pending, (state) => {
                 state.pending = true;
             })
@@ -83,6 +124,35 @@ const GuruSlice = createSlice({
                 state.pending = false;
                 state.error = action.error;
             })
+
+            //? GURU EDIT
+
+            .addCase(guruEdit.pending, (state) => {
+                state.pending = true;
+            })
+            .addCase(guruEdit.fulfilled, (state, action) => {
+                state.pending = false;
+                state.editCheck = action.payload;
+            })
+            .addCase(guruEdit.rejected, (state, action) => {
+                state.error = true;
+                state.pending = action.error;
+            })
+
+            //? GURU UPDATE
+
+            .addCase(guruUpdate.pending, (state) => {
+                state.pending = true;
+            })
+            .addCase(guruUpdate.fulfilled, (state, action) => {
+                state.updateCheck = action.payload;
+                state.pending = false;
+            })
+            .addCase(guruUpdate.rejected, (state, action) => {
+                state.pending = false;
+                state.error = action.error;
+            });
+
     }
 });
 
@@ -90,9 +160,10 @@ export const selectAllGuru = state => state.guru.items;
 export const guruPending = state => state.guru.pending;
 export const checkDelete = state => state.guru.deleteCheck;
 export const createGuruCheck = state => state.guru.createCheck;
+export const checkEditGuru = state => state.guru.editCheck;
+export const checkUpdate = state => state.guru.updateCheck;
 export const errorGuru = state => state.guru.error;
 export const checkErrorGuru = state => state.guru.checkError;
-export const guruShow = state => state.guru.viewCheck;
 export const { setDeleteCheck } = GuruSlice.actions;
 
 export default GuruSlice.reducer;

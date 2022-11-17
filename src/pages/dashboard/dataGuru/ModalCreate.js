@@ -36,8 +36,6 @@ const ModalCreate = ({ isVisible, onClose }) => {
         onClose();
     }
 
-    console.log(errorData);
-
     return (
         <div>
             {isVisible && mapels.items && (
@@ -61,9 +59,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 type="text"
                                                 name='nama_guru'
                                                 id='nama_guru'
-                                                className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData && 'border-red-500'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Nama Guru'
-                                                onChange={handleChange}
+                                                onChange={(e) => handleChange(e)}
                                             />
                                         </div>
                                         <div className="mb-3">
@@ -74,11 +72,11 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 )}
                                             </div>
                                             <select
-                                                className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData && 'border-red-500'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
                                                 placeholder='Mapel'
                                                 name='id_mapel'
-                                                onChange={handleChange}
+                                                onChange={(e) => handleChange(e)}
                                             >
                                                 <option>-Pilih Mapel Guru-</option>
                                                 {mapels?.items.map((mapel, i) => (

@@ -1,5 +1,6 @@
 import React from 'react';
 import Sidebar from '../../../components/Sidebar';
+import { BiTrash, BiEdit } from 'react-icons/bi';
 import { AdminMenu } from '../../../components/Links';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -9,6 +10,7 @@ import { guruDelete, guruPending, guruRecord } from '../../../features/dashboard
 import { selectAllGuru } from '../../../features/dashboard/GuruSlice';
 import Alert from '../../../components/Alert';
 import ModalCreate from './ModalCreate';
+import ModalUpdate from './ModalUpdate';
 
 const Record = () => {
     const [active, setActive] = useState('Data Guru');
@@ -18,6 +20,8 @@ const Record = () => {
     const dataGuruCheck = useSelector(guruPending);
     const [checkAlert, setCheckAlert] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [showModalUpdate, setShowModalUpdate] = useState(false);
+    const [idUpdateModal, setIdUpdateModal] = useState();
 
     const handleDelete = (id) => {
         dispatch(guruDelete(id));
@@ -32,6 +36,11 @@ const Record = () => {
         setTimeout(() => {
             setCheckAlert(false);
         }, 10000)
+    }
+
+    const hanldeUpdate = (id) => {
+        setShowModalUpdate(prev => prev = true);
+        setIdUpdateModal(prev => prev = id);
     }
 
     useEffect(() => {
@@ -92,7 +101,7 @@ const Record = () => {
                                         {dataGuru.items && dataGuru.items.map((data, i) => (
                                             < tr key={i} className={`bg-white ${'data-' + data.id}`} >
                                                 <>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data.id}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data?.nama_guru}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data?.mapel.nama_mapel}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data?.mapel.kkm}</td>
@@ -103,15 +112,16 @@ const Record = () => {
                                                     </td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
                                                         <Link
-                                                            className='text-xs md:text-sm text-white mr-1 font-medium md:font-semibold bg-amber-500 rounded-md uppercase py-1 px-3 hover:bg-amber-400'
+                                                            className='text-sm md:text-xl text-black mr-1 bg-white font-medium md:font-semibold py-1 px-3 hover:text-amber-400'
+                                                            onClick={() => hanldeUpdate(data?.id)}
                                                         >
-                                                            Edit
+                                                            <BiEdit className='inline' />
                                                         </Link>
                                                         <button
-                                                            className='text-xs md:text-sm text-white mr-1 font-medium md:font-semibold bg-rose-500 hover:bg-rose-400 rounded-md uppercase py-1 px-3'
+                                                            className='text-sm md:text-xl text-black mr-1 bg-white font-medium md:font-semibold py-1 px-3 hover:text-red-400'
                                                             onClick={() => handleDelete(data.id)}
                                                         >
-                                                            Hapus
+                                                            <BiTrash className='inline' />
                                                         </button>
                                                     </td>
                                                 </>
@@ -127,6 +137,7 @@ const Record = () => {
                     )}
                 </div>
                 <ModalCreate isVisible={showModal} onClose={() => setShowModal(false)} />
+                <ModalUpdate isVisible={showModalUpdate} onClose={() => setShowModalUpdate(false)} idUser={idUpdateModal} />
             </Sidebar >
         </div >
     );
