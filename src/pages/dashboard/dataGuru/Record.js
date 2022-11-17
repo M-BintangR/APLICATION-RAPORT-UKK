@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { guruDelete, guruPending, guruRecord } from '../../../features/dashboard/GuruSlice';
 import { selectAllGuru } from '../../../features/dashboard/GuruSlice';
 import Alert from '../../../components/Alert';
+import ModalCreate from './ModalCreate';
 
 const Record = () => {
     const [active, setActive] = useState('Data Guru');
@@ -16,6 +17,7 @@ const Record = () => {
     const dataGuru = useSelector(selectAllGuru);
     const dataGuruCheck = useSelector(guruPending);
     const [checkAlert, setCheckAlert] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     const handleDelete = (id) => {
         dispatch(guruDelete(id));
@@ -46,7 +48,6 @@ const Record = () => {
         { title: 'Action' }
     ];
 
-
     return (
         <div >
             <Sidebar Menus={Menus} active={active}>
@@ -61,7 +62,10 @@ const Record = () => {
                         <div>
                             <div className="mt-5 mb-8 bg-slate-100 rounded-md py-3 px-4">
                                 <h1 className='text-xl md:text-2xl font-semibold '>Data Guru
-                                    <Link to={'/dashboard/data/guru/create'} className=' py-1 px-2 md:py-2 md:px-3 text-xs float-right bg-green-600 hover:bg-green-500 text-white rounded-md uppercase md:text-sm'>Tambah</Link>
+                                    <button
+                                        className=' py-1 px-2 md:py-2 md:px-3 text-xs float-right bg-green-600 hover:bg-green-500 text-white rounded-md uppercase md:text-sm'
+                                        onClick={() => setShowModal(true)}
+                                    >Tambah</button>
                                 </h1>
                                 <p>Kelola Data Guru</p>
                             </div>
@@ -103,11 +107,6 @@ const Record = () => {
                                                         >
                                                             Edit
                                                         </Link>
-                                                        <Link
-                                                            className='text-xs md:text-sm text-white mr-1 font-medium md:font-semibold bg-cyan-500 rounded-md uppercase py-1 hover:bg-cyan-400  px-3'
-                                                        >
-                                                            Lihat
-                                                        </Link>
                                                         <button
                                                             className='text-xs md:text-sm text-white mr-1 font-medium md:font-semibold bg-rose-500 hover:bg-rose-400 rounded-md uppercase py-1 px-3'
                                                             onClick={() => handleDelete(data.id)}
@@ -123,11 +122,11 @@ const Record = () => {
                             </div>
                         </div>
                     )}
-
                     {checkAlert && (
                         <Alert pesan={'Data berhasil dihapus'} />
                     )}
                 </div>
+                <ModalCreate isVisible={showModal} onClose={() => setShowModal(false)} />
             </Sidebar >
         </div >
     );

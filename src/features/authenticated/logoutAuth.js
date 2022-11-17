@@ -14,9 +14,8 @@ export const logoutUser = createAsyncThunk('logoutUser', async () => {
             headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
         });
         return res.data;
-    } catch (e) {
-        const error = new Error("Something went wrong");
-        return error;
+    } catch (err) {
+        return err;
     }
 });
 

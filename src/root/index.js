@@ -10,7 +10,6 @@ import RecordWalas from '../pages/dashboard/dataWalas/Record';
 import RecordUser from '../pages/dashboard/dataUser/Record';
 import RecordMapel from '../pages/dashboard/dataMapel/Record';
 import Home from '../pages/dashboard/Home';
-import Create from '../pages/dashboard/dataGuru/Create';
 import { Navigate } from 'react-router-dom';
 import RequireAdmin from '../middleware/RequireAdmin';
 
@@ -36,13 +35,6 @@ const Root = () => {
                         element={
                             <RequireAdmin>
                                 <RecordGuru />
-                            </RequireAdmin>
-                        } />
-                    <Route
-                        path='/dashboard/data/guru/create'
-                        element={
-                            <RequireAdmin>
-                                <Create />
                             </RequireAdmin>
                         } />
                     <Route
