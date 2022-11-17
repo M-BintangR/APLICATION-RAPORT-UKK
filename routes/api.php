@@ -5,11 +5,6 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\WalasController;
-use App\Http\Middleware\IsAdmin;
-use App\Models\Mapel;
-use App\Models\Walas;
-use Illuminate\Auth\Events\Login;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +24,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::get('/data/guru', [GuruController::class, 'index']);
         Route::post('/data/guru', [GuruController::class, 'store']);
-        Route::get('/data/guru/{guru:id}', [GuruController::class, 'show']);
         Route::get('/data/guru/{guru:id}/edit', [GuruController::class, 'edit']);
         Route::post('/data/guru/{guru:id}', [GuruController::class, 'update']);
         Route::delete('/data/guru/{guru:id}', [GuruController::class, 'destroy']);
