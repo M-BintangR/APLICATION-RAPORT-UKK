@@ -14,7 +14,7 @@ class MapelController extends Controller
      */
     public function index()
     {
-        $items = Mapel::with(['jurusan', 'guru'])->get();
+        $items = Mapel::with(['jurusan'])->get();
 
         if ($items) {
             return response()->json([
