@@ -162,7 +162,7 @@ const MapelSlice = createSlice({
 });
 
 export const selectAllMapel = state => state.mapel.items;
-export const checkCreate = state => state.mapel.mapelCreate;
+export const checkCreateMapel = state => state.mapel.mapelCreate;
 export const selectStatusMapel = state => state.mapel.status;
 export const selectErrorMapel = state => state.mapel.error;
 export const pendingMapel = state => state.mapel.pending;
