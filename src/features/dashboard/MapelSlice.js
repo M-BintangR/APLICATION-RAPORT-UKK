@@ -26,13 +26,16 @@ const MapelSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(mapelRecord.pending, (state) => {
-                state.pending = 'loading';
+                state.pending = true;
+                state.status = 'loading';
             })
             .addCase(mapelRecord.fulfilled, (state, action) => {
+                state.pending = false;
                 state.items = action.payload;
                 state.status = 'success';
             })
             .addCase(mapelRecord.rejected, (state, action) => {
+                state.pending = false;
                 state.error = action.error.message;
             })
     }
@@ -41,4 +44,5 @@ const MapelSlice = createSlice({
 export const selectAllMapel = state => state.mapel.items;
 export const selectStatusMapel = state => state.mapel.status;
 export const selectErrorMapel = state => state.mapel.error;
+export const pendingMapel = state => state.mapel.pending;
 export default MapelSlice.reducer;
