@@ -1,13 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { MAPEL_RECORD_URL } from "../url/linkURL";
+import { MAPEL_CREATE_URL, MAPEL_DELETE_URL, MAPEL_EDIT_URL, MAPEL_RECORD_URL, MAPEL_UPDATE_URL } from "../url/linkURL";
 
-const initialState = {
-    items: {},
-    pending: false,
-    status: 'idle',
-    error: '',
-}
 
 export const mapelRecord = createAsyncThunk('mapelRecord', async () => {
     try {
@@ -20,11 +14,69 @@ export const mapelRecord = createAsyncThunk('mapelRecord', async () => {
     }
 });
 
+export const mapelCreate = createAsyncThunk('mapelCreate', async (initialCreate) => {
+    try {
+        const res = await axios.post(MAPEL_CREATE_URL, initialCreate, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
+export const mapelEdit = createAsyncThunk('mapelEdit', async (initialEdit) => {
+    try {
+        const res = await axios.get(MAPEL_EDIT_URL + initialEdit + '/edit', {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
+export const mapelUpdate = createAsyncThunk('mapelUpdate', async (initialUpdate) => {
+    try {
+        const res = await axios.post(MAPEL_UPDATE_URL + initialUpdate.id, initialUpdate, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
+export const mapelDelete = createAsyncThunk('mapelUpdate', async (initialDelete) => {
+    try {
+        const res = await axios.delete(MAPEL_DELETE_URL + initialDelete, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
+const initialState = {
+    items: {},
+    mapelCreate: {},
+    mapelEdit: {},
+    mapelUpdate: {},
+    mapelDelete: {},
+    error: {},
+    pending: false,
+    status: 'idle',
+}
+
 const MapelSlice = createSlice({
     name: 'mapel',
     initialState,
     extraReducers: (builder) => {
         builder
+
+            //? MAPEL RECORD
+
             .addCase(mapelRecord.pending, (state) => {
                 state.pending = true;
                 state.status = 'loading';
@@ -38,10 +90,66 @@ const MapelSlice = createSlice({
                 state.pending = false;
                 state.error = action.error.message;
             })
+
+            //? MAPEL CREATE
+
+            .addCase(mapelCreate.pending, (state) => {
+                state.pending = true;
+                state.status = 'loading';
+            })
+            .addCase(mapelCreate.fulfilled, (state, action) => {
+                state.pending = false;
+                state.mapelCreate = action.payload;
+                state.status = 'success';
+            })
+            .addCase(mapelCreate.rejected, (state, action) => {
+                state.pending = false;
+                state.error = action.error.message;
+            })
+
+            //? MAPEL EDIT
+
+            .addCase(mapelEdit.pending, (state) => {
+                state.pending = true;
+                state.status = 'loading';
+            })
+            .addCase(mapelEdit.fulfilled, (state, action) => {
+                state.pending = false;
+                state.mapelEdit = action.payload;
+                state.status = 'success';
+            })
+            .addCase(mapelEdit.rejected, (state, action) => {
+                state.pending = false;
+                state.error = action.error.message;
+            })
+
+            //? MAPEL UPDATE
+
+            .addCase(mapelUpdate.pending, (state) => {
+                state.pending = true;
+                state.status = 'loading';
+            })
+            .addCase(mapelUpdate.fulfilled, (state, action) => {
+                state.pending = false;
+                state.mapelUpdate = action.payload;
+                state.status = 'success';
+            })
+            .addCase(mapelUpdate.rejected, (state, action) => {
+                state.pending = false;
+                state.error = action.error.message;
+            })
+
+            //? MAPEL UPDATE
+
+            .addCase(mapelDelete.fulfilled, (state, action) => {
+                state.mapelDelete = action.payload;
+            })
+
     }
 });
 
 export const selectAllMapel = state => state.mapel.items;
+export const checkCreate = state => state.mapel.mapelCreate;
 export const selectStatusMapel = state => state.mapel.status;
 export const selectErrorMapel = state => state.mapel.error;
 export const pendingMapel = state => state.mapel.pending;

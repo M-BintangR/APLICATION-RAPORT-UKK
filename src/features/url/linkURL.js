@@ -11,3 +11,10 @@ export const GURU_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/guru/';
 
 //? MAPEL URL
 export const MAPEL_RECORD_URL = 'http://127.0.0.1:8000/api/admin/data/mapel';
+export const MAPEL_CREATE_URL = 'http://127.0.0.1:8000/api/admin/data/mapel';
+export const MAPEL_EDIT_URL = 'http://127.0.0.1:8000/api/admin/data/mapel/';
+export const MAPEL_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/mapel/';
+export const MAPEL_DELETE_URL = 'http://127.0.0.1:8000/api/admin/data/mapel/';
+
+//? JURUSAN URL
+export const JURUSAN_RECORD_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan';

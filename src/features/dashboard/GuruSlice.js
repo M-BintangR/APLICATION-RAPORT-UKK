@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { GURU_CREATE_URL, GURU_DELETE_URL, GURU_EDIT_URL, GURU_RECORD_URL, GURU_UPDATE_URL, GURU_VIEW_URL } from "../url/linkURL";
+import { GURU_CREATE_URL, GURU_DELETE_URL, GURU_EDIT_URL, GURU_RECORD_URL, GURU_UPDATE_URL } from "../url/linkURL";
 
 
 const initialState = {
