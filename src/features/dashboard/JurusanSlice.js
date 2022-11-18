@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { JURUSAN_CREATE_URL, JURUSAN_RECORD_URL } from "../url/linkURL";
+import { JURUSAN_CREATE_URL, JURUSAN_RECORD_URL, JURUSAN_EDIT_URL, JURUSAN_DELETE_URL, JURUSAN_UPDATE_URL } from "../url/linkURL";
 
 
 export const jurusanRecord = createAsyncThunk('jurusanRecord', async () => {
@@ -27,7 +27,7 @@ export const jurusanCreate = createAsyncThunk('jurusanCreate', async (initialCre
 
 export const jurusanEdit = createAsyncThunk('jurusanEdit', async (initialEdit) => {
     try {
-        const res = await axios.get(JURUSAN_RECORD_URL + initialEdit + '/edit', {
+        const res = await axios.get(JURUSAN_EDIT_URL + initialEdit + '/edit', {
             headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
         });
         return res.data;
@@ -38,7 +38,7 @@ export const jurusanEdit = createAsyncThunk('jurusanEdit', async (initialEdit) =
 
 export const jurusanUpdate = createAsyncThunk('jurusanUpdate', async (initialUpdate) => {
     try {
-        const res = await axios.post(JURUSAN_RECORD_URL + initialUpdate.id, initialUpdate, {
+        const res = await axios.post(JURUSAN_UPDATE_URL + initialUpdate.id, initialUpdate, {
             headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
         });
         return res.data;
@@ -49,7 +49,7 @@ export const jurusanUpdate = createAsyncThunk('jurusanUpdate', async (initialUpd
 
 export const jurusanDelete = createAsyncThunk('jurusanDelete', async (initialDelete) => {
     try {
-        const res = await axios.delete(JURUSAN_RECORD_URL + initialDelete, {
+        const res = await axios.delete(JURUSAN_DELETE_URL + initialDelete, {
             headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
         });
         return res.data;

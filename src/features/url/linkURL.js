@@ -22,3 +22,10 @@ export const JURUSAN_CREATE_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan'
 export const JURUSAN_EDIT_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan/';
 export const JURUSAN_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan/';
 export const JURUSAN_DELETE_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan/';
+
+//? TAPEL URL
+export const TAPEL_RECORD_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan';
+export const TAPEL_CREATE_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan';
+export const TAPEL_EDIT_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan/';
+export const TAPEL_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan/';
+export const TAPEL_DELETE_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan/';
