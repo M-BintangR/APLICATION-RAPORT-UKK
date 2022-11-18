@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { MAPEL_CREATE_URL, MAPEL_DELETE_URL, MAPEL_EDIT_URL, MAPEL_RECORD_URL, MAPEL_UPDATE_URL } from "../url/linkURL";
+import { MAPEL_CREATE_URL, MAPEL_EDIT_URL, MAPEL_RECORD_URL, MAPEL_UPDATE_URL, MAPEL_DELETE_URL } from "../url/linkURL";
 
 
 export const mapelRecord = createAsyncThunk('mapelRecord', async () => {
@@ -123,27 +123,40 @@ const MapelSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? MAPEL UPDATE
+            //? MAPEL DELETE
 
-            .addCase(mapelUpdate.pending, (state) => {
+
+            .addCase(mapelDelete.pending, (state) => {
                 state.pending = true;
-                state.status = 'loading';
             })
-            .addCase(mapelUpdate.fulfilled, (state, action) => {
-                state.pending = false;
-                state.mapelUpdate = action.payload;
-                state.status = 'success';
-            })
-            .addCase(mapelUpdate.rejected, (state, action) => {
-                state.pending = false;
-                state.error = action.error.message;
-            })
-
-            //? MAPEL UPDATE
-
             .addCase(mapelDelete.fulfilled, (state, action) => {
-                state.mapelDelete = action.payload;
-            });
+                state.pending = false;
+                state.mapelDelete = action.item;
+            })
+            .addCase(mapelDelete.rejected, (state, action) => {
+                state.pending = false;
+                state.error = action.error;
+            })
+
+        //? MAPEL UPDATE
+
+        // .addCase(mapelUpdate.pending, (state) => {
+        //     state.pending = true;
+        //     state.status = 'loading';
+        // })
+        // .addCase(mapelUpdate.fulfilled, (state, action) => {
+        //     state.pending = false;
+        //     state.mapelUpdate = action.payload;
+        //     state.status = 'success';
+        // })
+        // .addCase(mapelUpdate.rejected, (state, action) => {
+        //     state.pending = false;
+        //     state.error = action.error.message;
+        // })
+
+
+
+
 
     }
 });

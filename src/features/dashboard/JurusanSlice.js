@@ -149,4 +149,5 @@ const JurusanSlice = createSlice({
 
 });
 
+export const selectAllJurusan = state => state.jurusan.jurusanRecord;
 export default JurusanSlice.reducer;
