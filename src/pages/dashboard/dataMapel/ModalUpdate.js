@@ -1,131 +1,119 @@
 import React from 'react';
 import Sidebar from '../../../components/Sidebar';
 import { AdminMenu } from '../../../components/Links';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { jurusanRecord, selectAllJurusan } from '../../../features/dashboard/JurusanSlice';
 import { useState } from 'react';
-import { checkCreateMapel, mapelCreate, mapelRecord } from '../../../features/dashboard/MapelSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkEditMapel, checkUpdateMapel, mapelEdit, mapelRecord, mapelUpdate, pendingMapel } from '../../../features/dashboard/MapelSlice';
+import { selectAllJurusan } from '../../../features/dashboard/JurusanSlice';
+import { useEffect } from 'react';
 
-const Create = ({ isVisible, onClose }) => {
+const ModalUpdate = ({ isVisible, onClose, idUser }) => {
     const Menus = AdminMenu;
-    const dispatch = useDispatch();
-    const jurusans = useSelector(selectAllJurusan);
-    const check = useSelector(checkCreateMapel);
-    const [errorData, setErrorData] = useState(null);
-    const [inputCreate, setInputCreate] = useState({
+    const [inputEdit, setInputEdit] = useState({
         nama_mapel: '',
         kkm: '',
         level: '',
         id_jurusan: '',
     });
+    const dispatch = useDispatch();
+    const pending = useSelector(pendingMapel);
+    const dataEditMapel = useSelector(checkEditMapel);
+    const dataUpdateMapel = useSelector(checkUpdateMapel);
+    const dataJurusan = useSelector(selectAllJurusan);
 
-    const handleChange = e => {
-        setInputCreate(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
-
-    const handleClick = () => {
-        dispatch(mapelCreate(inputCreate));
+    const handleClose = () => {
         onClose();
-        setErrorData(prev => prev = null);
-        setInputCreate({ nama_mapel: '', kkm: '', level: '', id_jurusan: '' });
-        dispatch(mapelRecord());
+        setInputEdit({ nama_mapel: '', kkm: '', level: '', id_jurusan: '' });
     }
 
     useEffect(() => {
-        if (check.response) setErrorData(check?.response.data.errors)
-        dispatch(jurusanRecord());
-    }, [dispatch, setErrorData, check]);
+        isVisible && dispatch(mapelEdit(idUser));
+    }, [dispatch, isVisible, idUser]);
 
-    const handleClose = () => {
-        setErrorData(prev => prev = null);
+    const handleEdit = () => {
+        const data = {
+            nama_guru: inputEdit.nama_guru,
+            id_mapel: inputEdit.id_mapel,
+            id: idUser,
+        }
+        dispatch(mapelUpdate(data));
+        dispatch(mapelRecord());
         onClose();
     }
 
+    const handleChange = (e) => {
+        setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    }
+
+    console.log(inputEdit)
     return (
         <div>
-            {isVisible && (
+            {isVisible && dataJurusan.items && !pending && dataEditMapel?.item && (
                 <div className="fixed inset-0 z-50 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
                     <div className="bg-white p-2 rounded">
                         <div className="md:w-[600px] flex flex-col">
                             <div className="py-6 px-6 lg:px-8 text-left">
                                 <h3 className="mb-5 text-xl font-medium text-gray-900">
-                                    Tambah Data
+                                    Edit Data
                                 </h3>
                                 <div className='space-x-6'>
                                     <div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="nama_mapel">Nama Mapel</label>
-                                            <div>
-                                                {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData.nama_mapel[0]}</small>
-                                                )}
-                                            </div>
                                             <input
                                                 type="text"
                                                 name='nama_mapel'
                                                 id='nama_mapel'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5`}
                                                 placeholder='Nama Mapel'
-                                                value={inputCreate.nama_mapel}
+                                                defaultValue={dataEditMapel.item.nama_mapel}
                                                 onChange={handleChange}
-
                                             />
                                         </div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="kkm">Nilai KKM</label>
-                                            <div>
-                                                {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData.kkm[0]}</small>
-                                                )}
-                                            </div>
                                             <input
                                                 type="text"
                                                 name='kkm'
                                                 id='kkm'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 `}
                                                 placeholder='Nilai KKM'
-                                                value={inputCreate.kkm}
                                                 onChange={handleChange}
+                                                defaultValue={dataEditMapel.item.kkm}
                                             />
                                         </div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="level">Level</label>
-                                            <div>
-                                                {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData.level[0]}</small>
-                                                )}
-                                            </div>
                                             <input
                                                 type="text"
                                                 name='level'
                                                 id='level'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 `}
                                                 placeholder='Level'
-                                                value={inputCreate.level}
                                                 onChange={handleChange}
+                                                defaultValue={dataEditMapel.item.level}
                                             />
                                         </div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="jurusan">Jurusan</label>
-                                            <div>
-                                                {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData.id_jurusan[0]}</small>
-                                                )}
-                                            </div>
                                             <select
                                                 id='jurusan'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none `}
                                                 type="text"
                                                 placeholder='Jurusan'
                                                 name='id_jurusan'
-                                                value={inputCreate.id_jurusan}
                                                 onChange={handleChange}
+                                                defaultValue={dataEditMapel.item.id_jurusan}
                                             >
-                                                <option>- Pilih Jurusan -</option>
-                                                {jurusans.items.map((jurusan, i) => (
+                                                {dataJurusan?.items.map((jurusan, i) => (
+                                                    jurusan.id === dataEditMapel.item.id_jurusan && (
+                                                        <option key={i} value={jurusan.id}>{jurusan.kode_jurusan}</option>
+                                                    )
+                                                ))}
+                                                {dataJurusan?.items.map((jurusan, i) => (
                                                     <option key={i} value={jurusan.id}>{jurusan.kode_jurusan}</option>
                                                 ))}
+
                                             </select>
                                         </div>
                                     </div>
@@ -133,9 +121,9 @@ const Create = ({ isVisible, onClose }) => {
                                 <div className="flex flex-row">
                                     <button
                                         className='text-white bg-dark-purple hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-3 mr-2'
-                                        onClick={handleClick}
+                                        onClick={handleEdit}
                                     >
-                                        Tambah
+                                        Edit
                                     </button>
                                     <button
                                         className='text-white bg-red-700 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-3'
@@ -153,4 +141,4 @@ const Create = ({ isVisible, onClose }) => {
     );
 }
 
-export default Create
+export default ModalUpdate

@@ -38,7 +38,7 @@ export const mapelEdit = createAsyncThunk('mapelEdit', async (initialEdit) => {
 
 export const mapelUpdate = createAsyncThunk('mapelUpdate', async (initialUpdate) => {
     try {
-        const res = await axios.post(MAPEL_UPDATE_URL + initialUpdate.id, initialUpdate, {
+        const res = await axios.put(MAPEL_UPDATE_URL + initialUpdate.id, initialUpdate, {
             headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
         });
         return res.data;
@@ -123,37 +123,37 @@ const MapelSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? MAPEL DELETE
 
+            //? MAPEL UPDATE
 
-            .addCase(mapelDelete.pending, (state) => {
+            .addCase(mapelUpdate.pending, (state) => {
                 state.pending = true;
+                state.status = 'loading';
             })
-            .addCase(mapelDelete.fulfilled, (state, action) => {
+            .addCase(mapelUpdate.fulfilled, (state, action) => {
                 state.pending = false;
-                state.mapelDelete = action.item;
+                state.mapelUpdate = action.payload;
+                state.status = 'success';
             })
-            .addCase(mapelDelete.rejected, (state, action) => {
+            .addCase(mapelUpdate.rejected, (state, action) => {
                 state.pending = false;
-                state.error = action.error;
+                state.error = action.error.message;
             })
 
-        //? MAPEL UPDATE
+        //? MAPEL DELETE
 
-        // .addCase(mapelUpdate.pending, (state) => {
+
+        // .addCase(mapelDelete.pending, (state) => {
         //     state.pending = true;
-        //     state.status = 'loading';
         // })
-        // .addCase(mapelUpdate.fulfilled, (state, action) => {
+        // .addCase(mapelDelete.fulfilled, (state, action) => {
         //     state.pending = false;
-        //     state.mapelUpdate = action.payload;
-        //     state.status = 'success';
+        //     state.mapelDelete = action.item;
         // })
-        // .addCase(mapelUpdate.rejected, (state, action) => {
+        // .addCase(mapelDelete.rejected, (state, action) => {
         //     state.pending = false;
-        //     state.error = action.error.message;
+        //     state.error = action.error;
         // })
-
 
 
 
@@ -163,6 +163,8 @@ const MapelSlice = createSlice({
 
 export const selectAllMapel = state => state.mapel.items;
 export const checkCreateMapel = state => state.mapel.mapelCreate;
+export const checkUpdateMapel = state => state.mapel.mapelUpdate;
+export const checkEditMapel = state => state.mapel.mapelEdit;
 export const selectStatusMapel = state => state.mapel.status;
 export const selectErrorMapel = state => state.mapel.error;
 export const pendingMapel = state => state.mapel.pending;

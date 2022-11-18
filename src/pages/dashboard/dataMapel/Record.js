@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { mapelRecord, pendingMapel, selectAllMapel } from '../../../features/dashboard/MapelSlice';
 import ModalCreate from '../dataMapel/ModalCreate';
+import ModalUpdate from '../dataMapel/ModalUpdate';
 
 const Record = () => {
     const [active, setActive] = useState('Data Mapel');
@@ -16,6 +17,8 @@ const Record = () => {
     const dataMapel = useSelector(selectAllMapel);
     const pending = useSelector(pendingMapel);
     const [showModalCreate, setShowModalCreate] = useState(false);
+    const [showModalUpdate, setShowModalUpdate] = useState(false);
+    const [idUser, setIdUser] = useState();
 
     useEffect(() => {
         dispatch(mapelRecord());
@@ -30,6 +33,11 @@ const Record = () => {
         { title: 'Kode Jurusan' },
         { title: 'Action' }
     ];
+
+    const handleUpdate = (id) => {
+        setIdUser(id);
+        setShowModalUpdate(prev => prev = true);
+    }
 
     return (
         <div >
@@ -83,12 +91,13 @@ const Record = () => {
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{mapel.jurusan.nama_jurusan}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{mapel.jurusan.kode_jurusan}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
-                                                        <Link
+                                                        <button
                                                             className='text-sm md:text-xl text-black mr-1 bg-white font-medium md:font-semibold py-1 px-3 hover:text-amber-400'
+                                                            onClick={() => handleUpdate(mapel.id)}
 
                                                         >
                                                             <BiEdit className='inline' />
-                                                        </Link>
+                                                        </button>
                                                         <button
                                                             className='text-sm md:text-xl text-black mr-1 bg-white font-medium md:font-semibold py-1 px-3 hover:text-red-400'
 
@@ -111,7 +120,7 @@ const Record = () => {
                 )} */}
                 </div>
                 <ModalCreate isVisible={showModalCreate} onClose={() => setShowModalCreate(false)} />
-                {/* <ModalUpdate isVisible={showModalUpdate} onClose={() => setShowModalUpdate(false)} idUser={idUpdateModal} /> */}
+                <ModalUpdate isVisible={showModalUpdate} onClose={() => setShowModalUpdate(false)} idUser={idUser} />
             </Sidebar >
         </div >
     );

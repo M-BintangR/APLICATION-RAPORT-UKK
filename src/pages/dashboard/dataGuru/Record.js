@@ -111,12 +111,12 @@ const Record = () => {
                                                         </span>
                                                     </td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
-                                                        <Link
+                                                        <button
                                                             className='text-sm md:text-xl text-black mr-1 bg-white font-medium md:font-semibold py-1 px-3 hover:text-amber-400'
                                                             onClick={() => hanldeUpdate(data?.id)}
                                                         >
                                                             <BiEdit className='inline' />
-                                                        </Link>
+                                                        </button>
                                                         <button
                                                             className='text-sm md:text-xl text-black mr-1 bg-white font-medium md:font-semibold py-1 px-3 hover:text-red-400'
                                                             onClick={() => handleDelete(data.id)}
