@@ -36,3 +36,10 @@ export const KELAS_CREATE_URL = 'http://127.0.0.1:8000/api/admin/data/kelas';
 export const KELAS_EDIT_URL = 'http://127.0.0.1:8000/api/admin/data/kelas/';
 export const KELAS_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/kelas/';
 export const KELAS_DELETE_URL = 'http://127.0.0.1:8000/api/admin/data/kelas/';
+
+//? TAPEL URL
+export const SISWA_RECORD_URL = 'http://127.0.0.1:8000/api/admin/data/siswa';
+export const SISWA_CREATE_URL = 'http://127.0.0.1:8000/api/admin/data/siswa';
+export const SISWA_EDIT_URL = 'http://127.0.0.1:8000/api/admin/data/siswa/';
+export const SISWA_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/siswa/';
+export const SISWA_DELETE_URL = 'http://127.0.0.1:8000/api/admin/data/siswa/';
