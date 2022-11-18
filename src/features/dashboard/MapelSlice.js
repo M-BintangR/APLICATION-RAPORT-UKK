@@ -143,7 +143,7 @@ const MapelSlice = createSlice({
 
             .addCase(mapelDelete.fulfilled, (state, action) => {
                 state.mapelDelete = action.payload;
-            })
+            });
 
     }
 });
