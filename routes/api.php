@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\RegisterController;
@@ -55,6 +56,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/data/jurusan/{jurusan:id}/edit', [JurusanController::class, 'edit']);
         Route::put('/data/jurusan/{jurusan:id}', [JurusanController::class, 'update']);
         Route::delete('/data/jurusan/{jurusan:id}', [JurusanController::class, 'destroy']);
+
+        //? Route Data Kelas
+
+        Route::get('/data/kelas', [KelasController::class, 'index']);
+        Route::post('/data/kelas', [KelasController::class, 'store']);
+        Route::get('/data/kelas/{kelas:id}', [KelasController::class, 'show']);
+        Route::get('/data/kelas/{kelas:id}/edit', [KelasController::class, 'edit']);
+        Route::put('/data/kelas/{kelas:id}', [KelasController::class, 'update']);
+        Route::delete('/data/kelas/{kelas:id}', [KelasController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'guru', 'middleware' => 'guru'], function () {
