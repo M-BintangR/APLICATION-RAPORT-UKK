@@ -6,6 +6,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\TapelController;
 use App\Http\Controllers\WalasController;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +66,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/data/kelas/{kelas:id}/edit', [KelasController::class, 'edit']);
         Route::put('/data/kelas/{kelas:id}', [KelasController::class, 'update']);
         Route::delete('/data/kelas/{kelas:id}', [KelasController::class, 'destroy']);
+
+        //? Route Data Tapel
+
+        Route::get('/data/tapel', [TapelController::class, 'index']);
+        Route::post('/data/tapel', [TapelController::class, 'store']);
+        Route::get('/data/tapel/{tapel:id}', [TapelController::class, 'show']);
+        Route::get('/data/tapel/{tapel:id}/edit', [TapelController::class, 'edit']);
+        Route::put('/data/tapel/{tapel:id}', [TapelController::class, 'update']);
+        Route::delete('/data/tapel/{tapel:id}', [TapelController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'guru', 'middleware' => 'guru'], function () {
