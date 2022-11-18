@@ -3,7 +3,7 @@ import Sidebar from '../../../components/Sidebar';
 import { AdminMenu } from '../../../components/Links';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkEditGuru, guruEdit, guruPending } from '../../../features/dashboard/GuruSlice';
+import { checkEditGuru, guruEdit, guruPending, guruRecord, guruUpdate } from '../../../features/dashboard/GuruSlice';
 import { selectAllMapel } from '../../../features/dashboard/MapelSlice';
 import { useState } from 'react';
 
@@ -38,8 +38,14 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         if (dataEditGuru.item.nama_guru && dataEditGuru.item.id_mapel) {
             setInputEdit({ nama_guru: dataEditGuru.item.nama_guru, id_mapel: dataEditGuru.item.id_mapel });
         }
-        console.log(inputEdit.id_mapel);
-        console.log(inputEdit.nama_guru);
+        const data = {
+            nama_guru: inputEdit.nama_guru,
+            id_mapel: inputEdit.id_mapel,
+            id: idUser,
+        }
+        dispatch(guruUpdate(data));
+        dispatch(guruRecord());
+        onClose();
     }
 
     return (

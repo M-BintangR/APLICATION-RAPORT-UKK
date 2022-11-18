@@ -59,9 +59,9 @@ export const guruEdit = createAsyncThunk('guruEdit', async (initialEdit) => {
     }
 });
 
-export const guruUpdate = createAsyncThunk('guruUpdate', async (initialIdUpdate, initialDataUpdate) => {
+export const guruUpdate = createAsyncThunk('guruUpdate', async (initialUpdate) => {
     try {
-        const res = await axios.post(GURU_UPDATE_URL + initialIdUpdate, { initialDataUpdate }, {
+        const res = await axios.post(GURU_UPDATE_URL + initialUpdate.id, initialUpdate, {
             headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
         });
         return res.data;
