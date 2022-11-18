@@ -29,3 +29,10 @@ export const TAPEL_CREATE_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan';
 export const TAPEL_EDIT_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan/';
 export const TAPEL_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan/';
 export const TAPEL_DELETE_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan/';
+
+//? TAPEL URL
+export const KELAS_RECORD_URL = 'http://127.0.0.1:8000/api/admin/data/kelas';
+export const KELAS_CREATE_URL = 'http://127.0.0.1:8000/api/admin/data/kelas';
+export const KELAS_EDIT_URL = 'http://127.0.0.1:8000/api/admin/data/kelas/';
+export const KELAS_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/kelas/';
+export const KELAS_DELETE_URL = 'http://127.0.0.1:8000/api/admin/data/kelas/';

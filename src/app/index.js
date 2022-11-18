@@ -5,6 +5,7 @@ import logoutAuth from "../features/authenticated/logoutAuth";
 import MapelSlice from "../features/dashboard/MapelSlice";
 import JurusanSlice from "../features/dashboard/JurusanSlice";
 import TapelSlice from "../features/dashboard/TapelSlice";
+import KelasSlice from "../features/dashboard/KelasSlice";
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
         mapel: MapelSlice,
         jurusan: JurusanSlice,
         tapel: TapelSlice,
+        kelas: KelasSlice,
     }
 });
 
