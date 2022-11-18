@@ -6,6 +6,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TapelController;
 use App\Http\Controllers\WalasController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
+
         //? Route Data Guru
 
         Route::get('/data/guru', [GuruController::class, 'index']);
@@ -75,6 +77,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/data/tapel/{tapel:id}/edit', [TapelController::class, 'edit']);
         Route::put('/data/tapel/{tapel:id}', [TapelController::class, 'update']);
         Route::delete('/data/tapel/{tapel:id}', [TapelController::class, 'destroy']);
+
+        //? Route Data Siswa
+
+        Route::get('/data/siswa', [SiswaController::class, 'index']);
+        Route::post('/data/siswa', [SiswaController::class, 'store']);
+        Route::get('/data/siswa/{siswa:id}', [SiswaController::class, 'show']);
+        Route::get('/data/siswa/{siswa:id}/edit', [SiswaController::class, 'edit']);
+        Route::put('/data/siswa/{siswa:id}', [SiswaController::class, 'update']);
+        Route::delete('/data/siswa/{siswa:id}', [SiswaController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'guru', 'middleware' => 'guru'], function () {
