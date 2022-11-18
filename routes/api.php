@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\RegisterController;
@@ -45,6 +46,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/data/walas/{walas:id}/edit', [WalasController::class, 'edit']);
         Route::put('/data/walas/{walas:id}', [WalasController::class, 'update']);
         Route::delete('/data/walas/{walas:id}', [WalasController::class, 'destroy']);
+
+        //? Route Data Jurusan
+
+        Route::get('/data/jurusan', [JurusanController::class, 'index']);
+        Route::post('/data/jurusan', [JurusanController::class, 'store']);
+        Route::get('/data/jurusan/{jurusan:id}', [JurusanController::class, 'show']);
+        Route::get('/data/jurusan/{jurusan:id}/edit', [JurusanController::class, 'edit']);
+        Route::put('/data/jurusan/{jurusan:id}', [JurusanController::class, 'update']);
+        Route::delete('/data/jurusan/{jurusan:id}', [JurusanController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'guru', 'middleware' => 'guru'], function () {

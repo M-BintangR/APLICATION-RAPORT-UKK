@@ -52,6 +52,7 @@ class JurusanController extends Controller
     {
         $validateData = $request->validate([
             'nama_jurusan' => ['required'],
+            'kode_jurusan' => ['required'],
         ]);
 
         if ($validateData) {
@@ -131,6 +132,7 @@ class JurusanController extends Controller
     {
         $validateData = $request->validate([
             'nama_jurusan' => ['required'],
+            'kode_jurusan' => ['required'],
         ]);
 
         if ($validateData) {
