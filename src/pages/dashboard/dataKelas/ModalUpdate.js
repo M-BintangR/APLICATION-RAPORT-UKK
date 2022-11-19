@@ -2,19 +2,20 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkEditJurusan, checkPendingJurusan, jurusanEdit, jurusanRecord, jurusanUpdate } from '../../../features/dashboard/JurusanSlice';
+import { checkEditKelas, kelasEdit, kelasRecord, kelasUpdate, pendingKelas } from '../../../features/dashboard/KelasSlice';
 
-const ModalUpdate = ({ isVisible, onClose, idUser }) => {
-    const [inputEdit, setInputEdit] = useState({
-        nama_jurusan: '',
-        kode_jurusan: '',
-    });
+
+const ModalUpdate = ({ isVisible, idUser, onClose }) => {
     const dispatch = useDispatch();
-    const pending = useSelector(checkPendingJurusan);
-    const dataEditJurusan = useSelector(checkEditJurusan);
-
+    const [inputEdit, setInputEdit] = useState({
+        nama_kelas: '',
+        level: '',
+    });
+    const [errorData, setErrorData] = useState(null);
+    const pending = useSelector(pendingKelas);
+    const dataEditKelas = useSelector(checkEditKelas)
     useEffect(() => {
-        isVisible && dispatch(jurusanEdit(idUser));
+        isVisible && dispatch(kelasEdit(idUser));
     }, [dispatch, isVisible, idUser]);
 
     const handleChange = (e) => {
@@ -23,27 +24,27 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
 
     const handleClose = () => {
         onClose();
-        setInputEdit({ nama_jurusan: '', kode_jurusan: '' });
+        setInputEdit({ nama_kelas: '', level: '' });
     }
 
     const handleEdit = () => {
-        if (dataEditJurusan.item) {
-            setInputEdit({ nama_jurusan: dataEditJurusan.item.nama_jurusan, kode_jurusan: dataEditJurusan.item.kode_jurusan });
+        if (dataEditKelas.item) {
+            setInputEdit({ nama_kelas: dataEditKelas.item.nama_kelas, level: dataEditKelas.item.level });
         }
         const data = {
-            nama_jurusan: inputEdit.nama_jurusan,
-            kode_jurusan: inputEdit.kode_jurusan,
+            nama_kelas: inputEdit.nama_kelas,
+            level: inputEdit.level,
             id: idUser,
         }
-        dispatch(jurusanUpdate(data));
-        dispatch(jurusanRecord());
+        dispatch(kelasUpdate(data));
+        dispatch(kelasRecord());
         onClose();
     }
 
-
+    console.log(inputEdit);
     return (
         <div>
-            {isVisible && !pending && dataEditJurusan?.item && (
+            {isVisible && !pending && dataEditKelas?.item && (
                 <div className="fixed inset-0 z-50 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
                     <div className="bg-white p-2 rounded">
                         <div className="md:w-[600px] flex flex-col">
@@ -54,28 +55,33 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                 <div className='space-x-6'>
                                     <div>
                                         <div className="mb-3">
-                                            <label className='mb-2' htmlFor="nama_jurusan">Nama Jurusan</label>
+                                            <label className='mb-2' htmlFor="nama_kelas">Nama Jurusan</label>
                                             <input
                                                 type="text"
-                                                name='nama_jurusan'
-                                                id='nama_jurusan'
+                                                name='nama_kelas'
+                                                id='nama_kelas'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5`}
                                                 placeholder='Nama Jurusan'
                                                 onChange={handleChange}
-                                                defaultValue={dataEditJurusan?.item.nama_jurusan}
+                                                defaultValue={dataEditKelas?.item.nama_kelas}
                                             />
                                         </div>
                                         <div className="mb-3">
-                                            <label className='mb-2' htmlFor="kode_jurusan">Kode Jurusan</label>
-                                            <input
+                                            <label className='mb-2' htmlFor="kode_kelas">Kode Jurusan</label>
+                                            <select
+                                                id='level'
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
-                                                name='kode_jurusan'
-                                                id='kode_jurusan'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 `}
-                                                placeholder='Kode Jurusan'
+                                                placeholder='level'
+                                                name='level'
+                                                defaultValue={dataEditKelas?.item.level}
                                                 onChange={handleChange}
-                                                defaultValue={dataEditJurusan?.item.kode_jurusan}
-                                            />
+                                            >
+                                                <option>{dataEditKelas?.item.level}</option>
+                                                <option value={'X'}>X</option>
+                                                <option value={'XI'}>XI</option>
+                                                <option value={'XII'}>XII</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

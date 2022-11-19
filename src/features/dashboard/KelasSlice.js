@@ -38,7 +38,7 @@ export const kelasEdit = createAsyncThunk('kelasEdit', async (initialEdit) => {
 
 export const kelasUpdate = createAsyncThunk('kelasUpdate', async (initialUpdate) => {
     try {
-        const res = await axios.post(KELAS_UPDATE_URL + initialUpdate.id, initialUpdate, {
+        const res = await axios.put(KELAS_UPDATE_URL + initialUpdate.id, initialUpdate, {
             headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
         });
         return res.data;
@@ -150,4 +150,10 @@ const KelasSlice = createSlice({
 
 });
 
+export const selectAllKelas = state => state.kelas.kelasRecord;
+export const checkCreateKelas = state => state.kelas.kelasCreate;
+export const checkEditKelas = state => state.kelas.kelasEdit;
+export const checkUpdate = state => state.kelas.kelasUpdate;
+export const checkDelete = state => state.kelas.kelasDelete;
+export const pendingKelas = state => state.kelas.pending;
 export default KelasSlice.reducer;
