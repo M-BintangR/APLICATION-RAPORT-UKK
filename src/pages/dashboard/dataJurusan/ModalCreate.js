@@ -28,71 +28,37 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                 <div className='space-x-6'>
                                     <div>
                                         <div className="mb-3">
-                                            <label className='mb-2' htmlFor="nama_mapel">Nama Mapel</label>
+                                            <label className='mb-2' htmlFor="nama_mapel">Nama Jurusan</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData.nama_mapel[0]}</small>
+                                                    <small className='text-xs text-red-500 font-normal'>{errorData.nama_jurusan[0]}</small>
                                                 )}
                                             </div>
                                             <input
                                                 type="text"
-                                                name='nama_mapel'
-                                                id='nama_mapel'
+                                                name='nama_jurusan'
+                                                id='nama_jurusan'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
-                                                placeholder='Nama Mapel'
+                                                placeholder='Nama Jurusan'
                                                 onChange={handleChange}
 
                                             />
                                         </div>
                                         <div className="mb-3">
-                                            <label className='mb-2' htmlFor="kkm">Nilai KKM</label>
+                                            <label className='mb-2' htmlFor="kode_jurusan">Kode Jurusan</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData.kkm[0]}</small>
+                                                    <small className='text-xs text-red-500 font-normal'>{errorData.kode_jurusan[0]}</small>
                                                 )}
                                             </div>
                                             <input
                                                 type="text"
-                                                name='kkm'
-                                                id='kkm'
+                                                name='kode_jurusan'
+                                                id='kode_jurusan'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
-                                                placeholder='Nilai KKM'
+                                                placeholder='Kode Jurusan'
                                                 onChange={handleChange}
                                             />
-                                        </div>
-                                        <div className="mb-3">
-                                            <label className='mb-2' htmlFor="level">Level</label>
-                                            <div>
-                                                {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData.level[0]}</small>
-                                                )}
-                                            </div>
-                                            <input
-                                                type="text"
-                                                name='level'
-                                                id='level'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
-                                                placeholder='Level'
-                                                onChange={handleChange}
-                                            />
-                                        </div>
-                                        <div className="mb-3">
-                                            <label className='mb-2' htmlFor="jurusan">Jurusan</label>
-                                            <div>
-                                                {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData.id_jurusan[0]}</small>
-                                                )}
-                                            </div>
-                                            <select
-                                                id='jurusan'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData ? 'border-red-500' : 'border-gray-300'}`}
-                                                type="text"
-                                                placeholder='Jurusan'
-                                                name='id_jurusan'
-                                                onChange={handleChange}
-                                            >
-                                                <option>- Pilih Jurusan -</option>
-                                            </select>
                                         </div>
                                     </div>
                                 </div>
