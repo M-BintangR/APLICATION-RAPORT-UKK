@@ -6,19 +6,21 @@ import { Link } from 'react-router-dom';
 import { BiTrash, BiEdit } from 'react-icons/bi';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { mapelRecord, pendingMapel, selectAllMapel } from '../../../features/dashboard/MapelSlice';
+import { mapelDelete, mapelRecord, pendingMapel, selectAllMapel } from '../../../features/dashboard/MapelSlice';
 import ModalCreate from '../dataMapel/ModalCreate';
 import ModalUpdate from '../dataMapel/ModalUpdate';
+import Alert from '../../../components/Alert';
 
 const Record = () => {
     const [active, setActive] = useState('Data Mapel');
     const Menus = AdminMenu;
     const dispatch = useDispatch();
-    const dataMapel = useSelector(selectAllMapel);
-    const pending = useSelector(pendingMapel);
     const [showModalCreate, setShowModalCreate] = useState(false);
     const [showModalUpdate, setShowModalUpdate] = useState(false);
+    const [checkAlert, setCheckAlert] = useState(false);
     const [idUser, setIdUser] = useState();
+    const dataMapel = useSelector(selectAllMapel);
+    const pending = useSelector(pendingMapel);
 
     useEffect(() => {
         dispatch(mapelRecord());
@@ -33,6 +35,21 @@ const Record = () => {
         { title: 'Kode Jurusan' },
         { title: 'Action' }
     ];
+
+    const handleDelete = (id) => {
+        dispatch(mapelDelete(id));
+        setTimeout(() => {
+            dispatch(mapelRecord());
+        }, 500);
+
+        setTimeout(() => {
+            setCheckAlert(true);
+        }, 2000)
+
+        setTimeout(() => {
+            setCheckAlert(false);
+        }, 10000)
+    }
 
     const handleUpdate = (id) => {
         setIdUser(id);
@@ -100,7 +117,7 @@ const Record = () => {
                                                         </button>
                                                         <button
                                                             className='text-sm md:text-xl text-black mr-1 bg-white font-medium md:font-semibold py-1 px-3 hover:text-red-400'
-
+                                                            onClick={() => handleDelete(mapel.id)}
                                                         >
                                                             <BiTrash className='inline' />
                                                         </button>
@@ -115,9 +132,9 @@ const Record = () => {
                         </div>
                     )}
 
-                    {/* {checkAlert && (
-                    <Alert pesan={'Data berhasil dihapus'} />
-                )} */}
+                    {checkAlert && (
+                        <Alert pesan={'Data berhasil dihapus'} />
+                    )}
                 </div>
                 <ModalCreate isVisible={showModalCreate} onClose={() => setShowModalCreate(false)} />
                 <ModalUpdate isVisible={showModalUpdate} onClose={() => setShowModalUpdate(false)} idUser={idUser} />

@@ -67,7 +67,7 @@ const Create = ({ isVisible, onClose }) => {
                                                 id='nama_mapel'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Nama Mapel'
-                                                value={inputCreate.nama_mapel}
+                                                value={inputCreate?.nama_mapel}
                                                 onChange={handleChange}
 
                                             />
@@ -85,7 +85,7 @@ const Create = ({ isVisible, onClose }) => {
                                                 id='kkm'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Nilai KKM'
-                                                value={inputCreate.kkm}
+                                                value={inputCreate?.kkm}
                                                 onChange={handleChange}
                                             />
                                         </div>
@@ -102,7 +102,7 @@ const Create = ({ isVisible, onClose }) => {
                                                 id='level'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Level'
-                                                value={inputCreate.level}
+                                                value={inputCreate?.level}
                                                 onChange={handleChange}
                                             />
                                         </div>
@@ -119,11 +119,11 @@ const Create = ({ isVisible, onClose }) => {
                                                 type="text"
                                                 placeholder='Jurusan'
                                                 name='id_jurusan'
-                                                value={inputCreate.id_jurusan}
+                                                value={inputCreate?.id_jurusan}
                                                 onChange={handleChange}
                                             >
                                                 <option>- Pilih Jurusan -</option>
-                                                {jurusans.items.map((jurusan, i) => (
+                                                {jurusans?.items.map((jurusan, i) => (
                                                     <option key={i} value={jurusan.id}>{jurusan.kode_jurusan}</option>
                                                 ))}
                                             </select>

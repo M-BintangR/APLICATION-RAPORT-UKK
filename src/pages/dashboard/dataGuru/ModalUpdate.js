@@ -72,7 +72,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5`}
                                                 placeholder='Nama Guru'
                                                 onChange={handleChange}
-                                                defaultValue={dataEditGuru.item.nama_guru || inputEdit.nama_guru}
+                                                defaultValue={dataEditGuru?.item.nama_guru || inputEdit.nama_guru}
                                             />
                                         </div>
                                         <div className="mb-3">
@@ -86,15 +86,15 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                                 placeholder='Mapel'
                                                 name='id_mapel'
                                                 onChange={handleChange}
-                                                defaultValue={dataEditGuru.item.id_mapel || inputEdit.id_mapel}
+                                                defaultValue={dataEditGuru?.item.id_mapel || inputEdit.id_mapel}
                                             >
-                                                {dataMapel.items && dataMapel.items.map((mapel, i) => (
-                                                    mapel.id === dataEditGuru.item.id_mapel && (
-                                                        <option key={i} value={mapel.id}>{mapel.nama_mapel}</option>
+                                                {dataMapel.items && dataMapel?.items.map((mapel, i) => (
+                                                    mapel.id === dataEditGuru?.item.id_mapel && (
+                                                        <option key={i} value={mapel.id}>{mapel?.nama_mapel}</option>
                                                     )
                                                 ))}
                                                 {dataMapel.items && dataMapel.items.map((mapel, i) => (
-                                                    <option key={i} value={mapel.id}>{mapel.nama_mapel}</option>
+                                                    <option key={i} value={mapel?.id}>{mapel?.nama_mapel}</option>
                                                 ))}
                                             </select>
                                         </div>

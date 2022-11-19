@@ -98,16 +98,16 @@ const Record = () => {
                                         </tr>
                                     </thead>
                                     <tbody className='divide-y divide-gray-100 '>
-                                        {dataGuru.items && dataGuru.items.map((data, i) => (
+                                        {dataGuru.items && dataGuru.items && dataGuru.items.map((data, i) => (
                                             < tr key={i} className={`bg-white ${'data-' + data.id}`} >
                                                 <>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data?.nama_guru}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data?.mapel.nama_mapel}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data?.mapel.kkm}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data?.mapel?.nama_mapel}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data?.mapel?.kkm}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
                                                         <span className='p-1.5 text-xs font-medium uppercase tracking-wider text-yellow-800 bg-yellow-200 rounded-lg bg-opacity-50'>
-                                                            {data?.mapel.level}
+                                                            {data?.mapel?.level}
                                                         </span>
                                                     </td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
@@ -119,7 +119,7 @@ const Record = () => {
                                                         </button>
                                                         <button
                                                             className='text-sm md:text-xl text-black mr-1 bg-white font-medium md:font-semibold py-1 px-3 hover:text-red-400'
-                                                            onClick={() => handleDelete(data.id)}
+                                                            onClick={() => handleDelete(data?.id)}
                                                         >
                                                             <BiTrash className='inline' />
                                                         </button>

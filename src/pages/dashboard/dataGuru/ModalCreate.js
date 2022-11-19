@@ -69,7 +69,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="id_mapel">Mapel</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData.nama_guru[0]}</small>
+                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.nama_guru[0]}</small>
                                                 )}
                                             </div>
                                             <select
@@ -81,8 +81,8 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 onChange={(e) => handleChange(e)}
                                             >
                                                 <option>-Pilih Mapel Guru-</option>
-                                                {mapels.items && mapels.items.map((mapel, i) => (
-                                                    <option key={i} value={mapel?.id}>{mapel.nama_mapel}</option>
+                                                {mapels.items && mapels?.items.map((mapel, i) => (
+                                                    <option key={i} value={mapel?.id}>{mapel?.nama_mapel}</option>
                                                 ))}
                                             </select>
                                         </div>
