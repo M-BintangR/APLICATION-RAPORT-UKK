@@ -32,8 +32,8 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
             setInputEdit({ nama_kelas: dataEditKelas.item.nama_kelas, level: dataEditKelas.item.level });
         }
         const data = {
-            nama_kelas: inputEdit.nama_kelas,
-            level: inputEdit.level,
+            nama_kelas: inputEdit.item.nama_kelas,
+            level: inputEdit.item.level,
             id: idUser,
         }
         dispatch(kelasUpdate(data));
