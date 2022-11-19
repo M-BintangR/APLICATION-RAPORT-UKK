@@ -4,28 +4,45 @@ import { AdminMenu } from '../../../components/Links';
 import { useState } from 'react';
 import { BiTrash, BiEdit } from 'react-icons/bi';
 import ModalCreate from './ModalCreate';
+import ModalUpdate from './ModalUpdate';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkPendingJurusan, jurusanRecord, selectAllJurusan } from '../../../features/dashboard/JurusanSlice';
+import { checkPendingJurusan, jurusanDelete, jurusanRecord, selectAllJurusan } from '../../../features/dashboard/JurusanSlice';
+import Alert from '../../../components/Alert';
 
 const Record = () => {
     const [active, setActive] = useState('Data Jurusan');
     const Menus = AdminMenu;
     const [showModalCreate, setShowModalCreate] = useState(false);
+    const [showModalUpdate, setShowModalUpdate] = useState(false);
     const dispatch = useDispatch();
     const pending = useSelector(checkPendingJurusan);
     const dataJurusan = useSelector(selectAllJurusan);
+    const [idUser, setIdUser] = useState(null);
+    const [checkAlert, setCheckAlert] = useState(false);
 
     useEffect(() => {
         dispatch(jurusanRecord());
     }, [dispatch]);
 
-    const handleUpdate = () => {
-
+    const handleUpdate = (id) => {
+        setIdUser(id);
+        setShowModalUpdate(prev => prev = true);
     }
 
-    const handleDelete = () => {
+    const handleDelete = (id) => {
+        dispatch(jurusanDelete(id));
+        setTimeout(() => {
+            dispatch(jurusanRecord());
+        }, 500);
 
+        setTimeout(() => {
+            setCheckAlert(true);
+        }, 2000)
+
+        setTimeout(() => {
+            setCheckAlert(false);
+        }, 10000)
     }
 
     const TabelJurusans = [
@@ -108,12 +125,12 @@ const Record = () => {
                         </div>
                     )}
 
-                    {/* {checkAlert && (
+                    {checkAlert && (
                         <Alert pesan={'Data berhasil dihapus'} />
-                    )} */}
+                    )}
                 </div>
                 <ModalCreate isVisible={showModalCreate} onClose={() => setShowModalCreate(false)} />
-                {/* <ModalUpdate isVisible={showModalUpdate} onClose={() => setShowModalUpdate(false)} idUser={idUser} /> */}
+                <ModalUpdate isVisible={showModalUpdate} onClose={() => setShowModalUpdate(false)} idUser={idUser} />
             </Sidebar >
         </div >
     );

@@ -38,7 +38,7 @@ export const jurusanEdit = createAsyncThunk('jurusanEdit', async (initialEdit) =
 
 export const jurusanUpdate = createAsyncThunk('jurusanUpdate', async (initialUpdate) => {
     try {
-        const res = await axios.post(JURUSAN_UPDATE_URL + initialUpdate.id, initialUpdate, {
+        const res = await axios.put(JURUSAN_UPDATE_URL + initialUpdate.id, initialUpdate, {
             headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
         });
         return res.data;
@@ -152,5 +152,6 @@ const JurusanSlice = createSlice({
 
 export const selectAllJurusan = state => state.jurusan.jurusanRecord;
 export const checkCreateJurusan = state => state.jurusan.jurusanCreate;
+export const checkEditJurusan = state => state.jurusan.jurusanEdit;
 export const checkPendingJurusan = state => state.jurusan.pending;
 export default JurusanSlice.reducer;
