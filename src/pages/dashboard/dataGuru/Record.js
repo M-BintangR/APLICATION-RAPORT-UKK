@@ -3,7 +3,6 @@ import Sidebar from '../../../components/Sidebar';
 import { BiTrash, BiEdit } from 'react-icons/bi';
 import { AdminMenu } from '../../../components/Links';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { guruDelete, guruPending, guruRecord } from '../../../features/dashboard/GuruSlice';

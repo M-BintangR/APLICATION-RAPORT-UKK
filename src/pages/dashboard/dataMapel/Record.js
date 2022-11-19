@@ -2,7 +2,6 @@ import React from 'react';
 import Sidebar from '../../../components/Sidebar';
 import { AdminMenu } from '../../../components/Links';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { BiTrash, BiEdit } from 'react-icons/bi';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

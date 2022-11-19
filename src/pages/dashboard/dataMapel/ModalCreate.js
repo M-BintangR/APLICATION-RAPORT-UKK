@@ -1,6 +1,4 @@
 import React from 'react';
-import Sidebar from '../../../components/Sidebar';
-import { AdminMenu } from '../../../components/Links';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { jurusanRecord, selectAllJurusan } from '../../../features/dashboard/JurusanSlice';
@@ -8,7 +6,6 @@ import { useState } from 'react';
 import { checkCreateMapel, mapelCreate, mapelRecord } from '../../../features/dashboard/MapelSlice';
 
 const Create = ({ isVisible, onClose }) => {
-    const Menus = AdminMenu;
     const dispatch = useDispatch();
     const jurusans = useSelector(selectAllJurusan);
     const check = useSelector(checkCreateMapel);
