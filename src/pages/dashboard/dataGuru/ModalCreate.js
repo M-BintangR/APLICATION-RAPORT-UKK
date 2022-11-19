@@ -61,7 +61,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 id='nama_guru'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Nama Guru'
-                                                defaultValue={inputGuru.nama_guru}
+                                                defaultValue={inputGuru?.nama_guru}
                                                 onChange={(e) => handleChange(e)}
                                             />
                                         </div>
@@ -77,11 +77,11 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 type="text"
                                                 placeholder='Mapel'
                                                 name='id_mapel'
-                                                defaultValue={inputGuru.id_mapel}
+                                                defaultValue={inputGuru?.id_mapel}
                                                 onChange={(e) => handleChange(e)}
                                             >
                                                 <option>-Pilih Mapel Guru-</option>
-                                                {mapels?.items.map((mapel, i) => (
+                                                {mapels.items && mapels.items.map((mapel, i) => (
                                                     <option key={i} value={mapel?.id}>{mapel.nama_mapel}</option>
                                                 ))}
                                             </select>

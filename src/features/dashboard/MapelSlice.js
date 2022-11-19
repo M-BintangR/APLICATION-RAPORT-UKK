@@ -38,7 +38,7 @@ export const mapelEdit = createAsyncThunk('mapelEdit', async (initialEdit) => {
 
 export const mapelUpdate = createAsyncThunk('mapelUpdate', async (initialUpdate) => {
     try {
-        const res = await axios.put(MAPEL_UPDATE_URL + initialUpdate.id, initialUpdate, {
+        const res = await axios.post(MAPEL_UPDATE_URL + initialUpdate.id, initialUpdate, {
             headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
         });
         return res.data;

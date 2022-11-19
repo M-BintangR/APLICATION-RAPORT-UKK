@@ -31,9 +31,14 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
     }, [dispatch, isVisible, idUser]);
 
     const handleEdit = () => {
+        if (dataEditMapel.item) {
+            setInputEdit({ nama_mapel: dataEditMapel.item.nama_mapel, kkm: dataEditMapel.item.kkm, level: dataEditMapel.item.level, id_jurusan: dataEditMapel.id_jurusan });
+        }
         const data = {
-            nama_guru: inputEdit.nama_guru,
-            id_mapel: inputEdit.id_mapel,
+            nama_mapel: inputEdit.nama_mapel,
+            level: inputEdit.level,
+            kkm: inputEdit.kkm,
+            id_jurusan: inputEdit.id_jurusan,
             id: idUser,
         }
         dispatch(mapelUpdate(data));
@@ -45,7 +50,6 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
     }
 
-    console.log(inputEdit)
     return (
         <div>
             {isVisible && dataJurusan.items && !pending && dataEditMapel?.item && (
@@ -66,7 +70,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                                 id='nama_mapel'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5`}
                                                 placeholder='Nama Mapel'
-                                                defaultValue={dataEditMapel.item.nama_mapel}
+                                                defaultValue={dataEditMapel?.item.nama_mapel}
                                                 onChange={handleChange}
                                             />
                                         </div>
@@ -79,7 +83,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 `}
                                                 placeholder='Nilai KKM'
                                                 onChange={handleChange}
-                                                defaultValue={dataEditMapel.item.kkm}
+                                                defaultValue={dataEditMapel?.item.kkm}
                                             />
                                         </div>
                                         <div className="mb-3">
@@ -91,7 +95,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 `}
                                                 placeholder='Level'
                                                 onChange={handleChange}
-                                                defaultValue={dataEditMapel.item.level}
+                                                defaultValue={dataEditMapel?.item.level}
                                             />
                                         </div>
                                         <div className="mb-3">
@@ -103,14 +107,14 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                                 placeholder='Jurusan'
                                                 name='id_jurusan'
                                                 onChange={handleChange}
-                                                defaultValue={dataEditMapel.item.id_jurusan}
+                                                defaultValue={dataEditMapel?.item.id_jurusan}
                                             >
-                                                {dataJurusan?.items.map((jurusan, i) => (
+                                                {dataJurusan && dataJurusan.items.map((jurusan, i) => (
                                                     jurusan.id === dataEditMapel.item.id_jurusan && (
                                                         <option key={i} value={jurusan.id}>{jurusan.kode_jurusan}</option>
                                                     )
                                                 ))}
-                                                {dataJurusan?.items.map((jurusan, i) => (
+                                                {dataJurusan && dataJurusan?.items.map((jurusan, i) => (
                                                     <option key={i} value={jurusan.id}>{jurusan.kode_jurusan}</option>
                                                 ))}
 

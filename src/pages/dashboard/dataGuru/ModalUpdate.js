@@ -88,12 +88,12 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                                 onChange={handleChange}
                                                 defaultValue={dataEditGuru.item.id_mapel || inputEdit.id_mapel}
                                             >
-                                                {dataMapel?.items.map((mapel, i) => (
+                                                {dataMapel.items && dataMapel.items.map((mapel, i) => (
                                                     mapel.id === dataEditGuru.item.id_mapel && (
                                                         <option key={i} value={mapel.id}>{mapel.nama_mapel}</option>
                                                     )
                                                 ))}
-                                                {dataMapel?.items.map((mapel, i) => (
+                                                {dataMapel.items && dataMapel.items.map((mapel, i) => (
                                                     <option key={i} value={mapel.id}>{mapel.nama_mapel}</option>
                                                 ))}
                                             </select>
