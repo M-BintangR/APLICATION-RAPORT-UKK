@@ -41,7 +41,6 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
         onClose();
     }
 
-    console.log(inputEdit);
     return (
         <div>
             {isVisible && !pending && dataEditKelas?.item && (

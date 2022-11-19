@@ -150,4 +150,11 @@ const TapelSlice = createSlice({
 
 });
 
+export const selectAllTapel = state => state.tapel.tapelRecord;
+export const pendingTapel = state => state.tapel.pending;
+export const checkCreateTapel = state => state.tapel.tapelCreate;
+export const checkEditTapel = state => state.tapel.tapelEdit;
+export const checkUpdateTapel = state => state.tapel.tapelUpdate;
+export const checkDeleteTapel = state => state.tapel.tapelDelete;
+
 export default TapelSlice.reducer;
