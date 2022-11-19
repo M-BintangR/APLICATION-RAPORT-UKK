@@ -39,7 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/data/mapel', [MapelController::class, 'store']);
         Route::get('/data/mapel/{id}', [MapelController::class, 'show']);
         Route::get('/data/mapel/{mapel:id}/edit', [MapelController::class, 'edit']);
-        Route::put('/data/mapel/{mapel:id}', [MapelController::class, 'update']);
+        Route::post('/data/mapel/{mapel:id}', [MapelController::class, 'update']);
         Route::delete('/data/mapel/{mapel:id}', [MapelController::class, 'destroy']);
 
         //? Route Data Walas
