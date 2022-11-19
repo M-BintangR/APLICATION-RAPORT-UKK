@@ -1,18 +1,38 @@
+import { useEffect } from 'react';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkCreateJurusan, jurusanCreate, jurusanRecord } from '../../../features/dashboard/JurusanSlice';
 
 const ModalCreate = ({ isVisible, onClose }) => {
+    const dispatch = useDispatch();
     const [errorData, setErrorData] = useState(null);
+    const [inputCreate, setInputCreate] = useState({
+        kode_jurusan: '',
+        nama_jurusan: '',
+    });
 
-    const handleChange = () => {
+    const check = useSelector(checkCreateJurusan);
 
+
+    const handleChange = (e) => {
+        setInputCreate(prev => ({ ...prev, [e.target.name]: e.target.value }));
     }
 
     const handleClick = () => {
-
+        dispatch(jurusanCreate(inputCreate));
+        onClose();
+        setErrorData(prev => prev = null);
+        setInputCreate({ nama_jurusan: '', kode_jurusan: '' });
+        dispatch(jurusanRecord());
     }
+
+    useEffect(() => {
+        if (check.response) setErrorData(check?.response.data.errors)
+    }, [check]);
 
     const handleClose = () => {
         onClose();
+        setErrorData(prev => prev = null);
     }
 
     return (

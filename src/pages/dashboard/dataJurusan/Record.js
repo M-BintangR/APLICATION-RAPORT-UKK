@@ -49,13 +49,13 @@ const Record = () => {
                     {!pending && (
                         <div>
                             <div className="mt-5 mb-8 bg-slate-100 rounded-md py-3 px-4">
-                                <h1 className='text-xl md:text-2xl font-semibold '>Data Mapel
+                                <h1 className='text-xl md:text-2xl font-semibold '>Data Jurusan
                                     <button
                                         className=' py-1 px-2 md:py-2 md:px-3 text-xs float-right bg-green-600 hover:bg-green-500 text-white rounded-md uppercase md:text-sm'
                                         onClick={() => setShowModalCreate(prev => prev = true)}
                                     >Tambah</button>
                                 </h1>
-                                <p>Kelola Data Mapel</p>
+                                <p>Kelola Data Jurusan</p>
                             </div>
                             <h1 className='text-lg md:text-xl pb-2 font-medium md:font-semibold md:my-2'>Record Data
                                 <div className="float-right">

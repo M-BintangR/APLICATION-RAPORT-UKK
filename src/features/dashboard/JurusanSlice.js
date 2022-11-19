@@ -63,6 +63,7 @@ const initialState = {
     jurusanDelete: {},
     jurusanEdit: {},
     jurusanUpdate: {},
+    jurusanCreate: {},
     error: {},
     pending: false,
     status: 'idle',
@@ -150,5 +151,6 @@ const JurusanSlice = createSlice({
 });
 
 export const selectAllJurusan = state => state.jurusan.jurusanRecord;
+export const checkCreateJurusan = state => state.jurusan.jurusanCreate;
 export const checkPendingJurusan = state => state.jurusan.pending;
 export default JurusanSlice.reducer;
