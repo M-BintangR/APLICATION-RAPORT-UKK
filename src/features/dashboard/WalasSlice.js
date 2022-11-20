@@ -38,7 +38,7 @@ export const walasEdit = createAsyncThunk('walasEdit', async (initialEdit) => {
 
 export const walasUpdate = createAsyncThunk('walasUpdate', async (initialUpdate) => {
     try {
-        const res = await axios.post(WALAS_UPDATE_URL + initialUpdate.id, initialUpdate, {
+        const res = await axios.put(WALAS_UPDATE_URL + initialUpdate.id, initialUpdate, {
             headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
         });
         return res.data;
@@ -150,4 +150,10 @@ const WalasSlice = createSlice({
 
 });
 
+export const selectAllWalas = state => state.walas.walasRecord;
+export const pendingWalas = state => state.walas.pending;
+export const checkCreateWalas = state => state.walas.walasCreate;
+export const checkEditWalas = state => state.walas.walasEdit;
+export const checkUpdateWalas = state => state.walas.walasUpdate;
+export const checkDeleteWalas = state => state.walas.walasDelete;
 export default WalasSlice.reducer;
