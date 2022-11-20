@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkCreateTapel, tapelCreate } from '../../../features/dashboard/TapelSlice';
+import { checkCreateTapel, tapelCreate, tapelRecord } from '../../../features/dashboard/TapelSlice';
 
 const ModalCreate = ({ isVisible, onClose }) => {
     const [errorData, setErrorData] = useState(null);
@@ -22,7 +22,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
         onClose();
         setErrorData(prev => prev = null);
         setInputCreate({ tahun_pelaran: '', semester: '', aktif: '' });
-        dispatch(tapelCreate());
+        dispatch(tapelRecord());
     }
 
     useEffect(() => {
@@ -33,6 +33,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
         onClose();
         setErrorData(prev => prev = null);
     }
+
 
     return (
         <div>
@@ -59,7 +60,6 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 id='tahun_pelajaran'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Tahun Pelajaran'
-                                                value={inputCreate?.tahun_pelaran}
                                                 onChange={handleChange}
                                             />
                                         </div>
@@ -76,7 +76,6 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 id='semester'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Semester'
-                                                value={inputCreate?.semester}
                                                 onChange={handleChange}
 
                                             />
@@ -94,7 +93,6 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 type="text"
                                                 placeholder='Aktif'
                                                 name='aktif'
-                                                value={inputCreate?.aktif}
                                                 onChange={handleChange}
                                             >
                                                 <option>- Pilih -</option>

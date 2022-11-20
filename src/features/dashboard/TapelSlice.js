@@ -37,8 +37,9 @@ export const tapelEdit = createAsyncThunk('tapelEdit', async (initialEdit) => {
 });
 
 export const tapelUpdate = createAsyncThunk('tapelUpdate', async (initialUpdate) => {
+    console.log(initialUpdate);
     try {
-        const res = await axios.post(TAPEL_UPDATE_URL + initialUpdate.id, initialUpdate, {
+        const res = await axios.put(TAPEL_UPDATE_URL + initialUpdate.id, initialUpdate, {
             headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
         });
         return res.data;

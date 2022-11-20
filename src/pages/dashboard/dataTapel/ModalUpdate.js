@@ -29,9 +29,9 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
             setInputEdit({ tahun_pelajaran: dataEditTapel.item.tahun_pelajaran, semester: dataEditTapel.item.semester, aktif: dataEditTapel.item.aktif });
         }
         const data = {
-            tahun_pelajaran: inputEdit.item.tahun_pelajaran,
-            semester: inputEdit.item.semester,
-            aktif: inputEdit.item.aktif,
+            tahun_pelajaran: inputEdit.tahun_pelajaran,
+            semester: inputEdit.semester,
+            aktif: inputEdit.aktif,
             id: idUser,
         }
         dispatch(tapelUpdate(data));
