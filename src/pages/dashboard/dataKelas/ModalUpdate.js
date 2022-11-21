@@ -28,17 +28,18 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
 
     const handleEdit = () => {
         if (dataEditKelas.item) {
-            setInputEdit({ nama_kelas: dataEditKelas.item.nama_kelas, level: dataEditKelas.item.level });
+            setInputEdit(dataEditKelas.item);
         }
         const data = {
-            nama_kelas: inputEdit.item.nama_kelas,
-            level: inputEdit.item.level,
+            nama_kelas: inputEdit.nama_kelas,
+            level: inputEdit.level,
             id: idUser,
         }
         dispatch(kelasUpdate(data));
         dispatch(kelasRecord());
         onClose();
     }
+
 
     return (
         <div>
@@ -53,7 +54,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                 <div className='space-x-6'>
                                     <div>
                                         <div className="mb-3">
-                                            <label className='mb-2' htmlFor="nama_kelas">Nama Jurusan</label>
+                                            <label className='mb-2' htmlFor="nama_kelas">Nama Kelas</label>
                                             <input
                                                 type="text"
                                                 name='nama_kelas'
@@ -65,7 +66,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                             />
                                         </div>
                                         <div className="mb-3">
-                                            <label className='mb-2' htmlFor="kode_kelas">Kode Jurusan</label>
+                                            <label className='mb-2' htmlFor="level">Level</label>
                                             <select
                                                 id='level'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none`}

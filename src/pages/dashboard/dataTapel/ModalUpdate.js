@@ -8,7 +8,6 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
     const dispatch = useDispatch();
     const dataEditTapel = useSelector(checkEditTapel);
     const pending = useSelector(pendingTapel);
-    const [errorData, setErrorData] = useState(null);
     const [inputEdit, setInputEdit] = useState({
         tahun_pelajaran: '',
         semester: '',
@@ -26,7 +25,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
 
     const handleEdit = () => {
         if (dataEditTapel.item) {
-            setInputEdit({ tahun_pelajaran: dataEditTapel.item.tahun_pelajaran, semester: dataEditTapel.item.semester, aktif: dataEditTapel.item.aktif });
+            setInputEdit(dataEditTapel.item);
         }
         const data = {
             tahun_pelajaran: inputEdit.tahun_pelajaran,
@@ -69,16 +68,11 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                         </div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="semester">Semester</label>
-                                            <div>
-                                                {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.semester[0]}</small>
-                                                )}
-                                            </div>
                                             <input
                                                 type="text"
                                                 name='semester'
                                                 id='semester'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 `}
                                                 placeholder='Semester'
                                                 defaultValue={dataEditTapel?.item.semester}
                                                 onChange={handleChange}
@@ -89,7 +83,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                             <label className='mb-2' htmlFor="aktif">Aktif</label>
                                             <select
                                                 id='aktif'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none`}
                                                 type="text"
                                                 placeholder='Aktif'
                                                 name='aktif'

@@ -32,7 +32,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
 
     const handleEdit = () => {
         if (dataEditGuru.item) {
-            setInputEdit({ nama_guru: dataEditGuru.item.nama_guru, id_mapel: dataEditGuru.item.id_mapel });
+            setInputEdit(dataEditGuru.item);
         }
         const data = {
             nama_guru: inputEdit.nama_guru,

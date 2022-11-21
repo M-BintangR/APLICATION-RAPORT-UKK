@@ -28,7 +28,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
 
     const handleEdit = () => {
         if (dataEditJurusan.item) {
-            setInputEdit({ nama_jurusan: dataEditJurusan.item.nama_jurusan, kode_jurusan: dataEditJurusan.item.kode_jurusan });
+            setInputEdit(dataEditJurusan.item);
         }
         const data = {
             nama_jurusan: inputEdit.nama_jurusan,

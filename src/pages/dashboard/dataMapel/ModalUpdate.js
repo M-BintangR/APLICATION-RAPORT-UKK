@@ -27,7 +27,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
 
     const handleEdit = () => {
         if (dataEditMapel.item) {
-            setInputEdit({ nama_mapel: dataEditMapel.item.nama_mapel, kkm: dataEditMapel.item.kkm, level: dataEditMapel.item.level, id_jurusan: dataEditMapel.id_jurusan });
+            setInputEdit(dataEditMapel.item);
         }
         const data = {
             nama_mapel: inputEdit.nama_mapel,
@@ -44,6 +44,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
     const handleChange = (e) => {
         setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
     }
+
 
     return (
         <div>
