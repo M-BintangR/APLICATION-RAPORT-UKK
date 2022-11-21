@@ -51,7 +51,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="nama_mapel">Nama Jurusan</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData.nama_jurusan[0]}</small>
+                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.nama_jurusan[0]}</small>
                                                 )}
                                             </div>
                                             <input
@@ -68,7 +68,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="kode_jurusan">Kode Jurusan</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData.kode_jurusan[0]}</small>
+                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.kode_jurusan[0]}</small>
                                                 )}
                                             </div>
                                             <input

@@ -106,11 +106,11 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                             >
                                                 {dataJurusan && dataJurusan.items.map((jurusan, i) => (
                                                     jurusan.id === dataEditMapel.item.id_jurusan && (
-                                                        <option key={i} value={jurusan.id}>{jurusan.kode_jurusan}</option>
+                                                        <option key={i} value={jurusan?.id}>{jurusan?.kode_jurusan}</option>
                                                     )
                                                 ))}
                                                 {dataJurusan && dataJurusan?.items.map((jurusan, i) => (
-                                                    <option key={i} value={jurusan.id}>{jurusan.kode_jurusan}</option>
+                                                    <option key={i} value={jurusan?.id}>{jurusan?.kode_jurusan}</option>
                                                 ))}
 
                                             </select>

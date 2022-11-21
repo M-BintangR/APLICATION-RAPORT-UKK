@@ -96,8 +96,8 @@ const Record = () => {
                                             <tr key={i} className={`bg-white`} >
                                                 <>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{tapel?.tahun_pelajaran}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{tapel?.semester}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{tapel.tahun_pelajaran ? tapel?.tahun_pelajaran : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{tapel.semester ? tapel?.semester : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{tapel?.aktif === '1' ? 'Aktif' : 'Tidak Aktif'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
                                                         <button

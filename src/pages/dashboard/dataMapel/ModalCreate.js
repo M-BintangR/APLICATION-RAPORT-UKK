@@ -41,7 +41,7 @@ const Create = ({ isVisible, onClose }) => {
 
     return (
         <div>
-            {isVisible && (
+            {isVisible && jurusans.items && (
                 <div className="fixed inset-0 z-50 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
                     <div className="bg-white p-2 rounded">
                         <div className="md:w-[600px] flex flex-col">
@@ -55,7 +55,7 @@ const Create = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="nama_mapel">Nama Mapel</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData.nama_mapel[0]}</small>
+                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.nama_mapel[0]}</small>
                                                 )}
                                             </div>
                                             <input
@@ -73,7 +73,7 @@ const Create = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="kkm">Nilai KKM</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData.kkm[0]}</small>
+                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.kkm[0]}</small>
                                                 )}
                                             </div>
                                             <input
@@ -90,7 +90,7 @@ const Create = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="level">Level</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData.level[0]}</small>
+                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.level[0]}</small>
                                                 )}
                                             </div>
                                             <input
@@ -107,7 +107,7 @@ const Create = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="jurusan">Jurusan</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData.id_jurusan[0]}</small>
+                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.id_jurusan[0]}</small>
                                                 )}
                                             </div>
                                             <select
@@ -121,7 +121,7 @@ const Create = ({ isVisible, onClose }) => {
                                             >
                                                 <option>- Pilih Jurusan -</option>
                                                 {jurusans?.items.map((jurusan, i) => (
-                                                    <option key={i} value={jurusan.id}>{jurusan.kode_jurusan}</option>
+                                                    <option key={i} value={jurusan?.id}>{jurusan?.kode_jurusan}</option>
                                                 ))}
                                             </select>
                                         </div>

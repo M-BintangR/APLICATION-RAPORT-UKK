@@ -70,11 +70,11 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                             >
                                                 {dataKelas && dataKelas.items.map((kelas, i) => (
                                                     kelas.id === dataEditWalas.item.id_kelas && (
-                                                        <option key={i} value={kelas.id}>{kelas.nama_kelas}</option>
+                                                        <option key={i} value={kelas.id}>{kelas?.nama_kelas}</option>
                                                     )
                                                 ))}
                                                 {dataKelas && dataKelas?.items.map((kelas, i) => (
-                                                    <option key={i} value={kelas.id}>{kelas.nama_kelas}</option>
+                                                    <option key={i} value={kelas.id}>{kelas?.nama_kelas}</option>
                                                 ))}
 
                                             </select>
@@ -92,11 +92,11 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                             >
                                                 {dataGuru && dataGuru.items.map((guru, i) => (
                                                     guru.id === dataEditWalas.item.id_guru && (
-                                                        <option key={i} value={guru.id}>{guru.nama_guru}</option>
+                                                        <option key={i} value={guru.id}>{guru?.nama_guru}</option>
                                                     )
                                                 ))}
                                                 {dataGuru && dataGuru?.items.map((guru, i) => (
-                                                    <option key={i} value={guru.id}>{guru.nama_guru}</option>
+                                                    <option key={i} value={guru.id}>{guru?.nama_guru}</option>
                                                 ))}
 
                                             </select>

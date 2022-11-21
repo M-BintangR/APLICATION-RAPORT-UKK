@@ -96,8 +96,8 @@ const Record = () => {
                                             <tr key={i} className={`bg-white`} >
                                                 <>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{kelas?.nama_kelas}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{kelas?.level}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{kelas.nama_kelas ? kelas?.nama_kelas : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{kelas.level ? kelas?.level : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
                                                         <button
                                                             className='text-sm md:text-xl text-black mr-1 bg-white font-medium md:font-semibold py-1 px-3 hover:text-amber-400'

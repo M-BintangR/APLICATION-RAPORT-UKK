@@ -11,7 +11,6 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
         nama_kelas: '',
         level: '',
     });
-    const [errorData, setErrorData] = useState(null);
     const pending = useSelector(pendingKelas);
     const dataEditKelas = useSelector(checkEditKelas)
     useEffect(() => {
@@ -69,7 +68,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                             <label className='mb-2' htmlFor="kode_kelas">Kode Jurusan</label>
                                             <select
                                                 id='level'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none`}
                                                 type="text"
                                                 placeholder='level'
                                                 name='level'
