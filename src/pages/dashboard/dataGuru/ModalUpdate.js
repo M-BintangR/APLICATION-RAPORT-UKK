@@ -14,7 +14,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         nama_guru: '',
     });
     const checkShowModal = isVisible
-        && dataEditGuru?.item
+        && dataEditGuru.item
         && !pending && dataMapel.items;
 
     useEffect(() => {
@@ -31,7 +31,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
     }
 
     const handleEdit = () => {
-        if (dataEditGuru.item.nama_guru && dataEditGuru.item.id_mapel) {
+        if (dataEditGuru.item) {
             setInputEdit({ nama_guru: dataEditGuru.item.nama_guru, id_mapel: dataEditGuru.item.id_mapel });
         }
         const data = {
@@ -68,7 +68,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5`}
                                                 placeholder='Nama Guru'
                                                 onChange={handleChange}
-                                                defaultValue={dataEditGuru?.item.nama_guru || inputEdit.nama_guru}
+                                                defaultValue={dataEditGuru?.item.nama_guru}
                                             />
                                         </div>
                                         <div className="mb-3">
@@ -82,7 +82,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                                 placeholder='Mapel'
                                                 name='id_mapel'
                                                 onChange={handleChange}
-                                                defaultValue={dataEditGuru?.item.id_mapel || inputEdit.id_mapel}
+                                                defaultValue={dataEditGuru?.item.id_mapel}
                                             >
                                                 {dataMapel.items && dataMapel?.items.map((mapel, i) => (
                                                     mapel.id === dataEditGuru?.item.id_mapel && (

@@ -51,7 +51,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="tahun_pelaran">Tahun Pelajaran</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.tahun_pelaran[0]}</small>
+                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.tahun_pelajaran[0]}</small>
                                                 )}
                                             </div>
                                             <input

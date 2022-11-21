@@ -66,7 +66,7 @@ const Record = () => {
                         </div>
                     )}
 
-                    {!dataGuruCheck && (
+                    {!dataGuruCheck && dataGuru.items && (
                         <div>
                             <div className="mt-5 mb-8 bg-slate-100 rounded-md py-3 px-4">
                                 <h1 className='text-xl md:text-2xl font-semibold '>Data Guru
@@ -97,16 +97,16 @@ const Record = () => {
                                         </tr>
                                     </thead>
                                     <tbody className='divide-y divide-gray-100 '>
-                                        {dataGuru.items && dataGuru.items && dataGuru.items.map((data, i) => (
+                                        {dataGuru.items && dataGuru.items && dataGuru?.items.map((data, i) => (
                                             < tr key={i} className={`bg-white ${'data-' + data.id}`} >
                                                 <>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data?.nama_guru}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data?.mapel?.nama_mapel}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data?.mapel?.kkm}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data.nama_guru ? data?.nama_guru : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data.mapel.nama_mapel ? data?.mapel.nama_mapel : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data.mapel.kkm ? data?.mapel.kkm : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
                                                         <span className='p-1.5 text-xs font-medium uppercase tracking-wider text-yellow-800 bg-yellow-200 rounded-lg bg-opacity-50'>
-                                                            {data?.mapel?.level}
+                                                            {data.mapel.level ? data?.mapel.level : '-'}
                                                         </span>
                                                     </td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>

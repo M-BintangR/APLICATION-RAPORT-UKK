@@ -45,7 +45,6 @@ const Record = () => {
         setShowModalUpdate(prev => prev = true);
     }
 
-    console.log(dataTapel);
     const TabelTapel = [
         { title: 'No.', short: true },
         { title: 'Tahun Pelajaran' },

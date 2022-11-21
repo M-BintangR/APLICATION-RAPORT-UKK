@@ -40,7 +40,6 @@ const ModalCreate = ({ isVisible, onClose }) => {
         dispatch(walasRecord());
     }
 
-    console.log(inputCreate)
 
     return (
         <div>
