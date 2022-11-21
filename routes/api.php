@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KelasController;
@@ -86,6 +87,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/data/siswa/{siswa:id}/edit', [SiswaController::class, 'edit']);
         Route::put('/data/siswa/{siswa:id}', [SiswaController::class, 'update']);
         Route::delete('/data/siswa/{siswa:id}', [SiswaController::class, 'destroy']);
+
+        //? Route Dashboard Home
+
+        Route::get('/data/home/cards', [DashboardController::class, 'countData']);
     });
 
     Route::group(['prefix' => 'guru', 'middleware' => 'guru'], function () {

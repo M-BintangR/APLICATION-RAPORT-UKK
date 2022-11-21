@@ -49,7 +49,7 @@ class WalasController extends Controller
         $validateData = $request->validate([
             'id_guru' => ['required'],
             'id_kelas' => ['required'],
-        ], 200);
+        ]);
 
         if ($validateData) {
             $check = Walas::create($validateData);
