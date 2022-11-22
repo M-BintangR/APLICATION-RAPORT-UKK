@@ -25,10 +25,15 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         isVisible && dispatch(mapelEdit(idUser));
     }, [dispatch, isVisible, idUser]);
 
+    useEffect(() => {
+        setTimeout(() => {
+            if (dataEditMapel.item) {
+                setInputEdit(dataEditMapel?.item);
+            }
+        }, 2000);
+    }, [dataEditMapel]);
+
     const handleEdit = () => {
-        if (dataEditMapel.item) {
-            setInputEdit(dataEditMapel.item);
-        }
         const data = {
             nama_mapel: inputEdit.nama_mapel,
             level: inputEdit.level,

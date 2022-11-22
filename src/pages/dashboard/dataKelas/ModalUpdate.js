@@ -13,6 +13,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
     });
     const pending = useSelector(pendingKelas);
     const dataEditKelas = useSelector(checkEditKelas)
+
     useEffect(() => {
         isVisible && dispatch(kelasEdit(idUser));
     }, [dispatch, isVisible, idUser]);
@@ -26,10 +27,15 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
         setInputEdit({ nama_kelas: '', level: '' });
     }
 
+    useEffect(() => {
+        setTimeout(() => {
+            if (dataEditKelas.item) {
+                setInputEdit(dataEditKelas?.item);
+            }
+        }, 2000);
+    }, [dataEditKelas]);
+
     const handleEdit = () => {
-        if (dataEditKelas.item) {
-            setInputEdit(dataEditKelas.item);
-        }
         const data = {
             nama_kelas: inputEdit.nama_kelas,
             level: inputEdit.level,

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { BiTrash, BiEdit } from 'react-icons/bi';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { mapelDelete, mapelRecord, pendingMapel, selectAllMapel } from '../../../features/dashboard/MapelSlice';
+import { mapelDelete, mapelEdit, mapelRecord, pendingMapel, selectAllMapel } from '../../../features/dashboard/MapelSlice';
 import ModalCreate from '../dataMapel/ModalCreate';
 import ModalUpdate from '../dataMapel/ModalUpdate';
 import Alert from '../../../components/Alert';
@@ -52,8 +52,11 @@ const Record = () => {
 
     const handleUpdate = (id) => {
         setIdUser(id);
+        dispatch(mapelEdit(id));
         setShowModalUpdate(prev => prev = true);
     }
+
+
 
     return (
         <div >

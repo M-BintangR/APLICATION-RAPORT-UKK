@@ -14,9 +14,12 @@ const ModalCreate = ({ isVisible, onClose }) => {
     });
 
     useEffect(() => {
-        dispatch(mapelRecord());
         if (check.response) setErrorData(check?.response.data.errors);
-    }, [dispatch, setErrorData, check]);
+    }, [check]);
+
+    useEffect(() => {
+        dispatch(mapelRecord());
+    }, [dispatch]);
 
     const handleChange = e => {
         setInputGuru(prev => ({ ...prev, [e.target.name]: e.target.value }));

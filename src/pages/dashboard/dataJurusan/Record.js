@@ -27,6 +27,7 @@ const Record = () => {
 
     const handleUpdate = (id) => {
         setIdUser(id);
+
         setShowModalUpdate(prev => prev = true);
     }
 

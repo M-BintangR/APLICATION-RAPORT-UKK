@@ -27,10 +27,13 @@ const ModalCreate = ({ isVisible, onClose }) => {
 
     useEffect(() => {
         if (check.response) setErrorData(check?.response.data.errors)
+    }, [check]);
+
+    useEffect(() => {
         dispatch(walasRecord());
         dispatch(kelasRecord());
         dispatch(guruRecord());
-    }, [dispatch, setErrorData, check]);
+    }, [dispatch]);
 
     const handleClick = () => {
         dispatch(walasCreate(inputCreate));

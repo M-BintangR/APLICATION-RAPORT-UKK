@@ -30,10 +30,15 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
         setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
     }
 
+    useEffect(() => {
+        setTimeout(() => {
+            if (dataEditWalas.item) {
+                setInputEdit(dataEditWalas?.item);
+            }
+        }, 2000);
+    }, [dataEditWalas]);
+
     const handleEdit = () => {
-        if (dataEditWalas.item) {
-            setInputEdit(dataEditWalas.item);
-        }
         const data = {
             id_kelas: inputEdit.id_kelas,
             id_guru: inputEdit.id_guru,

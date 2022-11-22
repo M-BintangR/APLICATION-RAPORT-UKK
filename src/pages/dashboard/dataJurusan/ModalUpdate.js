@@ -26,10 +26,15 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         setInputEdit({ nama_jurusan: '', kode_jurusan: '' });
     }
 
+    useEffect(() => {
+        setTimeout(() => {
+            if (dataEditJurusan.item) {
+                setInputEdit(dataEditJurusan?.item);
+            }
+        }, 2000);
+    }, [dataEditJurusan]);
+
     const handleEdit = () => {
-        if (dataEditJurusan.item) {
-            setInputEdit(dataEditJurusan.item);
-        }
         const data = {
             nama_jurusan: inputEdit.nama_jurusan,
             kode_jurusan: inputEdit.kode_jurusan,
@@ -39,6 +44,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         dispatch(jurusanRecord());
         onClose();
     }
+
 
 
     return (

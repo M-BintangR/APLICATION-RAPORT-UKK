@@ -23,10 +23,15 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         setInputEdit({ tahun_pelajaran: '', semester: '', aktif: '' });
     }
 
+    useEffect(() => {
+        setTimeout(() => {
+            if (dataEditTapel.item) {
+                setInputEdit(dataEditTapel?.item);
+            }
+        }, 2000);
+    }, [dataEditTapel]);
+
     const handleEdit = () => {
-        if (dataEditTapel.item) {
-            setInputEdit(dataEditTapel.item);
-        }
         const data = {
             tahun_pelajaran: inputEdit.tahun_pelajaran,
             semester: inputEdit.semester,

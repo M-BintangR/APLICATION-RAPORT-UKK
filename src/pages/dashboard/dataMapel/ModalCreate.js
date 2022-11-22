@@ -31,8 +31,11 @@ const Create = ({ isVisible, onClose }) => {
 
     useEffect(() => {
         if (check.response) setErrorData(check?.response.data.errors)
+    }, [check]);
+
+    useEffect(() => {
         dispatch(jurusanRecord());
-    }, [dispatch, setErrorData, check]);
+    }, [dispatch]);
 
     const handleClose = () => {
         setErrorData(prev => prev = null);
