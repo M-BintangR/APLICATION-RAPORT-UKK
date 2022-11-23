@@ -37,12 +37,6 @@ const Sidebar = (props) => {
         dispatch(userSuccess({ token: token, users: users }));
     }, [token, users, dispatch]);
 
-
-    const handleOpen = () => {
-        setSubmenuOpen(!submenuOpen);
-        setOpen(!open);
-    }
-
     return (
         <>
             <div className='fixed z-50 duration-300 bottom-0 left-0 top-0'>
@@ -75,7 +69,7 @@ const Sidebar = (props) => {
                                 >
                                     <li
                                         className={`text-gray-300 text-sm flex items-center ${active === menu.title && 'bg-light-with'} gap-x-4 cursor-pointer p-2 hover:bg-light-with rounded-md mt-2`}
-                                        onClick={handleOpen}
+                                        onClick={() => setSubmenuOpen(!submenuOpen)}
                                     >
                                         <span className='text-2xl block float-left'>
                                             <RiDashboardFill />
@@ -126,10 +120,10 @@ const Sidebar = (props) => {
                         {dropdownOpen && (
                             <ul>
                                 <li
-                                    className={`text-dark-purple text-sm flex items-center justify-between gap-x-4 cursor-pointer p-2 hover:bg-slate-400 rounded-md duration-300 my-1 mx-1 bg-slate-300 w-32`}
+                                    className={`text-dark-purple hover:text-red-600 text-sm flex items-center justify-between gap-x-4 cursor-pointer p-2 hover:bg-slate-400 rounded-md duration-300 my-1 mx-1 bg-slate-300 w-32`}
                                     onClick={handleLogout}
                                 >
-                                    <div className="text-left font-medium">
+                                    <div className="text-left font-medium ">
                                         Logout
                                     </div>
                                     <div className='text-right'>
@@ -137,9 +131,9 @@ const Sidebar = (props) => {
                                     </div>
                                 </li>
                                 <li
-                                    className={`text-dark-purple text-sm flex items-center justify-between gap-x-4 cursor-pointer p-2 hover:bg-slate-400 rounded-md duration-300 my-1 mx-1 bg-slate-300 w-32`}
+                                    className={`text-dark-purple hover:text-green-600 text-sm flex items-center justify-between gap-x-4 cursor-pointer p-2 hover:bg-slate-400 rounded-md duration-300 my-1 mx-1 bg-slate-300 w-32`}
                                 >
-                                    <div className="text-left font-medium">
+                                    <div className="text-left font-medium ">
                                         Profil
                                     </div>
                                     <div className='text-right'>

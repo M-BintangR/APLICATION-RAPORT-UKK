@@ -38,7 +38,7 @@ export const siswaEdit = createAsyncThunk('siswaEdit', async (initialEdit) => {
 
 export const siswaUpdate = createAsyncThunk('siswaUpdate', async (initialUpdate) => {
     try {
-        const res = await axios.post(SISWA_UPDATE_URL + initialUpdate.id, initialUpdate, {
+        const res = await axios.put(SISWA_UPDATE_URL + initialUpdate.id, initialUpdate, {
             headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
         });
         return res.data;

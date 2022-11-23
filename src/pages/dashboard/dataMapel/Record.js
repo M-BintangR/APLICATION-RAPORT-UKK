@@ -53,7 +53,6 @@ const Record = () => {
 
     const handleUpdate = (id) => {
         setIdUser(id);
-        dispatch(mapelEdit(id));
         setShowModalUpdate(prev => prev = true);
     }
 

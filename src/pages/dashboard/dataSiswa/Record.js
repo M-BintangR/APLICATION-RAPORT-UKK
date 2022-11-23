@@ -22,7 +22,6 @@ const Record = () => {
     const dispatch = useDispatch();
     const Menus = AdminMenu;
 
-    console.log(dataSiswa);
 
     useEffect(() => {
         dispatch(siswaRecord());
@@ -46,7 +45,6 @@ const Record = () => {
     }
     const handleUpdate = (id) => {
         setIdUser(id);
-        dispatch(siswaUpdate(id));
         setShowModalUpdate(prev => prev = true);
     }
 

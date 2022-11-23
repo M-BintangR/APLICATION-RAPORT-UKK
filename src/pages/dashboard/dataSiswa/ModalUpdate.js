@@ -37,7 +37,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
             nis: inputEdit.nis,
             nama: inputEdit.nama,
             id_kelas: inputEdit.id_kelas,
-            id_jurusan: inputEdit.jurusan,
+            id_jurusan: inputEdit.id_jurusan,
             jk: inputEdit.jk,
             agama: inputEdit.agama,
             nisn: inputEdit.nisn,

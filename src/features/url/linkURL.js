@@ -50,3 +50,7 @@ export const WALAS_CREATE_URL = 'http://127.0.0.1:8000/api/admin/data/walas';
 export const WALAS_EDIT_URL = 'http://127.0.0.1:8000/api/admin/data/walas/';
 export const WALAS_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/walas/';
 export const WALAS_DELETE_URL = 'http://127.0.0.1:8000/api/admin/data/walas/';
+
+//? HOME DASHBOARD URL
+
+export const HOME_DASHBOARD_URL = '';

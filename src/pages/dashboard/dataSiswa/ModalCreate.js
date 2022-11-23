@@ -143,7 +143,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 value={inputCreate?.jk}
                                                 onChange={handleChange}
                                             >
-                                                <option>- Pilih Jurusan -</option>
+                                                <option>- Pilih Jenis Kelamin -</option>
                                                 <option value="L">Laki-Laki</option>
                                                 <option value="P">Perempuan</option>
                                             </select>
