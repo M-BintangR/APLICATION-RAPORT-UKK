@@ -150,4 +150,11 @@ const SiswaSlice = createSlice({
 
 });
 
+export const selectALlSiswa = state => state.siswa.siswaRecord;
+export const checkCreateSiswa = state => state.siswa.siswaCreate;
+export const checkEditSiswa = state => state.siswa.siswaEdit;
+export const checkUpdateSiswa = state => state.siswa.siswaUpdate;
+export const checkDeleteSiswa = state => state.siswa.siswaDelete;
+export const pendingSiswa = state => state.siswa.pending;
+export const errorSiswa = state => state.siswa.error;
 export default SiswaSlice.reducer;
