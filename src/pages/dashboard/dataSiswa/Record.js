@@ -20,6 +20,9 @@ const Record = () => {
     const pending = useSelector(pendingSiswa);
     const dataSiswa = useSelector(selectALlSiswa);
     const dispatch = useDispatch();
+    const Menus = AdminMenu;
+
+    console.log(dataSiswa);
 
     useEffect(() => {
         dispatch(siswaRecord());
@@ -59,7 +62,6 @@ const Record = () => {
         { title: 'Action' }
     ];
 
-    const Menus = AdminMenu;
     return (
         <div >
             <Sidebar Menus={Menus} active={active}>
@@ -106,13 +108,13 @@ const Record = () => {
                                             <tr key={i} className={`bg-white`} >
                                                 <>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.nama}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.kelas?.nama_kelas}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.jurusan?.kode_kelas}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.nis}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.nisn}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.agama}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.jk}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.nama ? siswa?.nama : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.kelas?.nama_kelas ? siswa?.kelas?.nama_kelas : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.jurusan?.kode_jurusan ? siswa?.jurusan?.kode_jurusan : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.nis ? siswa?.nis : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.nisn ? siswa?.nisn : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.agama ? siswa?.agama : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.jk ? siswa?.jk : '-'}</td>
 
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
                                                         <button

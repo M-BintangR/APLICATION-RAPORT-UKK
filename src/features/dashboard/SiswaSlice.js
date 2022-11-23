@@ -70,7 +70,7 @@ const initialState = {
 }
 
 const SiswaSlice = createSlice({
-    name: 'tapel',
+    name: 'siswa',
     initialState,
 
     extraReducers: (builder) => {

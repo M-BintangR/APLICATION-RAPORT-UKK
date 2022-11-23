@@ -7,6 +7,7 @@ import JurusanSlice from "../features/dashboard/JurusanSlice";
 import TapelSlice from "../features/dashboard/TapelSlice";
 import KelasSlice from "../features/dashboard/KelasSlice";
 import WalasSlice from "../features/dashboard/WalasSlice";
+import SiswaSlice from "../features/dashboard/SiswaSlice";
 
 export const store = configureStore({
     reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
         tapel: TapelSlice,
         kelas: KelasSlice,
         walas: WalasSlice,
+        siswa: SiswaSlice,
     }
 });
 
