@@ -48,6 +48,7 @@ const Record = () => {
         setTimeout(() => {
             setCheckAlert(false);
         }, 10000)
+        dispatch(mapelRecord());
     }
 
     const handleUpdate = (id) => {
@@ -104,11 +105,11 @@ const Record = () => {
                                             <tr key={i} className={`bg-white`} >
                                                 <>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{mapel.nama_mapel ? mapel?.nama_mapel : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{mapel?.nama_mapel ? mapel?.nama_mapel : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{mapel.kkm ? mapel?.kkm : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{mapel.level ? mapel?.level : '-'}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{mapel.jurusan.nama_jurusan ? mapel?.jurusan.nama_jurusan : '-'}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{mapel.jurusan.kode_jurusan ? mapel?.jurusan.kode_jurusan : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{mapel?.jurusan.nama_jurusan ? mapel?.jurusan?.nama_jurusan : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{mapel?.jurusan.kode_jurusan ? mapel?.jurusan?.kode_jurusan : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
                                                         <button
                                                             className='text-sm md:text-xl text-black mr-1 bg-white font-medium md:font-semibold py-1 px-3 hover:text-amber-400'

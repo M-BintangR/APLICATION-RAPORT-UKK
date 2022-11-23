@@ -26,11 +26,9 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
     }, [dispatch, isVisible, idUser]);
 
     useEffect(() => {
-        setTimeout(() => {
-            if (dataEditMapel.item) {
-                setInputEdit(dataEditMapel?.item);
-            }
-        }, 2000);
+        if (dataEditMapel.item) {
+            setInputEdit(dataEditMapel?.item);
+        }
     }, [dataEditMapel]);
 
     const handleEdit = () => {

@@ -39,6 +39,7 @@ const Record = () => {
         setTimeout(() => {
             setCheckAlert(false);
         }, 10000)
+        dispatch(walasRecord());
     }
 
     useEffect(() => {
@@ -63,7 +64,7 @@ const Record = () => {
                         </div>
                     )}
 
-                    {!pending && dataWalas.item && (
+                    {!pending && (
                         <div>
                             <div className="mt-5 mb-8 bg-slate-100 rounded-md py-3 px-4">
                                 <h1 className='text-xl md:text-2xl font-semibold '>Data Mapel
@@ -94,12 +95,12 @@ const Record = () => {
                                         </tr>
                                     </thead>
                                     <tbody className='divide-y divide-gray-100 '>
-                                        {dataWalas.item.map((walas, i) => (
+                                        {dataWalas.item && dataWalas.item.map((walas, i) => (
                                             <tr key={i} className={`bg-white`} >
                                                 <>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{walas.guru.nama_guru ? walas?.guru.nama_guru : '-'}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{walas.kelas.nama_kelas ? walas?.kelas.nama_kelas : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{walas?.guru?.nama_guru ? walas?.guru?.nama_guru : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{walas.kelas.nama_kelas ? walas?.kelas?.nama_kelas : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
                                                         <button
                                                             className='text-sm md:text-xl text-black mr-1 bg-white font-medium md:font-semibold py-1 px-3 hover:text-amber-400'

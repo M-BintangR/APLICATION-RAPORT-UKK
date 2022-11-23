@@ -38,6 +38,11 @@ const Sidebar = (props) => {
     }, [token, users, dispatch]);
 
 
+    const handleOpen = () => {
+        setSubmenuOpen(!submenuOpen);
+        setOpen(!open);
+    }
+
     return (
         <>
             <div className='fixed z-50 duration-300 bottom-0 left-0 top-0'>
@@ -70,7 +75,7 @@ const Sidebar = (props) => {
                                 >
                                     <li
                                         className={`text-gray-300 text-sm flex items-center ${active === menu.title && 'bg-light-with'} gap-x-4 cursor-pointer p-2 hover:bg-light-with rounded-md mt-2`}
-                                        onClick={() => setSubmenuOpen(!submenuOpen)}
+                                        onClick={handleOpen}
                                     >
                                         <span className='text-2xl block float-left'>
                                             <RiDashboardFill />

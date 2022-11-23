@@ -44,6 +44,7 @@ const Record = () => {
         setTimeout(() => {
             setCheckAlert(false);
         }, 10000)
+        dispatch(jurusanRecord());
     }
 
     const TabelJurusans = [
@@ -64,7 +65,7 @@ const Record = () => {
                         </div>
                     )}
 
-                    {!pending && dataJurusan.items && (
+                    {!pending && (
                         <div>
                             <div className="mt-5 mb-8 bg-slate-100 rounded-md py-3 px-4">
                                 <h1 className='text-xl md:text-2xl font-semibold '>Data Jurusan

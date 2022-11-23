@@ -38,6 +38,7 @@ const Record = () => {
         setTimeout(() => {
             setCheckAlert(false);
         }, 10000)
+        dispatch(tapelRecord());
     }
 
     const handleUpdate = (id) => {
@@ -64,7 +65,7 @@ const Record = () => {
                         </div>
                     )}
 
-                    {!pending && dataTapel.items && (
+                    {!pending && (
                         <div>
                             <div className="mt-5 mb-8 bg-slate-100 rounded-md py-3 px-4">
                                 <h1 className='text-xl md:text-2xl font-semibold '>Data Jurusan
@@ -92,7 +93,7 @@ const Record = () => {
                                         </tr>
                                     </thead>
                                     <tbody className='divide-y divide-gray-100 '>
-                                        {dataTapel && dataTapel?.items.map((tapel, i) => (
+                                        {dataTapel.items && dataTapel?.items.map((tapel, i) => (
                                             <tr key={i} className={`bg-white`} >
                                                 <>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>

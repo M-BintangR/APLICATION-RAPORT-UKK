@@ -27,11 +27,9 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
     }
 
     useEffect(() => {
-        setTimeout(() => {
-            if (dataEditJurusan.item) {
-                setInputEdit(dataEditJurusan?.item);
-            }
-        }, 2000);
+        if (dataEditJurusan.item) {
+            setInputEdit(dataEditJurusan?.item);
+        }
     }, [dataEditJurusan]);
 
     const handleEdit = () => {
