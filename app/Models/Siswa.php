@@ -13,12 +13,12 @@ class Siswa extends Model
     // one to many (kelas)
     public function kelas()
     {
-        return $this->belongsTo(Kelas::class);
+        return $this->belongsTo(Kelas::class, 'id_kelas', 'id');
     }
 
     // one to many (jurusan)
     public function jurusan()
     {
-        return $this->belongsTo(Jurusan::class);
+        return $this->belongsTo(Jurusan::class, 'id_jurusan', 'id');
     }
 }

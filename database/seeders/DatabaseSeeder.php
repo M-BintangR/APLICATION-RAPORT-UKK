@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Guru;
 use App\Models\Mapel;
+use App\Models\User;
 use App\Models\Walas;
 use Illuminate\Database\Seeder;
 
@@ -40,6 +41,13 @@ class DatabaseSeeder extends Seeder
         Walas::create([
             "id_guru" => 1,
             'id_kelas' => 1
+        ]);
+
+        User::create([
+            "nama_pengguna" => "Muhammad Bintang",
+            "username" => "HoshiChan",
+            "password" => bcrypt("adminadmin"),
+            "role" => "admin",
         ]);
     }
 }
