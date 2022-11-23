@@ -54,7 +54,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                 <h3 className="mb-5 text-xl font-medium text-gray-900">
                                     Tambah Data
                                 </h3>
-                                <div className='space-x-6'>
+                                <div className='grid grid-cols-1 md:grid-cols-2 gap-x-5'>
                                     <div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="nama">Nama</label>
@@ -68,7 +68,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 name='nama'
                                                 id='nama'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
-                                                placeholder='Nama Mapel'
+                                                placeholder='Nama'
                                                 value={inputCreate?.nama}
                                                 onChange={handleChange}
 
@@ -86,7 +86,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 name='nis'
                                                 id='nis'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
-                                                placeholder='Nilai KKM'
+                                                placeholder='NIS'
                                                 value={inputCreate?.nis}
                                                 onChange={handleChange}
                                             />
@@ -103,11 +103,13 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 name='nisn'
                                                 id='nisn'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
-                                                placeholder='Level'
+                                                placeholder='NISN'
                                                 value={inputCreate?.nisn}
                                                 onChange={handleChange}
                                             />
                                         </div>
+                                    </div>
+                                    <div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="agama">Agama</label>
                                             <div>
@@ -120,7 +122,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 name='agama'
                                                 id='agama'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
-                                                placeholder='Level'
+                                                placeholder='Agama'
                                                 value={inputCreate?.agama}
                                                 onChange={handleChange}
                                             />
@@ -136,7 +138,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 id='jk'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
-                                                placeholder='Jurusan'
+                                                placeholder='Jenis Kelamin'
                                                 name='jk'
                                                 value={inputCreate?.jk}
                                                 onChange={handleChange}
@@ -157,7 +159,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 id='kelas'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
-                                                placeholder='Jurusan'
+                                                placeholder='Kelas'
                                                 name='id_kelas'
                                                 value={inputCreate?.id_kelas}
                                                 onChange={handleChange}
@@ -168,6 +170,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 ))}
                                             </select>
                                         </div>
+
+                                    </div>
+                                    <div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="jurusan">Jurusan</label>
                                             <div>

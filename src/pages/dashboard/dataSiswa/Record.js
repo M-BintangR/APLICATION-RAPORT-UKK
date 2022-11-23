@@ -114,7 +114,7 @@ const Record = () => {
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.nis ? siswa?.nis : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.nisn ? siswa?.nisn : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.agama ? siswa?.agama : '-'}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.jk ? siswa?.jk : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.jk === "L" ? "Laki-laki" : 'Perempuan'}</td>
 
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
                                                         <button

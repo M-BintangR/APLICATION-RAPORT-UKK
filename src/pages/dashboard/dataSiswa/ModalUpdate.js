@@ -67,7 +67,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                 <h3 className="mb-5 text-xl font-medium text-gray-900">
                                     Edit Data
                                 </h3>
-                                <div className='space-x-6'>
+                                <div className='grid grid-cols-1 md:grid-cols-2 gap-x-5'>
                                     <div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="nama">Nama</label>
@@ -76,7 +76,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                                 name='nama'
                                                 id='nama'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5`}
-                                                placeholder='Nama Mapel'
+                                                placeholder='Nama'
                                                 defaultValue={dataEditSiswa?.item.nama}
                                                 onChange={handleChange}
                                             />
@@ -88,7 +88,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                                 name='nis'
                                                 id='nis'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 `}
-                                                placeholder='Nilai KKM'
+                                                placeholder='NIS'
                                                 onChange={handleChange}
                                                 defaultValue={dataEditSiswa?.item.nis}
                                             />
@@ -100,11 +100,13 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                                 name='nisn'
                                                 id='nisn'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 `}
-                                                placeholder='Level'
+                                                placeholder='NISN'
                                                 onChange={handleChange}
                                                 defaultValue={dataEditSiswa?.item.nisn}
                                             />
                                         </div>
+                                    </div>
+                                    <div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="agama">Agama</label>
                                             <input
@@ -112,7 +114,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                                 name='agama'
                                                 id='agama'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 `}
-                                                placeholder='Level'
+                                                placeholder='Agama'
                                                 onChange={handleChange}
                                                 defaultValue={dataEditSiswa?.item.agama}
                                             />
@@ -123,7 +125,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                                 id='jk'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none `}
                                                 type="text"
-                                                placeholder='Jurusan'
+                                                placeholder='Jenis Kelamin'
                                                 name='jk'
                                                 defaultValue={dataEditSiswa?.item.jk}
                                                 onChange={handleChange}
@@ -142,7 +144,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                                 id='kelas'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none `}
                                                 type="text"
-                                                placeholder='Jurusan'
+                                                placeholder='Kelas'
                                                 name='id_kelas'
                                                 onChange={handleChange}
                                                 defaultValue={dataEditSiswa?.item.id_kelas}
@@ -158,6 +160,8 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
 
                                             </select>
                                         </div>
+                                    </div>
+                                    <div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="jurusan">Jurusan</label>
                                             <select
