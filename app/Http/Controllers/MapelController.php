@@ -50,6 +50,31 @@ class MapelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function search($query)
+    {
+        $search = Mapel::with(['jurusan'])->where(function ($data) use ($query) {
+            $data
+                ->where('nama_mapel', 'like', "%{$query}%")
+                ->orWhere('kkm', 'like', "%{$query}%")
+                ->orWhere('level', 'like', "%{$query}%");
+        })->orWhereHas('jurusan', function ($data) use ($query) {
+            $data
+                ->where('nama_jurusan', 'like', "%{$query}%")
+                ->orWhere('kode_jurusan', 'like', "%{$query}%");
+        })->get();
+
+        if ($query) {
+            return response()->json([
+                'items' => $search,
+                'message' => 'success',
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => 'Unauthorizaed',
+        ], 401);
+    }
+
     public function store(Request $request)
     {
         $idJurusan = Jurusan::pluck('id')->toArray();
@@ -81,26 +106,6 @@ class MapelController extends Controller
      * @param  \App\Models\Mapel  $mapel
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $item = Mapel::where('id', $id)->with(['jurusan', 'guru'])->get();
-
-        if ($item) {
-            return response()->json([
-                'item' => $item,
-                'message' => 'success',
-            ], 200);
-        } else {
-            return response()->json([
-                'message' => 'not found',
-            ], 404);
-        }
-
-        return response()->json([
-            'message' => 'Unauthorizaed',
-        ], 401);
-    }
-
     /**
      * Show the form for editing the specified resource.
      *

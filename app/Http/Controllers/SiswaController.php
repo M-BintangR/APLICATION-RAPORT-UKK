@@ -50,6 +50,37 @@ class SiswaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function search($query)
+    {
+        $search = Siswa::with(['kelas', 'jurusan'])
+            ->where(function ($data) use ($query) {
+                $data
+                    ->where('nis', 'like', "%{$query}%")
+                    ->orWhere('nama', 'like', "%{$query}%")
+                    ->orWhere('jk', 'like', "%{$query}%")
+                    ->orWhere('agama', 'like', "%{$query}%")
+                    ->orWhere('nisn', 'like', "%{$query}%");
+            })->orWhereHas('kelas', function ($data) use ($query) {
+                $data
+                    ->where('nama_kelas', 'like', "%{$query}%")
+                    ->orWhere('level', 'like', "%{$query}%");
+            })->orWhere('jurusan', function ($data) use ($query) {
+                $data
+                    ->where('kode_jurusan', 'like', "%{$query}%");
+            })->get();
+
+        if ($query) {
+            return response()->json([
+                'items' => $search,
+                'message' => 'success',
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => 'Unauthorizaed',
+        ], 401);
+    }
+
     public function store(Request $request)
     {
 
@@ -88,25 +119,6 @@ class SiswaController extends Controller
      * @param  \App\Models\Siswa  $siswa
      * @return \Illuminate\Http\Response
      */
-    public function show(Siswa $siswa)
-    {
-        $item = $siswa->with(['jurusan', 'kelas'])->get();
-
-        if ($item) {
-            return response()->json([
-                'item' => $item,
-                'message' => 'success',
-            ], 200);
-        } else {
-            return response()->json([
-                'message' => 'not found',
-            ], 404);
-        }
-
-        return response()->json([
-            'message' => 'Unauthorizaed',
-        ], 401);
-    }
 
     /**
      * Show the form for editing the specified resource.

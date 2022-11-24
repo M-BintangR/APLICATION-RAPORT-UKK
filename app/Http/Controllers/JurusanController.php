@@ -48,6 +48,24 @@ class JurusanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function search($query)
+    {
+        $search = Jurusan::where('nama_jurusan', 'like', "%{$query}%")
+            ->orWhere('kode_jurusan', 'like', "%{$query}%")->get();
+
+        if ($query) {
+            return response()->json([
+                'items' => $search,
+                'message' => 'success',
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => 'Unauthorizaed',
+        ], 401);
+    }
+
     public function store(Request $request)
     {
         $validateData = $request->validate([
@@ -77,24 +95,6 @@ class JurusanController extends Controller
      * @param  \App\Models\Jurusan  $jurusan
      * @return \Illuminate\Http\Response
      */
-    public function show(Jurusan $jurusan)
-    {
-        $item = $jurusan;
-
-        if ($item) {
-            return response()->json([
-                'item' => $item,
-                'message' => 'success',
-            ], 200);
-        } else {
-            return response()->json([
-                'message' => 'not found',
-            ], 404);
-        }
-        return response()->json([
-            'message' => 'Unauthorizaed',
-        ], 401);
-    }
 
     /**
      * Show the form for editing the specified resource.

@@ -48,6 +48,25 @@ class TapelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function search($query)
+    {
+        $search = Tapel::where('tahun_pelajaran', 'like', "%{$query}%")
+            ->orWhere('semester', 'like', "%{$query}%")
+            ->orWhere('aktif', 'like', "%{$query}")->get();
+
+        if ($query) {
+            return response()->json([
+                'items' => $search,
+                'message' => 'success',
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => 'Unauthorizaed',
+        ], 401);
+    }
+
     public function store(Request $request)
     {
         $validateData = $request->validate([
@@ -78,25 +97,6 @@ class TapelController extends Controller
      * @param  \App\Models\Tapel  $tapel
      * @return \Illuminate\Http\Response
      */
-    public function show(Tapel $tapel)
-    {
-        $item = $tapel;
-
-        if ($item) {
-            return response()->json([
-                'item' => $item,
-                'message' => 'success',
-            ], 200);
-        } else {
-            return response()->json([
-                'message' => 'not found',
-            ], 404);
-        }
-
-        return response()->json([
-            'message' => 'Unauthorizaed',
-        ], 401);
-    }
 
     /**
      * Show the form for editing the specified resource.

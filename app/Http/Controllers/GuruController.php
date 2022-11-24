@@ -46,7 +46,9 @@ class GuruController extends Controller
                 ->where('nama_guru', 'like', "%{$request}%");
         })->orWhereHas('mapel', function ($query) use ($request) {
             $query
-                ->where('nama_mapel', 'like', "%{$request}%");
+                ->where('nama_mapel', 'like', "%{$request}%")
+                ->orWhere('kkm', 'like', "%{$request}%")
+                ->orWhere('level', 'like', "%{$request}%");
         })->get();
 
         if ($request) {
@@ -91,25 +93,6 @@ class GuruController extends Controller
      * @param  \App\Models\Guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function show(Guru $guru)
-    {
-        $item = $guru->with(['mapel', 'walas'])->get();
-
-        if ($item) {
-            return response()->json([
-                'item' => $item,
-                'message' => "success",
-            ], 200);
-        } else {
-            return response()->json([
-                'message' => "not foun",
-            ], 404);
-        }
-
-        return response()->json([
-            'message' => "Unauthorizaed",
-        ], 401);
-    }
 
     /**
      * Show the form for editing the specified resource.

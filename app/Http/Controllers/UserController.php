@@ -48,6 +48,25 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function search($query)
+    {
+        $search = User::where('nama_pengguna', 'like', "%{$query}%")
+            ->orWhere('username', 'like', "%{$query}%")
+            ->orWhere('role', 'like', "%{$query}%")->get();
+
+        if ($query) {
+            return response()->json([
+                'items' => $search,
+                'message' => 'success',
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => 'Unauthorizaed',
+        ], 401);
+    }
+
     public function store(Request $request)
     {
         $validateData = $request->validate([
@@ -79,25 +98,6 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
-    {
-        $item = $user;
-
-        if ($item) {
-            return response()->json([
-                'item' => $item,
-                'message' => 'success',
-            ], 200);
-        } else {
-            return response()->json([
-                'message' => 'not found',
-            ], 404);
-        }
-
-        return response()->json([
-            'message' => 'Unauthorizaed',
-        ], 401);
-    }
 
     /**
      * Show the form for editing the specified resource.

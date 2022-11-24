@@ -47,6 +47,29 @@ class WalasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function search($query)
+    {
+        $search = Walas::with(['guru', 'kelas'])
+            ->whereHas('guru', function ($data) use ($query) {
+                $data
+                    ->where('nama_guru', 'like', "%{$query}%");
+            })->orWhereHas('kelas', function ($data) use ($query) {
+                $data
+                    ->where('nama_kelas', 'like', "%{$query}%");
+            })->get();
+
+        if ($query) {
+            return response()->json([
+                'items' => $search,
+                'message' => 'success',
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => 'Unauthorizaed',
+        ], 401);
+    }
+
     public function store(Request $request)
     {
         $idGuru = Guru::pluck('id')->toArray();
@@ -79,25 +102,6 @@ class WalasController extends Controller
      * @param  \App\Models\Walas  $walas
      * @return \Illuminate\Http\Response
      */
-    public function show(Walas $walas)
-    {
-        $item = $walas->with(['guru', 'kelas'])->get();
-
-        if ($item) {
-            return response()->json([
-                'item' => $item,
-                'message' => 'success',
-            ], 200);
-        } else {
-            return response()->json([
-                'message' => 'not found',
-            ], 404);
-        }
-
-        return response()->json([
-            'message' => 'Unauthorizaed',
-        ], 401);
-    }
 
     /**
      * Show the form for editing the specified resource.
