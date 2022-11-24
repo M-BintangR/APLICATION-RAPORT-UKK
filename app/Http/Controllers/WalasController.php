@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
+use App\Models\Kelas;
 use App\Models\Walas;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class WalasController extends Controller
 {
@@ -46,9 +49,12 @@ class WalasController extends Controller
      */
     public function store(Request $request)
     {
+        $idGuru = Guru::pluck('id')->toArray();
+        $idKelas = Kelas::pluck('id')->toArray();
+
         $validateData = $request->validate([
-            'id_guru' => ['required'],
-            'id_kelas' => ['required'],
+            'id_guru' => ['required', Rule::in($idGuru)],
+            'id_kelas' => ['required', Rule::in($idKelas)],
         ]);
 
         if ($validateData) {
@@ -127,9 +133,12 @@ class WalasController extends Controller
      */
     public function update(Request $request, Walas $walas)
     {
+        $idGuru = Guru::pluck('id')->toArray();
+        $idKelas = Guru::pluck('id')->toArray();
+
         $validateData = $request->validate([
-            'id_guru' => ['required'],
-            'id_kelas' => ['required'],
+            'id_guru' => ['required', Rule::in($idGuru)],
+            'id_kelas' => ['required', Rule::in($idKelas)],
         ]);
 
         if ($validateData) {

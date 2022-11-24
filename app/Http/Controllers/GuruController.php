@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
+use App\Models\Mapel;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class GuruController extends Controller
 {
@@ -39,9 +41,10 @@ class GuruController extends Controller
 
     public function store(Request $request)
     {
+        $idMapel = Mapel::pluck('id')->toArray();
         $validateData = $request->validate([
             'nama_guru' => ['required'],
-            'id_mapel' => ['required'],
+            'id_mapel' => ['required', Rule::in($idMapel)],
         ]);
 
         if ($validateData) {
@@ -121,9 +124,11 @@ class GuruController extends Controller
      */
     public function update(Request $request, Guru $guru)
     {
+        $idMapel = Mapel::pluck('id')->toArray();
+
         $validateData = $request->validate([
             'nama_guru' => ['required'],
-            'id_mapel' => ['required'],
+            'id_mapel' => ['required', Rule::in($idMapel)],
         ]);
 
         if ($validateData) {

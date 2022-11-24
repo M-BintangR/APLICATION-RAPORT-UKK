@@ -25,7 +25,8 @@ class DashboardController extends Controller
         $countJurusan = count(Jurusan::all());
         $countUser = count(User::all());
 
-        $jmlData = collect([
+
+        return response()->json([
             'jmlSiswa' => $countSiswa,
             'jmlWalas' => $countWalas,
             'jmlMapel' => $countMapel,
@@ -34,14 +35,6 @@ class DashboardController extends Controller
             'jmlGuru' => $countGuru,
             'jmlJurusan' => $countJurusan,
             'jmlUser' => $countUser,
-        ]);
-
-        if ($jmlData) {
-            return response()->json($jmlData);
-        }
-
-        return response()->json([
-            'message' => 'Unauthorizaed',
-        ], 401);
+        ], 200);
     }
 }

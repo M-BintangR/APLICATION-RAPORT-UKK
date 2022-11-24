@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jurusan;
+use App\Models\Kelas;
 use App\Models\Siswa;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
@@ -49,15 +52,19 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
+
+        $idKelas = Kelas::pluck('id')->toArray();
+        $idJurusan = Jurusan::pluck('id')->toArray();
+
         $validateData = $request->validate([
-            'nis' => ['required', 'max:7', 'min:7'],
+            'nis' => ['required', 'max:7', 'min:7', 'unique:siswas,nis'],
             'nama' => ['required', 'min:1', 'max:100'],
             'profil' => ['nullable'],
-            'id_kelas' => ['required'],
-            'id_jurusan' => ['required'],
+            'id_kelas' => ['required', Rule::in($idKelas)],
+            'id_jurusan' => ['required', Rule::in($idJurusan)],
             'jk' => ['required', 'min:1', 'max:1'],
             'agama' => ['required', 'min:1', 'max:15'],
-            'nisn' => ['required', 'min:10', 'max:10'],
+            'nisn' => ['required', 'min:10', 'max:10', 'unique:siswas,nisn'],
         ]);
 
         if ($validateData) {
@@ -135,12 +142,15 @@ class SiswaController extends Controller
      */
     public function update(Request $request, Siswa $siswa)
     {
+        $idKelas = Kelas::pluck('id')->toArray();
+        $idJurusan = Jurusan::pluck('id')->toArray();
+
         $validateData = $request->validate([
             'nis' => ['required', 'max:7', 'min:7'],
             'nama' => ['required', 'min:1', 'max:100'],
             'profil' => ['nullable'],
-            'id_kelas' => ['required'],
-            'id_jurusan' => ['required'],
+            'id_kelas' => ['required', Rule::in($idKelas)],
+            'id_jurusan' => ['required', Rule::in($idJurusan)],
             'jk' => ['required', 'min:1', 'max:1'],
             'agama' => ['required', 'min:1', 'max:15'],
             'nisn' => ['required', 'min:10', 'max:10'],

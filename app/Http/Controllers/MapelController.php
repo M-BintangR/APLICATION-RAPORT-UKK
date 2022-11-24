@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jurusan;
 use App\Models\Mapel;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class MapelController extends Controller
 {
@@ -50,11 +52,12 @@ class MapelController extends Controller
      */
     public function store(Request $request)
     {
+        $idJurusan = Jurusan::pluck('id')->toArray();
         $validateData = $request->validate([
             'nama_mapel' => ['required'],
             'kkm' => ['required'],
             'level' => ['required'],
-            'id_jurusan' => ['required'],
+            'id_jurusan' => ['required', Rule::in($idJurusan)],
         ]);
 
         if ($validateData) {
@@ -133,11 +136,12 @@ class MapelController extends Controller
      */
     public function update(Request $request, Mapel $mapel)
     {
+        $idJurusan = Jurusan::pluck('id')->toArray();
         $validateData = $request->validate([
             'nama_mapel' => ['required'],
             'kkm' => ['required'],
             'level' => ['required'],
-            'id_jurusan' => ['required'],
+            'id_jurusan' => ['required', Rule::in($idJurusan)],
         ]);
 
         if ($validateData) {
