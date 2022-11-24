@@ -39,6 +39,19 @@ class GuruController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function search($request)
+    {
+        $search = Guru::with(['mapel'])->where(function ($query) use ($request) {
+            $query
+                ->where('nama_guru', 'like', "%{$request}%");
+        })->orWhereHas('mapel', function ($query) use ($request) {
+            $query
+                ->where('nama_mapel', 'like', "%{$request}%");
+        })->get();
+
+        return response()->json($search);
+    }
+
     public function store(Request $request)
     {
         $idMapel = Mapel::pluck('id')->toArray();

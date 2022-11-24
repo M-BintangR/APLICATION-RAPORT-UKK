@@ -106,6 +106,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout']);
 });
 
+Route::get('/dashboard/data/guru/{query}', [GuruController::class, 'search']);
+
 //* register and login
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'register']);
