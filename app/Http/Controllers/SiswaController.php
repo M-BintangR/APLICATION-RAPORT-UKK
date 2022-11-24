@@ -64,7 +64,7 @@ class SiswaController extends Controller
                 $data
                     ->where('nama_kelas', 'like', "%{$query}%")
                     ->orWhere('level', 'like', "%{$query}%");
-            })->orWhere('jurusan', function ($data) use ($query) {
+            })->orWhereHas('jurusan', function ($data) use ($query) {
                 $data
                     ->where('kode_jurusan', 'like', "%{$query}%");
             })->get();
