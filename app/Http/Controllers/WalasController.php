@@ -49,18 +49,21 @@ class WalasController extends Controller
      */
     public function search($query)
     {
-        $search = Walas::with(['guru', 'kelas'])
-            ->whereHas('guru', function ($data) use ($query) {
-                $data
-                    ->where('nama_guru', 'like', "%{$query}%");
-            })->orWhereHas('kelas', function ($data) use ($query) {
-                $data
-                    ->where('nama_kelas', 'like', "%{$query}%");
-            })->get();
+        $search = Walas::with(['guru', 'kelas'])->where(function ($data) use ($query) {
+            $data
+                ->where('id_kelas', 'like', "%{$query}%")
+                ->orWhere('id_guru', 'like', "%{$query}%");
+        })->orWhereHas('guru', function ($data) use ($query) {
+            $data
+                ->where('nama_guru', 'like', "%{$query}%");
+        })->orWhereHas('kelas', function ($data) use ($query) {
+            $data
+                ->where('nama_kelas', 'like', "%{$query}%");
+        })->get();
 
         if ($query) {
             return response()->json([
-                'items' => $search,
+                'item' => $search,
                 'message' => 'success',
             ], 200);
         }

@@ -50,12 +50,14 @@ class KelasController extends Controller
     public function search($query)
     {
         $search = Kelas::where('nama_kelas', 'like', "%{$query}%")
-            ->orWhere('level', 'like', "%{$query}%")->get();
+            ->orWhere('level', 'like', "%{$query}%")
+            ->get();
 
         if ($query) {
             return response()->json([
                 'items' => $search,
-            ]);
+                'message' => 'success',
+            ], 200);
         }
 
         return response()->json([
