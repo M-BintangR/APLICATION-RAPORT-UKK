@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { KELAS_CREATE_URL, KELAS_RECORD_URL, KELAS_EDIT_URL, KELAS_DELETE_URL, KELAS_UPDATE_URL } from "../url/linkURL";
+import { KELAS_CREATE_URL, KELAS_RECORD_URL, KELAS_EDIT_URL, KELAS_DELETE_URL, KELAS_UPDATE_URL, JURUSAN_SEARCH_URL } from "../url/linkURL";
 
 
 export const kelasRecord = createAsyncThunk('kelasRecord', async () => {
@@ -58,6 +58,17 @@ export const kelasDelete = createAsyncThunk('kelasDelete', async (initialDelete)
     }
 });
 
+export const kelasSearch = createAsyncThunk('kelasSearch', async (query) => {
+    try {
+        const res = await axios.get(JURUSAN_SEARCH_URL + query, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
 const initialState = {
     kelasRecord: {},
     kelasDelete: {},
@@ -76,7 +87,7 @@ const KelasSlice = createSlice({
     extraReducers: (builder) => {
         builder
 
-            //? JURUSAN RECORD
+            //? KELAS RECORD
 
             .addCase(kelasRecord.pending, (state) => {
                 state.pending = true;
@@ -93,7 +104,7 @@ const KelasSlice = createSlice({
                 state.error = action.error;
             })
 
-            //? MAPEL CREATE
+            //? KELAS CREATE
 
             .addCase(kelasCreate.pending, (state) => {
                 state.pending = true;
@@ -109,7 +120,7 @@ const KelasSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? MAPEL EDIT
+            //? KELAS EDIT
 
             .addCase(kelasEdit.pending, (state) => {
                 state.pending = true;
@@ -125,7 +136,7 @@ const KelasSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? MAPEL UPDATE
+            //? KELAS UPDATE
 
             .addCase(kelasUpdate.pending, (state) => {
                 state.pending = true;
@@ -141,10 +152,16 @@ const KelasSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? MAPEL UPDATE
+            //? KELAS UPDATE
 
             .addCase(kelasDelete.fulfilled, (state, action) => {
                 state.kelasDelete = action.payload;
+            })
+
+            //? KELAS SEARCH
+
+            .addCase(kelasSearch.fulfilled, (state, action) => {
+                state.kelasRecord = action.payload;
             });
     }
 

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { TAPEL_CREATE_URL, TAPEL_RECORD_URL, TAPEL_EDIT_URL, TAPEL_DELETE_URL, TAPEL_UPDATE_URL } from "../url/linkURL";
+import { TAPEL_CREATE_URL, TAPEL_RECORD_URL, TAPEL_EDIT_URL, TAPEL_DELETE_URL, TAPEL_UPDATE_URL, TAPEL_SEARCH_URL } from "../url/linkURL";
 
 
 export const tapelRecord = createAsyncThunk('tapelRecord', async () => {
@@ -59,6 +59,17 @@ export const tapelDelete = createAsyncThunk('tapelDelete', async (initialDelete)
     }
 });
 
+export const tapelSearch = createAsyncThunk('tapelSearch', async (query) => {
+    try {
+        const res = await axios.get(TAPEL_SEARCH_URL + query, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
 const initialState = {
     tapelRecord: {},
     tapelDelete: {},
@@ -77,7 +88,7 @@ const TapelSlice = createSlice({
     extraReducers: (builder) => {
         builder
 
-            //? JURUSAN RECORD
+            //? TAPEL RECORD
 
             .addCase(tapelRecord.pending, (state) => {
                 state.pending = true;
@@ -94,7 +105,7 @@ const TapelSlice = createSlice({
                 state.error = action.error;
             })
 
-            //? MAPEL CREATE
+            //? TAPEL CREATE
 
             .addCase(tapelCreate.pending, (state) => {
                 state.pending = true;
@@ -110,7 +121,7 @@ const TapelSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? MAPEL EDIT
+            //? TAPEL EDIT
 
             .addCase(tapelEdit.pending, (state) => {
                 state.pending = true;
@@ -126,7 +137,7 @@ const TapelSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? MAPEL UPDATE
+            //? TAPEL UPDATE
 
             .addCase(tapelUpdate.pending, (state) => {
                 state.pending = true;
@@ -142,11 +153,18 @@ const TapelSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? MAPEL UPDATE
+            //? TAPEL UPDATE
 
             .addCase(tapelDelete.fulfilled, (state, action) => {
                 state.tapelDelete = action.payload;
-            });
+            })
+
+            //? TAPEL SEARCH
+
+            .addCase(tapelSearch.fulfilled, (state, action) => {
+                state.tapelRecord = action.payload;
+            })
+
     }
 
 });

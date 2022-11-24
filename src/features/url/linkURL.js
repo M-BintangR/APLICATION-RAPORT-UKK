@@ -16,6 +16,7 @@ export const MAPEL_CREATE_URL = 'http://127.0.0.1:8000/api/admin/data/mapel';
 export const MAPEL_EDIT_URL = 'http://127.0.0.1:8000/api/admin/data/mapel/';
 export const MAPEL_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/mapel/';
 export const MAPEL_DELETE_URL = 'http://127.0.0.1:8000/api/admin/data/mapel/';
+export const MAPEL_SEARCH_URL = 'http://127.0.0.1:8000/api/admin/data/mapel/';
 
 //? JURUSAN URL
 export const JURUSAN_RECORD_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan';
@@ -23,6 +24,7 @@ export const JURUSAN_CREATE_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan'
 export const JURUSAN_EDIT_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan/';
 export const JURUSAN_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan/';
 export const JURUSAN_DELETE_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan/';
+export const JURUSAN_SEARCH_URL = 'http://127.0.0.1:8000/api/admin/data/jurusan/';
 
 //? TAPEL URL
 export const TAPEL_RECORD_URL = 'http://127.0.0.1:8000/api/admin/data/tapel';
@@ -30,27 +32,31 @@ export const TAPEL_CREATE_URL = 'http://127.0.0.1:8000/api/admin/data/tapel';
 export const TAPEL_EDIT_URL = 'http://127.0.0.1:8000/api/admin/data/tapel/';
 export const TAPEL_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/tapel/';
 export const TAPEL_DELETE_URL = 'http://127.0.0.1:8000/api/admin/data/tapel/';
+export const TAPEL_SEARCH_URL = 'http://127.0.0.1:8000/api/admin/data/tapel/';
 
-//? TAPEL URL
+//? KELAS URL
 export const KELAS_RECORD_URL = 'http://127.0.0.1:8000/api/admin/data/kelas';
 export const KELAS_CREATE_URL = 'http://127.0.0.1:8000/api/admin/data/kelas';
 export const KELAS_EDIT_URL = 'http://127.0.0.1:8000/api/admin/data/kelas/';
 export const KELAS_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/kelas/';
 export const KELAS_DELETE_URL = 'http://127.0.0.1:8000/api/admin/data/kelas/';
+export const KELAS_SEARCH_URL = 'http://127.0.0.1:8000/api/admin/data/kelas/';
 
-//? TAPEL URL
+//? SISWA URL
 export const SISWA_RECORD_URL = 'http://127.0.0.1:8000/api/admin/data/siswa';
 export const SISWA_CREATE_URL = 'http://127.0.0.1:8000/api/admin/data/siswa';
 export const SISWA_EDIT_URL = 'http://127.0.0.1:8000/api/admin/data/siswa/';
 export const SISWA_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/siswa/';
 export const SISWA_DELETE_URL = 'http://127.0.0.1:8000/api/admin/data/siswa/';
+export const SISWA_SEARCH_URL = 'http://127.0.0.1:8000/api/admin/data/siswa/';
 
-//? TAPEL URL
+//? WALAS URL
 export const WALAS_RECORD_URL = 'http://127.0.0.1:8000/api/admin/data/walas';
 export const WALAS_CREATE_URL = 'http://127.0.0.1:8000/api/admin/data/walas';
 export const WALAS_EDIT_URL = 'http://127.0.0.1:8000/api/admin/data/walas/';
 export const WALAS_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/walas/';
 export const WALAS_DELETE_URL = 'http://127.0.0.1:8000/api/admin/data/walas/';
+export const WALAS_SEARCH_URL = 'http://127.0.0.1:8000/api/admin/data/walas/';
 
 //? HOME DASHBOARD URL
 

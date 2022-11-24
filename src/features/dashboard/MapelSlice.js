@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { MAPEL_CREATE_URL, MAPEL_EDIT_URL, MAPEL_RECORD_URL, MAPEL_UPDATE_URL, MAPEL_DELETE_URL } from "../url/linkURL";
+import { MAPEL_CREATE_URL, MAPEL_EDIT_URL, MAPEL_RECORD_URL, MAPEL_UPDATE_URL, MAPEL_DELETE_URL, MAPEL_SEARCH_URL } from "../url/linkURL";
 
 
 export const mapelRecord = createAsyncThunk('mapelRecord', async () => {
@@ -50,6 +50,17 @@ export const mapelUpdate = createAsyncThunk('mapelUpdate', async (initialUpdate)
 export const mapelDelete = createAsyncThunk('mapelUpdate', async (initialDelete) => {
     try {
         const res = await axios.delete(MAPEL_DELETE_URL + initialDelete, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
+export const mapelSearch = createAsyncThunk('mapelSearch', async (query) => {
+    try {
+        const res = await axios.get(MAPEL_SEARCH_URL + query, {
             headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
         });
         return res.data;
@@ -140,20 +151,14 @@ const MapelSlice = createSlice({
                 state.error = action.error.message;
             })
 
-        //? MAPEL DELETE
+            //? MAPEL SEARCH
+
+            .addCase(mapelSearch.fulfilled, (state, action) => {
+                state.items = action.payload;
+            });
 
 
-        // .addCase(mapelDelete.pending, (state) => {
-        //     state.pending = true;
-        // })
-        // .addCase(mapelDelete.fulfilled, (state, action) => {
-        //     state.pending = false;
-        //     state.mapelDelete = action.item;
-        // })
-        // .addCase(mapelDelete.rejected, (state, action) => {
-        //     state.pending = false;
-        //     state.error = action.error;
-        // })
+
 
 
 

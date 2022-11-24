@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { JURUSAN_CREATE_URL, JURUSAN_RECORD_URL, JURUSAN_EDIT_URL, JURUSAN_DELETE_URL, JURUSAN_UPDATE_URL } from "../url/linkURL";
+import { JURUSAN_CREATE_URL, JURUSAN_RECORD_URL, JURUSAN_EDIT_URL, JURUSAN_DELETE_URL, JURUSAN_UPDATE_URL, JURUSAN_SEARCH_URL } from "../url/linkURL";
 
 
 export const jurusanRecord = createAsyncThunk('jurusanRecord', async () => {
@@ -58,6 +58,17 @@ export const jurusanDelete = createAsyncThunk('jurusanDelete', async (initialDel
     }
 });
 
+export const jurusanSearch = createAsyncThunk('jurusanSearch', async (query) => {
+    try {
+        const res = await axios.get(JURUSAN_SEARCH_URL + query, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
 const initialState = {
     jurusanRecord: {},
     jurusanDelete: {},
@@ -93,7 +104,7 @@ const JurusanSlice = createSlice({
                 state.error = action.error;
             })
 
-            //? MAPEL CREATE
+            //? JURUSAN CREATE
 
             .addCase(jurusanCreate.pending, (state) => {
                 state.pending = true;
@@ -109,7 +120,7 @@ const JurusanSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? MAPEL EDIT
+            //? JURUSAN EDIT
 
             .addCase(jurusanEdit.pending, (state) => {
                 state.pending = true;
@@ -125,7 +136,7 @@ const JurusanSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? MAPEL UPDATE
+            //? JURUSAN UPDATE
 
             .addCase(jurusanUpdate.pending, (state) => {
                 state.pending = true;
@@ -141,11 +152,18 @@ const JurusanSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? MAPEL UPDATE
+            //? JURUSAN DELETE
 
             .addCase(jurusanDelete.fulfilled, (state, action) => {
                 state.jurusanDelete = action.payload;
+            })
+
+            //? JURUSAN SEARCH
+
+            .addCase(jurusanSearch.fulfilled, (state, action) => {
+                state.jurusanRecord = action.payload;
             });
+
     }
 
 });

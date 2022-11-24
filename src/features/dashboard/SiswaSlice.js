@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { SISWA_CREATE_URL, SISWA_RECORD_URL, SISWA_EDIT_URL, SISWA_DELETE_URL, SISWA_UPDATE_URL } from "../url/linkURL";
+import { SISWA_CREATE_URL, SISWA_RECORD_URL, SISWA_EDIT_URL, SISWA_DELETE_URL, SISWA_UPDATE_URL, SISWA_SEARCH_URL } from "../url/linkURL";
 
 
 export const siswaRecord = createAsyncThunk('siswaRecord', async () => {
@@ -58,6 +58,17 @@ export const siswaDelete = createAsyncThunk('siswaDelete', async (initialDelete)
     }
 });
 
+export const siswaSearch = createAsyncThunk('siswaSearch', async (query) => {
+    try {
+        const res = await axios.get(SISWA_SEARCH_URL + query, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
 const initialState = {
     siswaRecord: {},
     siswaDelete: {},
@@ -76,7 +87,7 @@ const SiswaSlice = createSlice({
     extraReducers: (builder) => {
         builder
 
-            //? JURUSAN RECORD
+            //? SISWA RECORD
 
             .addCase(siswaRecord.pending, (state) => {
                 state.pending = true;
@@ -93,7 +104,7 @@ const SiswaSlice = createSlice({
                 state.error = action.error;
             })
 
-            //? MAPEL CREATE
+            //? SISWA CREATE
 
             .addCase(siswaCreate.pending, (state) => {
                 state.pending = true;
@@ -109,7 +120,7 @@ const SiswaSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? MAPEL EDIT
+            //? SISWA EDIT
 
             .addCase(siswaEdit.pending, (state) => {
                 state.pending = true;
@@ -125,7 +136,7 @@ const SiswaSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? MAPEL UPDATE
+            //? SISWA UPDATE
 
             .addCase(siswaUpdate.pending, (state) => {
                 state.pending = true;
@@ -141,10 +152,16 @@ const SiswaSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? MAPEL UPDATE
+            //? SISWA UPDATE
 
             .addCase(siswaDelete.fulfilled, (state, action) => {
                 state.siswaDelete = action.payload;
+            })
+
+            //? SISWA SEARCH
+
+            .addCase(siswaSearch.fulfilled, (state, action) => {
+                state.siswaRecord = action.payload;
             });
     }
 

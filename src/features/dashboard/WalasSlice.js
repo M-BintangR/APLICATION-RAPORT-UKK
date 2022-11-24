@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { WALAS_CREATE_URL, WALAS_RECORD_URL, WALAS_EDIT_URL, WALAS_DELETE_URL, WALAS_UPDATE_URL } from "../url/linkURL";
+import { WALAS_CREATE_URL, WALAS_RECORD_URL, WALAS_EDIT_URL, WALAS_DELETE_URL, WALAS_UPDATE_URL, WALAS_SEARCH_URL } from "../url/linkURL";
 
 
 export const walasRecord = createAsyncThunk('walasRecord', async () => {
@@ -58,6 +58,17 @@ export const walasDelete = createAsyncThunk('walasDelete', async (initialDelete)
     }
 });
 
+export const walasSearch = createAsyncThunk(' walasSearch', async (query) => {
+    try {
+        const res = await axios.get(WALAS_SEARCH_URL + query, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
 const initialState = {
     walasRecord: {},
     walasDelete: {},
@@ -76,7 +87,7 @@ const WalasSlice = createSlice({
     extraReducers: (builder) => {
         builder
 
-            //? JURUSAN RECORD
+            //? WALAS RECORD
 
             .addCase(walasRecord.pending, (state) => {
                 state.pending = true;
@@ -93,7 +104,7 @@ const WalasSlice = createSlice({
                 state.error = action.error;
             })
 
-            //? MAPEL CREATE
+            //? WALAS CREATE
 
             .addCase(walasCreate.pending, (state) => {
                 state.pending = true;
@@ -109,7 +120,7 @@ const WalasSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? MAPEL EDIT
+            //? WALAS EDIT
 
             .addCase(walasEdit.pending, (state) => {
                 state.pending = true;
@@ -125,7 +136,7 @@ const WalasSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? MAPEL UPDATE
+            //? WALAS UPDATE
 
             .addCase(walasUpdate.pending, (state) => {
                 state.pending = true;
@@ -141,10 +152,16 @@ const WalasSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? MAPEL UPDATE
+            //? WALAS UPDATE
 
             .addCase(walasDelete.fulfilled, (state, action) => {
                 state.walasDelete = action.payload;
+            })
+
+            //? WALAS SEARCH
+
+            .addCase(walasSearch.fulfilled, (state, action) => {
+                state.walasRecord = action.payload;
             });
     }
 
