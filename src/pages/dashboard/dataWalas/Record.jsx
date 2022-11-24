@@ -3,7 +3,7 @@ import Sidebar from '../../../components/Sidebar';
 import { AdminMenu } from '../../../components/Links';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { pendingWalas, selectAllWalas, walasDelete, walasRecord } from '../../../features/dashboard/WalasSlice';
+import { pendingWalas, selectAllWalas, walasDelete, walasRecord, walasSearch } from '../../../features/dashboard/WalasSlice';
 import Alert from '../../../components/Alert';
 import ModalCreate from './ModalCreate';
 import ModalUpdate from './ModalUpdate';
@@ -46,6 +46,10 @@ const Record = () => {
         dispatch(walasRecord());
     }, [dispatch]);
 
+    const handleSearch = (e) => {
+        dispatch(walasSearch(e.target.value));
+    }
+
     const TabelWalas = [
         { title: 'No.', short: true },
         { title: 'Nama Guru' },
@@ -77,8 +81,11 @@ const Record = () => {
                             </div>
                             <h1 className='text-lg md:text-xl pb-2 font-medium md:font-semibold md:my-2'>Record Data
                                 <div className="float-right">
-                                    <input className='p-1 rounded-md border shadow-sm border-sky-200 text-sm
-                            w-[100px] md:w-[150px] bg-slate-100 focus:bg-slate-200 focus:outline-sky-200' type="text" placeholder='Search' />
+                                    <input className='p-1 rounded-md border shadow-sm border-sky-200 text-sm w-[100px] md:w-[150px] bg-slate-100 focus:bg-slate-200 focus:outline-sky-200'
+                                        type="text"
+                                        placeholder='Search'
+                                        onInput={handleSearch}
+                                    />
                                 </div>
                             </h1>
                             <div className="overflow-x-scroll mt-2 rounded-lg shadow mb-20">

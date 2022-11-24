@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { KELAS_CREATE_URL, KELAS_RECORD_URL, KELAS_EDIT_URL, KELAS_DELETE_URL, KELAS_UPDATE_URL, JURUSAN_SEARCH_URL } from "../url/linkURL";
+import { KELAS_CREATE_URL, KELAS_RECORD_URL, KELAS_EDIT_URL, KELAS_DELETE_URL, KELAS_UPDATE_URL, KELAS_SEARCH_URL } from "../url/linkURL";
 
 
 export const kelasRecord = createAsyncThunk('kelasRecord', async () => {
@@ -60,7 +60,7 @@ export const kelasDelete = createAsyncThunk('kelasDelete', async (initialDelete)
 
 export const kelasSearch = createAsyncThunk('kelasSearch', async (query) => {
     try {
-        const res = await axios.get(JURUSAN_SEARCH_URL + query, {
+        const res = await axios.get(KELAS_SEARCH_URL + query, {
             headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
         });
         return res.data;

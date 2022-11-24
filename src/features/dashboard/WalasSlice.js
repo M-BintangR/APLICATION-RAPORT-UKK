@@ -58,7 +58,7 @@ export const walasDelete = createAsyncThunk('walasDelete', async (initialDelete)
     }
 });
 
-export const walasSearch = createAsyncThunk(' walasSearch', async (query) => {
+export const walasSearch = createAsyncThunk('walasSearch', async (query) => {
     try {
         const res = await axios.get(WALAS_SEARCH_URL + query, {
             headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
