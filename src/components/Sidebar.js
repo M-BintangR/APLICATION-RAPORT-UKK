@@ -1,6 +1,6 @@
 import React from 'react';
 import { BsArrowLeftShort, BsChevronDown } from 'react-icons/bs';
-import { RiDashboardFill } from 'react-icons/ri';
+import { RiDashboardFill, RiFolderUserFill } from 'react-icons/ri';
 import { FiLogOut } from 'react-icons/fi';
 import { MdSchool } from 'react-icons/md';
 import { CgProfile } from 'react-icons/cg';
@@ -11,6 +11,9 @@ import { logoutUser } from '../features/authenticated/logoutAuth';
 import { selectUser } from '../features/authenticated/loginAuth';
 import { useEffect } from 'react';
 import { userSuccess } from '../features/authenticated/loginAuth';
+import { FaAtom, FaBookOpen, FaChalkboardTeacher, FaSchool } from 'react-icons/fa';
+import { BiTimeFive } from 'react-icons/bi';
+import { IoMdSchool } from 'react-icons/io';
 
 const Sidebar = (props) => {
     const [open, setOpen] = useState(true);
@@ -65,14 +68,39 @@ const Sidebar = (props) => {
                                     </h2>
                                 )}
                                 <Link to={menu?.link}
-                                    onClick={() => setOpen(prev => prev = true)}
+                                    onClick={() => setOpen(!open)}
                                 >
                                     <li
                                         className={`text-gray-300 text-sm flex items-center ${active === menu.title && 'bg-light-with'} gap-x-4 cursor-pointer p-2 hover:bg-light-with rounded-md mt-2`}
                                         onClick={() => setSubmenuOpen(!submenuOpen)}
                                     >
                                         <span className='text-2xl block float-left'>
-                                            <RiDashboardFill />
+                                            <>
+                                                {menu?.title === 'Data Guru' && (
+                                                    <FaChalkboardTeacher />
+                                                )}
+                                                {menu?.title === 'Dashboard' && (
+                                                    <RiDashboardFill />
+                                                )}
+                                                {menu?.title === 'Data Tapel' && (
+                                                    <BiTimeFive />
+                                                )}
+                                                {menu?.title === 'Data Mapel' && (
+                                                    <FaBookOpen />
+                                                )}
+                                                {menu?.title === 'Data Siswa' && (
+                                                    <IoMdSchool />
+                                                )}
+                                                {menu?.title === 'Data Walas' && (
+                                                    <RiFolderUserFill />
+                                                )}
+                                                {menu?.title === 'Data Jurusan' && (
+                                                    <FaAtom />
+                                                )}
+                                                {menu?.title === 'Data Kelas' && (
+                                                    <FaSchool />
+                                                )}
+                                            </>
                                         </span>
                                         <span className={`text-base font-medium flex-1 duration-200 ${!open && 'hidden'}`}>{menu.title}
                                         </span>
