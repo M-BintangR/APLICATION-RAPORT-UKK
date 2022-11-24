@@ -53,4 +53,4 @@ export const WALAS_DELETE_URL = 'http://127.0.0.1:8000/api/admin/data/walas/';
 
 //? HOME DASHBOARD URL
 
-export const HOME_DASHBOARD_URL = '';
+export const HOME_DASHBOARD_URL = 'http://127.0.0.1:8000/api/admin/data/home/cards';
