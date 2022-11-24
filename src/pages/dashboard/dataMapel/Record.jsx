@@ -6,8 +6,8 @@ import { BiTrash, BiEdit } from 'react-icons/bi';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { mapelDelete, mapelEdit, mapelRecord, pendingMapel, selectAllMapel } from '../../../features/dashboard/MapelSlice';
-import ModalCreate from '../dataMapel/ModalCreate';
-import ModalUpdate from '../dataMapel/ModalUpdate';
+import ModalCreate from './ModalCreate';
+import ModalUpdate from './ModalUpdate';
 import Alert from '../../../components/Alert';
 
 const Record = () => {
