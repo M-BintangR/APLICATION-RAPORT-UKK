@@ -33,6 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/data/guru/{guru:id}/edit', [GuruController::class, 'edit']);
         Route::post('/data/guru/{guru:id}', [GuruController::class, 'update']);
         Route::delete('/data/guru/{guru:id}', [GuruController::class, 'destroy']);
+        Route::get('/data/guru/{query}', [GuruController::class, 'search']);
 
         //? Route Data Mapel
 
@@ -106,7 +107,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout']);
 });
 
-Route::get('/dashboard/data/guru/{query}', [GuruController::class, 'search']);
 
 //* register and login
 Route::post('/login', [LoginController::class, 'login']);

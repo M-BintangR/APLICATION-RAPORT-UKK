@@ -49,7 +49,16 @@ class GuruController extends Controller
                 ->where('nama_mapel', 'like', "%{$request}%");
         })->get();
 
-        return response()->json($search);
+        if ($request) {
+            return response()->json([
+                'items' => $search,
+                'message' => 'success',
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Unauthorizaed',
+            ], 401);
+        }
     }
 
     public function store(Request $request)
