@@ -5,7 +5,7 @@ import { AdminMenu } from '../../../components/Links';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { guruDelete, guruPending, guruRecord } from '../../../features/dashboard/GuruSlice';
+import { guruDelete, guruPending, guruRecord, guruSearch } from '../../../features/dashboard/GuruSlice';
 import { selectAllGuru } from '../../../features/dashboard/GuruSlice';
 import Alert from '../../../components/Alert';
 import ModalCreate from './ModalCreate';
@@ -41,6 +41,10 @@ const Record = () => {
     const hanldeUpdate = (id) => {
         setShowModalUpdate(prev => prev = true);
         setIdUpdateModal(prev => prev = id);
+    }
+
+    const handleSearch = (e) => {
+        dispatch(guruSearch(e.target.value));
     }
 
     useEffect(() => {
@@ -80,8 +84,12 @@ const Record = () => {
                             </div>
                             <h1 className='text-lg md:text-xl pb-2 font-medium md:font-semibold md:my-2'>Record Data
                                 <div className="float-right">
-                                    <input className='p-1 rounded-md border shadow-sm border-sky-200 text-sm
-                                    w-[100px] md:w-[150px] bg-slate-100 focus:bg-slate-200 focus:outline-sky-200' type="text" placeholder='Search' />
+                                    <input
+                                        className='p-1 rounded-md border shadow-sm border-sky-200 text-sm w-[100px] md:w-[150px] bg-slate-100 focus:bg-slate-200 focus:outline-sky-200'
+                                        type="text"
+                                        placeholder='Search'
+                                        onChange={handleSearch}
+                                    />
                                 </div>
                             </h1>
                             <div className="overflow-x-scroll mt-2 rounded-lg shadow mb-20">
@@ -98,7 +106,7 @@ const Record = () => {
                                         </tr>
                                     </thead>
                                     <tbody className='divide-y divide-gray-100 '>
-                                        {dataGuru.items && dataGuru.items && dataGuru?.items.map((data, i) => (
+                                        {dataGuru.items && dataGuru?.items.map((data, i) => (
                                             < tr key={i} className={`bg-white ${'data-' + data.id}`} >
                                                 <>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
