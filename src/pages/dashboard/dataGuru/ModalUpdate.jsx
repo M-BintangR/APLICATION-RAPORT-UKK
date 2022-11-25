@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkEditGuru, guruEdit, guruPending, guruRecord, guruUpdate } from '../../../features/dashboard/GuruSlice';
+import { checkEditGuru, checkUpdateGuru, guruEdit, guruPending, guruRecord, guruUpdate } from '../../../features/dashboard/GuruSlice';
 import { selectAllMapel } from '../../../features/dashboard/MapelSlice';
 import { useState } from 'react';
 
@@ -13,6 +13,8 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         id_mapel: '',
         nama_guru: '',
     });
+    const [errorData, setErrorData] = useState(null);
+    const check = useSelector(checkUpdateGuru);
     const checkShowModal = isVisible
         && dataEditGuru.item
         && !pending && dataMapel.items;
@@ -23,6 +25,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
 
     const handleClose = () => {
         onClose();
+        setErrorData(null);
         setInputEdit({ nama_guru: '', id_mapel: '' });
     }
 
@@ -36,6 +39,10 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         }
     }, [dataEditGuru]);
 
+    useEffect(() => {
+        if (check.response) setErrorData(check?.response.data.errors);
+    }, [check]);
+
     const handleEdit = () => {
         const data = {
             nama_guru: inputEdit.nama_guru,
@@ -45,6 +52,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         dispatch(guruUpdate(data));
         dispatch(guruRecord());
         onClose();
+        setErrorData(null);
     }
 
     return (
@@ -62,13 +70,17 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="nama_guru">Nama Guru</label>
                                             <div>
-
+                                                {errorData?.nama_guru && (
+                                                    errorData?.nama_guru.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
                                             </div>
                                             <input
                                                 type="text"
                                                 name='nama_guru'
                                                 id='nama_guru'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.nama_guru ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Nama Guru'
                                                 onChange={handleChange}
                                                 defaultValue={dataEditGuru?.item.nama_guru}
@@ -77,10 +89,14 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="id_mapel">Mapel</label>
                                             <div>
-
+                                                {errorData?.id_mapel && (
+                                                    errorData?.id_mapel.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
                                             </div>
                                             <select
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none `}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData?.id_mapel ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
                                                 placeholder='Mapel'
                                                 name='id_mapel'

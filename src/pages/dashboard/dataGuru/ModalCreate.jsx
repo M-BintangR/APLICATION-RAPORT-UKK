@@ -28,19 +28,20 @@ const ModalCreate = ({ isVisible, onClose }) => {
     const handleClick = () => {
         dispatch(guruCreate(inputGuru));
         onClose();
-        setErrorData(prev => prev = null);
+        setErrorData(null);
         setInputGuru({ nama_guru: '', id_mapel: '' });
         dispatch(guruRecord());
     }
 
     const handleClose = () => {
+        setInputGuru({ nama_guru: '', id_mapel: '' });
         setErrorData(null);
         onClose();
     }
 
     return (
         <div>
-            {isVisible && mapels.items && (
+            {isVisible && mapels?.items && (
                 <div className="fixed inset-0 z-50 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
                     <div className="bg-white p-2 rounded">
                         <div className="md:w-[600px] flex flex-col">
@@ -53,7 +54,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="nama_guru">Nama Guru</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.nama_guru && (
                                                     errorData?.nama_guru.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -63,7 +64,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 type="text"
                                                 name='nama_guru'
                                                 id='nama_guru'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.nama_guru ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Nama Guru'
                                                 defaultValue={inputGuru?.nama_guru}
                                                 onChange={(e) => handleChange(e)}
@@ -72,14 +73,14 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="id_mapel">Mapel</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.id_mapel && (
                                                     errorData?.id_mapel.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
                                                 )}
                                             </div>
                                             <select
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData?.id_mapel ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
                                                 placeholder='Mapel'
                                                 name='id_mapel'

@@ -1,29 +1,36 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkEditMapel, mapelEdit, mapelRecord, mapelUpdate, pendingMapel } from '../../../features/dashboard/MapelSlice';
+import { checkEditMapel, checkUpdateMapel, mapelEdit, mapelRecord, mapelUpdate, pendingMapel } from '../../../features/dashboard/MapelSlice';
 import { selectAllJurusan } from '../../../features/dashboard/JurusanSlice';
 import { useEffect } from 'react';
 
 const ModalUpdate = ({ isVisible, onClose, idUser }) => {
+    const dispatch = useDispatch();
+    const pending = useSelector(pendingMapel);
+    const dataEditMapel = useSelector(checkEditMapel);
+    const dataJurusan = useSelector(selectAllJurusan);
+    const check = useSelector(checkUpdateMapel);
+    const [errorData, setErrorData] = useState(null);
     const [inputEdit, setInputEdit] = useState({
         nama_mapel: '',
         kkm: '',
         level: '',
         id_jurusan: '',
     });
-    const dispatch = useDispatch();
-    const pending = useSelector(pendingMapel);
-    const dataEditMapel = useSelector(checkEditMapel);
-    const dataJurusan = useSelector(selectAllJurusan);
 
     const handleClose = () => {
         onClose();
+        setErrorData(null);
         setInputEdit({ nama_mapel: '', kkm: '', level: '', id_jurusan: '' });
     }
 
     useEffect(() => {
         isVisible && dispatch(mapelEdit(idUser));
     }, [dispatch, isVisible, idUser]);
+
+    useEffect(() => {
+        if (check.response) setErrorData(check?.response.data.errors)
+    }, [check]);
 
     useEffect(() => {
         if (dataEditMapel.item) {
@@ -41,6 +48,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         }
         dispatch(mapelUpdate(data));
         dispatch(mapelRecord());
+        setErrorData(null);
         onClose();
     }
 
@@ -51,7 +59,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
 
     return (
         <div>
-            {isVisible && dataJurusan.items && !pending && dataEditMapel?.item && (
+            {isVisible && dataJurusan?.items && !pending && dataEditMapel?.item && (
                 <div className="fixed inset-0 z-50 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
                     <div className="bg-white p-2 rounded">
                         <div className="md:w-[600px] flex flex-col">
@@ -63,11 +71,18 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                     <div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="nama_mapel">Nama Mapel</label>
+                                            <div>
+                                                {errorData?.nama_mapel && (
+                                                    errorData?.nama_mapel.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
                                             <input
                                                 type="text"
                                                 name='nama_mapel'
                                                 id='nama_mapel'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.nama_mapel ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Nama Mapel'
                                                 defaultValue={dataEditMapel?.item.nama_mapel}
                                                 onChange={handleChange}
@@ -75,11 +90,18 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                         </div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="kkm">Nilai KKM</label>
+                                            <div>
+                                                {errorData?.kkm && (
+                                                    errorData?.kkm.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
                                             <input
                                                 type="text"
                                                 name='kkm'
                                                 id='kkm'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 `}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.kkm ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Nilai KKM'
                                                 onChange={handleChange}
                                                 defaultValue={dataEditMapel?.item.kkm}
@@ -87,11 +109,18 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                         </div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="level">Level</label>
+                                            <div>
+                                                {errorData?.level && (
+                                                    errorData?.level.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
                                             <input
                                                 type="text"
                                                 name='level'
                                                 id='level'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 `}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.level ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Level'
                                                 onChange={handleChange}
                                                 defaultValue={dataEditMapel?.item.level}
@@ -99,9 +128,16 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                         </div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="jurusan">Jurusan</label>
+                                            <div>
+                                                {errorData?.id_jurusan && (
+                                                    errorData?.id_jurusan.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
                                             <select
                                                 id='jurusan'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none `}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData?.id_jurusan ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
                                                 placeholder='Jurusan'
                                                 name='id_jurusan'

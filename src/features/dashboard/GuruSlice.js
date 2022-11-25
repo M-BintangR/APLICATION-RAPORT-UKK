@@ -179,7 +179,7 @@ export const guruPending = state => state.guru.pending;
 export const checkDelete = state => state.guru.deleteCheck;
 export const createGuruCheck = state => state.guru.createCheck;
 export const checkEditGuru = state => state.guru.editCheck;
-export const checkUpdate = state => state.guru.updateCheck;
+export const checkUpdateGuru = state => state.guru.updateCheck;
 export const errorGuru = state => state.guru.error;
 export const checkErrorGuru = state => state.guru.checkError;
 export const { setDeleteCheck, searchData } = GuruSlice.actions;

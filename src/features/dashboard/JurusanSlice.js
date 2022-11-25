@@ -170,6 +170,7 @@ const JurusanSlice = createSlice({
 
 export const selectAllJurusan = state => state.jurusan.jurusanRecord;
 export const checkCreateJurusan = state => state.jurusan.jurusanCreate;
+export const checkUpdateJurusan = state => state.jurusan.jurusanUpdate;
 export const checkEditJurusan = state => state.jurusan.jurusanEdit;
 export const checkPendingJurusan = state => state.jurusan.pending;
 export default JurusanSlice.reducer;

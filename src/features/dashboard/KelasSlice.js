@@ -170,7 +170,7 @@ const KelasSlice = createSlice({
 export const selectAllKelas = state => state.kelas.kelasRecord;
 export const checkCreateKelas = state => state.kelas.kelasCreate;
 export const checkEditKelas = state => state.kelas.kelasEdit;
-export const checkUpdate = state => state.kelas.kelasUpdate;
+export const checkUpdateKelas = state => state.kelas.kelasUpdate;
 export const checkDelete = state => state.kelas.kelasDelete;
 export const pendingKelas = state => state.kelas.pending;
 export default KelasSlice.reducer;

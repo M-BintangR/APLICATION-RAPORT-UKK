@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkEditJurusan, checkPendingJurusan, jurusanEdit, jurusanRecord, jurusanUpdate } from '../../../features/dashboard/JurusanSlice';
+import { checkEditJurusan, checkPendingJurusan, checkUpdateJurusan, jurusanEdit, jurusanRecord, jurusanUpdate } from '../../../features/dashboard/JurusanSlice';
 
 const ModalUpdate = ({ isVisible, onClose, idUser }) => {
     const [inputEdit, setInputEdit] = useState({
@@ -12,10 +12,17 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
     const dispatch = useDispatch();
     const pending = useSelector(checkPendingJurusan);
     const dataEditJurusan = useSelector(checkEditJurusan);
+    const [errorData, setErrorData] = useState(null);
+    const check = useSelector(checkUpdateJurusan);
 
     useEffect(() => {
         isVisible && dispatch(jurusanEdit(idUser));
     }, [dispatch, isVisible, idUser]);
+
+    useEffect(() => {
+        if (check.response) setErrorData(check?.response.data.errors)
+    }, [check]);
+
 
     const handleChange = (e) => {
         setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -23,6 +30,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
 
     const handleClose = () => {
         onClose();
+        setErrorData(null);
         setInputEdit({ nama_jurusan: '', kode_jurusan: '' });
     }
 
@@ -41,6 +49,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         dispatch(jurusanUpdate(data));
         dispatch(jurusanRecord());
         onClose();
+        setErrorData(null);
     }
 
 
@@ -59,11 +68,18 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                     <div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="nama_jurusan">Nama Jurusan</label>
+                                            <div>
+                                                {errorData?.nama_jurusan && (
+                                                    errorData?.nama_jurusan.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
                                             <input
                                                 type="text"
                                                 name='nama_jurusan'
                                                 id='nama_jurusan'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.nama_jurusan ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Nama Jurusan'
                                                 onChange={handleChange}
                                                 defaultValue={dataEditJurusan?.item.nama_jurusan}
@@ -71,11 +87,18 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                         </div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="kode_jurusan">Kode Jurusan</label>
+                                            <div>
+                                                {errorData?.kode_jurusan && (
+                                                    errorData?.kode_jurusan.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
                                             <input
                                                 type="text"
                                                 name='kode_jurusan'
                                                 id='kode_jurusan'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 `}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.kode_jurusan ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Kode Jurusan'
                                                 onChange={handleChange}
                                                 defaultValue={dataEditJurusan?.item.kode_jurusan}

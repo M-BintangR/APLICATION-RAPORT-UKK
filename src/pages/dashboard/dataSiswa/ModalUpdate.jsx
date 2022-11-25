@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { checkEditSiswa, pendingSiswa, siswaEdit, siswaRecord, siswaUpdate } from '../../../features/dashboard/SiswaSlice';
+import { checkEditSiswa, checkUpdateSiswa, pendingSiswa, siswaEdit, siswaRecord, siswaUpdate } from '../../../features/dashboard/SiswaSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { selectAllKelas } from '../../../features/dashboard/KelasSlice';
@@ -21,10 +21,16 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
     const dataKelas = useSelector(selectAllKelas);
     const dataJurusan = useSelector(selectAllJurusan);
     const pending = useSelector(pendingSiswa);
+    const check = useSelector(checkUpdateSiswa);
+    const [errorData, setErrorData] = useState(null);
 
     useEffect(() => {
         isVisible && dispatch(siswaEdit(idUser));
     }, [dispatch, idUser, isVisible]);
+
+    useEffect(() => {
+        if (check.response) setErrorData(check?.response.data.errors)
+    }, [check]);
 
     useEffect(() => {
         if (dataEditSiswa.item) {
@@ -46,6 +52,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
         dispatch(siswaUpdate(data));
         dispatch(siswaRecord());
         onClose();
+        setErrorData(null);
     }
 
     const handleChange = (e) => {
@@ -53,6 +60,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
     }
 
     const handleClose = () => {
+        setErrorData(null);
         onClose();
         setInputEdit({ nis: '', nama: '', id_kelas: '', id_jurusan: '', agama: '', jk: '', nisn: '' })
     }
@@ -71,11 +79,18 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                     <div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="nama">Nama</label>
+                                            <div>
+                                                {errorData?.nama && (
+                                                    errorData?.nama.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
                                             <input
                                                 type="text"
                                                 name='nama'
                                                 id='nama'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.nama ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Nama'
                                                 defaultValue={dataEditSiswa?.item.nama}
                                                 onChange={handleChange}
@@ -83,11 +98,18 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                         </div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="nis">NIS</label>
+                                            <div>
+                                                {errorData?.nis && (
+                                                    errorData?.nis.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
                                             <input
                                                 type="text"
                                                 name='nis'
                                                 id='nis'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 `}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.nis ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='NIS'
                                                 onChange={handleChange}
                                                 defaultValue={dataEditSiswa?.item.nis}
@@ -95,11 +117,18 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                         </div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="nisn">NISN</label>
+                                            <div>
+                                                {errorData?.nisn && (
+                                                    errorData?.nisn.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
                                             <input
                                                 type="text"
                                                 name='nisn'
                                                 id='nisn'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 `}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.nisn ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='NISN'
                                                 onChange={handleChange}
                                                 defaultValue={dataEditSiswa?.item.nisn}
@@ -109,11 +138,18 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                     <div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="agama">Agama</label>
+                                            <div>
+                                                {errorData?.agama && (
+                                                    errorData?.agama.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
                                             <input
                                                 type="text"
                                                 name='agama'
                                                 id='agama'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 `}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.agama ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Agama'
                                                 onChange={handleChange}
                                                 defaultValue={dataEditSiswa?.item.agama}
@@ -121,9 +157,16 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                         </div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="jk">Jenis Kelamin</label>
+                                            <div>
+                                                {errorData?.jk && (
+                                                    errorData?.jk.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
                                             <select
                                                 id='jk'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none `}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData?.jk ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
                                                 placeholder='Jenis Kelamin'
                                                 name='jk'
@@ -140,9 +183,16 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                         </div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="kelas">Kelas</label>
+                                            <div>
+                                                {errorData?.id_kelas && (
+                                                    errorData?.id_kelas.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
                                             <select
                                                 id='kelas'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none `}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData?.id_kelas ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
                                                 placeholder='Kelas'
                                                 name='id_kelas'
@@ -164,9 +214,16 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                     <div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="jurusan">Jurusan</label>
+                                            <div>
+                                                {errorData?.id_jurusan && (
+                                                    errorData?.id_jurusan.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
                                             <select
                                                 id='jurusan'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none `}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData?.id_jurusan ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
                                                 placeholder='Jurusan'
                                                 name='id_jurusan'

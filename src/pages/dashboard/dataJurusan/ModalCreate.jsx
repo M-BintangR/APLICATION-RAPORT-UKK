@@ -21,7 +21,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
     const handleClick = () => {
         dispatch(jurusanCreate(inputCreate));
         onClose();
-        setErrorData(prev => prev = null);
+        setErrorData(null);
         setInputCreate({ nama_jurusan: '', kode_jurusan: '' });
         dispatch(jurusanRecord());
     }
@@ -31,8 +31,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
     }, [check]);
 
     const handleClose = () => {
+        setInputCreate({ nama_jurusan: '', kode_jurusan: '' });
+        setErrorData(null);
         onClose();
-        setErrorData(prev => prev = null);
     }
 
     return (
@@ -50,7 +51,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="nama_mapel">Nama Jurusan</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.nama_jurusan && (
                                                     errorData?.nama_jurusan.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -60,7 +61,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 type="text"
                                                 name='nama_jurusan'
                                                 id='nama_jurusan'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.nama_jurusan ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Nama Jurusan'
                                                 onChange={handleChange}
 
@@ -69,7 +70,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="kode_jurusan">Kode Jurusan</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.kode_jurusan && (
                                                     errorData?.kode_jurusan.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -79,7 +80,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 type="text"
                                                 name='kode_jurusan'
                                                 id='kode_jurusan'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.kode_jurusan ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Kode Jurusan'
                                                 onChange={handleChange}
                                             />

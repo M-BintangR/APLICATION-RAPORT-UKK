@@ -17,8 +17,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
     const check = useSelector(checkCreateWalas);
 
     const handleClose = () => {
+        setInputCreate({ id_guru: '', id_kelas: '' });
         onClose();
-        setErrorData(prev => prev = null);
+        setErrorData(null);
     }
 
     const handleChange = (e) => {
@@ -38,7 +39,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
     const handleClick = () => {
         dispatch(walasCreate(inputCreate));
         onClose();
-        setErrorData(prev => prev = null);
+        setErrorData(null);
         setInputCreate({ id_guru: '', id_kelas: '' });
         dispatch(walasRecord());
     }
@@ -59,7 +60,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="kelas">Kelas</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.id_kelas && (
                                                     errorData?.id_kelas.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -67,7 +68,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             </div>
                                             <select
                                                 id='kelas'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData?.id_kelas ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
                                                 placeholder='Kelas'
                                                 name='id_kelas'
@@ -83,7 +84,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="guru">Nama Guru</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.id_guru && (
                                                     errorData?.id_guru.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))

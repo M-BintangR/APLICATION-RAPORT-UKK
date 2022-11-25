@@ -2,21 +2,27 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkEditKelas, kelasEdit, kelasRecord, kelasUpdate, pendingKelas } from '../../../features/dashboard/KelasSlice';
+import { checkEditKelas, checkUpdateKelas, kelasEdit, kelasRecord, kelasUpdate, pendingKelas } from '../../../features/dashboard/KelasSlice';
 
 
 const ModalUpdate = ({ isVisible, idUser, onClose }) => {
     const dispatch = useDispatch();
+    const pending = useSelector(pendingKelas);
+    const dataEditKelas = useSelector(checkEditKelas);
+    const [errorData, setErrorData] = useState(null);
+    const check = useSelector(checkUpdateKelas);
     const [inputEdit, setInputEdit] = useState({
         nama_kelas: '',
         level: '',
     });
-    const pending = useSelector(pendingKelas);
-    const dataEditKelas = useSelector(checkEditKelas)
 
     useEffect(() => {
         isVisible && dispatch(kelasEdit(idUser));
     }, [dispatch, isVisible, idUser]);
+
+    useEffect(() => {
+        if (check.response) setErrorData(check?.response.data.errors)
+    }, [check]);
 
     const handleChange = (e) => {
         setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -24,6 +30,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
 
     const handleClose = () => {
         onClose();
+        setErrorData(null);
         setInputEdit({ nama_kelas: '', level: '' });
     }
 
@@ -42,6 +49,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
         dispatch(kelasUpdate(data));
         dispatch(kelasRecord());
         onClose();
+        setErrorData(null);
     }
 
 
@@ -59,11 +67,18 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                     <div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="nama_kelas">Nama Kelas</label>
+                                            <div>
+                                                {errorData?.nama_kelas && (
+                                                    errorData?.nama_kelas.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
                                             <input
                                                 type="text"
                                                 name='nama_kelas'
                                                 id='nama_kelas'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.nama_kelas ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Nama Jurusan'
                                                 onChange={handleChange}
                                                 defaultValue={dataEditKelas?.item.nama_kelas}
@@ -71,9 +86,16 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                         </div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="level">Level</label>
+                                            <div>
+                                                {errorData?.level && (
+                                                    errorData?.level.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
                                             <select
                                                 id='level'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData?.level ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
                                                 placeholder='level'
                                                 name='level'

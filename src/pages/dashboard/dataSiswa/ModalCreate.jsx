@@ -36,14 +36,17 @@ const ModalCreate = ({ isVisible, onClose }) => {
     const handleClick = () => {
         dispatch(siswaCreate(inputCreate));
         onClose();
-        setErrorData(prev => prev = null);
+        setErrorData(null);
         setInputCreate({ nis: '', nama: '', id_kelas: '', id_jurusan: '', jk: '', agama: '', nisn: '' });
         dispatch(siswaRecord());
     }
     const handleClose = () => {
-        setErrorData(prev => prev = null);
+        setInputCreate({ nis: '', nama: '', id_kelas: '', id_jurusan: '', jk: '', agama: '', nisn: '' });
+        setErrorData(null);
         onClose();
     }
+
+    console.log(errorData);
     return (
         <div>
             {isVisible && dataJurusan.items && dataKelas.items && (
@@ -59,7 +62,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="nama">Nama</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.nama && (
                                                     errorData?.nama.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -69,7 +72,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 type="text"
                                                 name='nama'
                                                 id='nama'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.nama ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Nama'
                                                 value={inputCreate?.nama}
                                                 onChange={handleChange}
@@ -79,7 +82,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="nis">NIS</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.nis && (
                                                     errorData?.nis.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -89,7 +92,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 type="text"
                                                 name='nis'
                                                 id='nis'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.nis ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='NIS'
                                                 value={inputCreate?.nis}
                                                 onChange={handleChange}
@@ -98,7 +101,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="nisn">NISN</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.nisn && (
                                                     errorData?.nisn.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -108,7 +111,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 type="text"
                                                 name='nisn'
                                                 id='nisn'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.nisn ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='NISN'
                                                 value={inputCreate?.nisn}
                                                 onChange={handleChange}
@@ -119,7 +122,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="agama">Agama</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.agama && (
                                                     errorData?.agama.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -129,7 +132,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 type="text"
                                                 name='agama'
                                                 id='agama'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.agama ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Agama'
                                                 value={inputCreate?.agama}
                                                 onChange={handleChange}
@@ -138,7 +141,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="jk">Jenis Kelamin</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.jk && (
                                                     errorData?.jk.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -146,7 +149,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             </div>
                                             <select
                                                 id='jk'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData?.jk ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
                                                 placeholder='Jenis Kelamin'
                                                 name='jk'
@@ -161,7 +164,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="kelas">Kelas</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.id_kelas && (
                                                     errorData?.id_kelas.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -169,7 +172,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             </div>
                                             <select
                                                 id='kelas'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData?.id_kelas ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
                                                 placeholder='Kelas'
                                                 name='id_kelas'
@@ -188,7 +191,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="jurusan">Jurusan</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.id_jurusan && (
                                                     errorData?.id_jurusan.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -196,7 +199,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             </div>
                                             <select
                                                 id='jurusan'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData?.id_jurusan ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
                                                 placeholder='Jurusan'
                                                 name='id_jurusan'

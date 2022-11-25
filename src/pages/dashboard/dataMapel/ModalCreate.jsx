@@ -24,7 +24,7 @@ const Create = ({ isVisible, onClose }) => {
     const handleClick = () => {
         dispatch(mapelCreate(inputCreate));
         onClose();
-        setErrorData(prev => prev = null);
+        setErrorData(null);
         setInputCreate({ nama_mapel: '', kkm: '', level: '', id_jurusan: '' });
         dispatch(mapelRecord());
     }
@@ -38,13 +38,14 @@ const Create = ({ isVisible, onClose }) => {
     }, [dispatch]);
 
     const handleClose = () => {
-        setErrorData(prev => prev = null);
+        setInputCreate({ nama_mapel: '', kkm: '', level: '', id_jurusan: '' });
+        setErrorData(null);
         onClose();
     }
 
     return (
         <div>
-            {isVisible && jurusans.items && (
+            {isVisible && jurusans?.items && (
                 <div className="fixed inset-0 z-50 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
                     <div className="bg-white p-2 rounded">
                         <div className="md:w-[600px] flex flex-col">
@@ -57,7 +58,7 @@ const Create = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="nama_mapel">Nama Mapel</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.nama_mapel && (
                                                     errorData?.nama_mapel.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -67,7 +68,7 @@ const Create = ({ isVisible, onClose }) => {
                                                 type="text"
                                                 name='nama_mapel'
                                                 id='nama_mapel'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.nama_mapel ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Nama Mapel'
                                                 value={inputCreate?.nama_mapel}
                                                 onChange={handleChange}
@@ -77,7 +78,7 @@ const Create = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="kkm">Nilai KKM</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.kkm && (
                                                     errorData?.kkm.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -87,7 +88,7 @@ const Create = ({ isVisible, onClose }) => {
                                                 type="text"
                                                 name='kkm'
                                                 id='kkm'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.kkm ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Nilai KKM'
                                                 value={inputCreate?.kkm}
                                                 onChange={handleChange}
@@ -96,7 +97,7 @@ const Create = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="level">Level</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.level && (
                                                     errorData?.level.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -106,7 +107,7 @@ const Create = ({ isVisible, onClose }) => {
                                                 type="text"
                                                 name='level'
                                                 id='level'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.level ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Level'
                                                 value={inputCreate?.level}
                                                 onChange={handleChange}
@@ -115,7 +116,7 @@ const Create = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="jurusan">Jurusan</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.id_jurusan && (
                                                     errorData?.id_jurusan.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -123,7 +124,7 @@ const Create = ({ isVisible, onClose }) => {
                                             </div>
                                             <select
                                                 id='jurusan'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData?.id_jurusan ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
                                                 placeholder='Jurusan'
                                                 name='id_jurusan'

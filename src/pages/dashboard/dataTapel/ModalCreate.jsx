@@ -20,7 +20,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
     const handleClick = () => {
         dispatch(tapelCreate(inputCreate));
         onClose();
-        setErrorData(prev => prev = null);
+        setErrorData(null);
         setInputCreate({ tahun_pelaran: '', semester: '', aktif: '' });
         dispatch(tapelRecord());
     }
@@ -30,8 +30,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
     }, [check]);
 
     const handleClose = () => {
+        setInputCreate({ tahun_pelaran: '', semester: '', aktif: '' });
         onClose();
-        setErrorData(prev => prev = null);
+        setErrorData(null);
     }
 
 
@@ -50,7 +51,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="tahun_pelaran">Tahun Pelajaran</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.tahun_pelajaran && (
                                                     errorData?.tahun_pelajaran.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -60,7 +61,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 type="text"
                                                 name='tahun_pelajaran'
                                                 id='tahun_pelajaran'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.tahun_pelajaran ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Tahun Pelajaran'
                                                 onChange={handleChange}
                                             />
@@ -68,7 +69,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="semester">Semester</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.semester && (
                                                     errorData?.semester.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -78,7 +79,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 type="text"
                                                 name='semester'
                                                 id='semester'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.semester ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Semester'
                                                 onChange={handleChange}
 
@@ -87,7 +88,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="aktif">Aktif</label>
                                             <div>
-                                                {errorData && (
+                                                {errorData?.aktif && (
                                                     errorData?.aktif.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
@@ -95,7 +96,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             </div>
                                             <select
                                                 id='aktif'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData ? 'border-red-500' : 'border-gray-300'}`}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData?.aktif ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
                                                 placeholder='Aktif'
                                                 name='aktif'

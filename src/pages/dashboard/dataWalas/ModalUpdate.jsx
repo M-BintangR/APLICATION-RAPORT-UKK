@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAllGuru } from '../../../features/dashboard/GuruSlice';
 import { selectAllKelas } from '../../../features/dashboard/KelasSlice';
-import { checkEditWalas, pendingWalas, walasEdit, walasRecord, walasUpdate } from '../../../features/dashboard/WalasSlice';
+import { checkEditWalas, checkUpdateWalas, pendingWalas, walasEdit, walasRecord, walasUpdate } from '../../../features/dashboard/WalasSlice';
 
 const ModalUpdate = ({ isVisible, idUser, onClose }) => {
     const dispatch = useDispatch();
@@ -12,6 +12,8 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
     const dataGuru = useSelector(selectAllGuru);
     const dataKelas = useSelector(selectAllKelas);
     const dataEditWalas = useSelector(checkEditWalas);
+    const check = useSelector(checkUpdateWalas);
+    const [errorData, setErrorData] = useState(null);
     const [inputEdit, setInputEdit] = useState({
         id_kelas: '',
         id_guru: '',
@@ -19,12 +21,18 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
 
     const handleClose = () => {
         onClose();
+        setErrorData(null);
         setInputEdit({ id_guru: '', id_kelas: '' });
     }
 
     useEffect(() => {
         isVisible && dispatch(walasEdit(idUser));
     }, [dispatch, isVisible, idUser]);
+
+    useEffect(() => {
+        if (check.response) setErrorData(check?.response.data.errors)
+    }, [check]);
+
 
     const handleChange = (e) => {
         setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -44,6 +52,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
         }
         dispatch(walasUpdate(data));
         dispatch(walasRecord());
+        setErrorData(null);
         onClose();
     }
 
@@ -62,9 +71,16 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                     <div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="kelas"> Kelas</label>
+                                            <div>
+                                                {errorData?.id_kelas && (
+                                                    errorData?.id_kelas.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
                                             <select
                                                 id='kelas'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none `}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData?.id_kelas ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
                                                 placeholder='Kelas'
                                                 name='id_kelas'
@@ -84,9 +100,16 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                         </div>
                                         <div className="mb-3">
                                             <label className='mb-2' htmlFor="guru">Nama Guru</label>
+                                            <div>
+                                                {errorData?.id_guru && (
+                                                    errorData?.id_guru.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
                                             <select
                                                 id='guru'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none `}
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
                                                 placeholder='Nama Guru'
                                                 name='id_guru'
