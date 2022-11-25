@@ -58,7 +58,9 @@ const Create = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="nama_mapel">Nama Mapel</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.nama_mapel[0]}</small>
+                                                    errorData?.nama_mapel.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
                                                 )}
                                             </div>
                                             <input
@@ -76,7 +78,9 @@ const Create = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="kkm">Nilai KKM</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.kkm[0]}</small>
+                                                    errorData?.kkm.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
                                                 )}
                                             </div>
                                             <input
@@ -93,7 +97,9 @@ const Create = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="level">Level</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.level[0]}</small>
+                                                    errorData?.level.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
                                                 )}
                                             </div>
                                             <input
@@ -110,7 +116,9 @@ const Create = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="jurusan">Jurusan</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.id_jurusan[0]}</small>
+                                                    errorData?.id_jurusan.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
                                                 )}
                                             </div>
                                             <select

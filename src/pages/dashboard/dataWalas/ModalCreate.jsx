@@ -60,7 +60,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="kelas">Kelas</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.id_kelas[0]}</small>
+                                                    errorData?.id_kelas.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
                                                 )}
                                             </div>
                                             <select
@@ -82,7 +84,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="guru">Nama Guru</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.id_guru[0]}</small>
+                                                    errorData?.id_guru.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
                                                 )}
                                             </div>
                                             <select

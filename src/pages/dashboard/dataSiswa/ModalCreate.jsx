@@ -60,7 +60,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="nama">Nama</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.nama[0]}</small>
+                                                    errorData?.nama.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
                                                 )}
                                             </div>
                                             <input
@@ -78,7 +80,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="nis">NIS</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.nis[0]}</small>
+                                                    errorData?.nis.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
                                                 )}
                                             </div>
                                             <input
@@ -95,7 +99,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="nisn">NISN</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.nisn[0]}</small>
+                                                    errorData?.nisn.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
                                                 )}
                                             </div>
                                             <input
@@ -114,7 +120,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="agama">Agama</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.agama[0]}</small>
+                                                    errorData?.agama.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
                                                 )}
                                             </div>
                                             <input
@@ -131,7 +139,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="jk">Jenis Kelamin</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.jk[0]}</small>
+                                                    errorData?.jk.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
                                                 )}
                                             </div>
                                             <select
@@ -152,7 +162,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="kelas">Kelas</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.id_kelas[0]}</small>
+                                                    errorData?.id_kelas.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
                                                 )}
                                             </div>
                                             <select
@@ -177,7 +189,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             <label className='mb-2' htmlFor="jurusan">Jurusan</label>
                                             <div>
                                                 {errorData && (
-                                                    <small className='text-xs text-red-500 font-normal'>{errorData?.id_jurusan[0]}</small>
+                                                    errorData?.id_jurusan.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
                                                 )}
                                             </div>
                                             <select

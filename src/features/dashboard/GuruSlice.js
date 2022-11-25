@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit";
 import axios from "axios";
 import { GURU_CREATE_URL, GURU_DELETE_URL, GURU_EDIT_URL, GURU_RECORD_URL, GURU_SEARCH_URL, GURU_UPDATE_URL } from "../url/linkURL";
 
@@ -134,7 +134,7 @@ const GuruSlice = createSlice({
             })
             .addCase(guruCreate.rejected, (state, action) => {
                 state.pending = false;
-                state.error = action.error;
+                state.error = action.payload;
             })
 
             //? GURU EDIT

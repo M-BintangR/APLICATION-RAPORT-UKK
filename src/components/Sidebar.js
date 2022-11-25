@@ -16,7 +16,7 @@ import { BiTimeFive } from 'react-icons/bi';
 import { IoMdSchool } from 'react-icons/io';
 
 const Sidebar = (props) => {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const [submenuOpen, setSubmenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const Menus = props.Menus;
@@ -68,7 +68,7 @@ const Sidebar = (props) => {
                                     </h2>
                                 )}
                                 <Link to={menu?.link}
-                                    onClick={() => setOpen(!open)}
+                                    onClick={() => setOpen(prev => prev = true)}
                                 >
                                     <li
                                         className={`text-gray-300 text-sm flex items-center ${active === menu.title && 'bg-light-with'} gap-x-4 cursor-pointer p-2 hover:bg-light-with rounded-md mt-2`}

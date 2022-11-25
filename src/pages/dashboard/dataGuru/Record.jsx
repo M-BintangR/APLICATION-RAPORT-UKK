@@ -5,7 +5,7 @@ import { AdminMenu } from '../../../components/Links';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { guruDelete, guruPending, guruRecord, guruSearch } from '../../../features/dashboard/GuruSlice';
+import { createGuruCheck, errorGuru, guruDelete, guruPending, guruRecord, guruSearch } from '../../../features/dashboard/GuruSlice';
 import { selectAllGuru } from '../../../features/dashboard/GuruSlice';
 import Alert from '../../../components/Alert';
 import ModalCreate from './ModalCreate';
@@ -60,6 +60,8 @@ const Record = () => {
         { title: 'Level' },
         { title: 'Action' }
     ];
+
+
 
     return (
         <div >
