@@ -52,6 +52,7 @@ class SiswaController extends Controller
      */
     public function search($query)
     {
+        $dataKu = 'tai';
         $search = Siswa::with(['kelas', 'jurusan'])
             ->where(function ($data) use ($query) {
                 $data

@@ -9,6 +9,7 @@ use App\Http\Controllers\MapelController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TapelController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WalasController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/data/guru/{guru:id}', [GuruController::class, 'update']);
         Route::delete('/data/guru/{guru:id}', [GuruController::class, 'destroy']);
         Route::get('/data/guru/{query}', [GuruController::class, 'search']);
+
+        //? Route Data User
+
+        Route::get('/data/user', [UserController::class, 'index']);
+        Route::post('/data/user', [UserController::class, 'store']);
+        Route::get('/data/user/{user:id}/edit', [UserController::class, 'edit']);
+        Route::post('/data/user/{user:id}', [UserController::class, 'update']);
+        Route::delete('/data/user/{user:id}', [UserController::class, 'destroy']);
+        Route::get('/data/user/{query}', [UserController::class, 'search']);
 
         //? Route Data Mapel
 
