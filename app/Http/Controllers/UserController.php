@@ -76,6 +76,8 @@ class UserController extends Controller
             'role' => ['required'],
         ]);
 
+        $validateData['password'] = bcrypt($validateData['password']);
+
         if ($validateData) {
             $check = User::create($validateData);
         }
