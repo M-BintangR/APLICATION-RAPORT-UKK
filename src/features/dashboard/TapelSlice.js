@@ -153,7 +153,7 @@ const TapelSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? TAPEL UPDATE
+            //? TAPEL DELETE 
 
             .addCase(tapelDelete.fulfilled, (state, action) => {
                 state.tapelDelete = action.payload;

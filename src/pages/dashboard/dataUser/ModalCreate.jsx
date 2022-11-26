@@ -1,17 +1,29 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkCreateUser, userCreate, userRecord } from '../../../features/dashboard/UserSlice';
 
 const ModalCreate = ({ isVisible, onClose }) => {
+    const check = useSelector(checkCreateUser);
+    const [errorData, setErrorData] = useState(null);
+    const dispatch = useDispatch();
     const [inputCreate, setInputCreate] = useState({
         nama_pengguna: '',
         username: '',
         password: '',
+        role: '',
     });
-    const [errorData, setErrorData] = useState(null);
+
+    useEffect(() => {
+        if (check.response) setErrorData(check?.response.data.errors);
+    }, [check]);
 
 
     const handleClose = () => {
+        setInputCreate({ nama_pengguna: '', username: '', password: '', role: '' });
         onClose();
+        setErrorData(null);
     }
 
     const handleChange = (e) => {
@@ -19,7 +31,11 @@ const ModalCreate = ({ isVisible, onClose }) => {
     }
 
     const handleClick = () => {
-
+        dispatch(userCreate(inputCreate));
+        onClose();
+        setErrorData(null);
+        setInputCreate({ nama_pengguna: '', username: '', password: '', role: '' });
+        dispatch(userRecord());
     }
 
     return (
@@ -35,63 +51,82 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                 <div className='space-x-6'>
                                     <div>
                                         <div className="mb-3">
-                                            <label className='mb-2' htmlFor="tahun_pelaran">Tahun Pelajaran</label>
+                                            <label className='mb-2' htmlFor="nama_pengguna">Nama Pengguna</label>
                                             <div>
-                                                {errorData?.tahun_pelajaran && (
-                                                    errorData?.tahun_pelajaran.map((error) => (
+                                                {errorData?.nama_pengguna && (
+                                                    errorData?.nama_pengguna.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
                                                 )}
                                             </div>
                                             <input
                                                 type="text"
-                                                name='tahun_pelajaran'
-                                                id='tahun_pelajaran'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.tahun_pelajaran ? 'border-red-500' : 'border-gray-300'}`}
-                                                placeholder='Tahun Pelajaran'
+                                                name='nama_pengguna'
+                                                id='nama_pengguna'
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.nama_pengguna ? 'border-red-500' : 'border-gray-300'}`}
+                                                placeholder='Nama Pengguna'
                                                 onChange={handleChange}
                                             />
                                         </div>
                                         <div className="mb-3">
-                                            <label className='mb-2' htmlFor="semester">Semester</label>
+                                            <label className='mb-2' htmlFor="username">Username</label>
                                             <div>
-                                                {errorData?.semester && (
-                                                    errorData?.semester.map((error) => (
+                                                {errorData?.username && (
+                                                    errorData?.username.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
                                                 )}
                                             </div>
                                             <input
                                                 type="text"
-                                                name='semester'
-                                                id='semester'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.semester ? 'border-red-500' : 'border-gray-300'}`}
-                                                placeholder='Semester'
+                                                name='username'
+                                                id='username'
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.username ? 'border-red-500' : 'border-gray-300'}`}
+                                                placeholder='Username'
                                                 onChange={handleChange}
-
                                             />
                                         </div>
                                         <div className="mb-3">
-                                            <label className='mb-2' htmlFor="aktif">Aktif</label>
+                                            <label className='mb-2' htmlFor="role">Role</label>
                                             <div>
-                                                {errorData?.aktif && (
-                                                    errorData?.aktif.map((error) => (
+                                                {errorData?.role && (
+                                                    errorData?.role.map((error) => (
                                                         <small className='text-xs text-red-500 font-normal'>{error}</small>
                                                     ))
                                                 )}
                                             </div>
                                             <select
-                                                id='aktif'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData?.aktif ? 'border-red-500' : 'border-gray-300'}`}
+                                                id='role'
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:outline-none ${errorData?.role ? 'border-red-500' : 'border-gray-300'}`}
                                                 type="text"
-                                                placeholder='Aktif'
-                                                name='aktif'
+                                                placeholder='Role'
+                                                name='role'
                                                 onChange={handleChange}
                                             >
-                                                <option>- Pilih -</option>
-                                                <option value={'1'}>Aktif</option>
-                                                <option value={'0'}>Tidak Aktif</option>
+                                                <option>- Pilih Role -</option>
+                                                <option value={'Guru'}>Guru</option>
+                                                <option value={'Walas'}>Walas</option>
+                                                <option value={'Siswa'}>Siswa</option>
+                                                <option value={'Admin'}>Admin</option>
                                             </select>
+                                        </div>
+                                        <div className="mb-3">
+                                            <label className='mb-2' htmlFor="password">Password</label>
+                                            <div>
+                                                {errorData?.password && (
+                                                    errorData?.password.map((error) => (
+                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
+                                                    ))
+                                                )}
+                                            </div>
+                                            <input
+                                                type="password"
+                                                name='pasword'
+                                                id='pasword'
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.pasword ? 'border-red-500' : 'border-gray-300'}`}
+                                                placeholder='Password'
+                                                onChange={handleChange}
+                                            />
                                         </div>
                                     </div>
                                 </div>

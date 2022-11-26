@@ -155,4 +155,10 @@ const UserSlice = createSlice({
 
 });
 
+export const selectAllUser = state => state.user.userRecord;
+export const checkCreateUser = state => state.user.userCreate;
+export const checkUpdateUser = state => state.user.userUpdate;
+export const checkEditUser = state => state.user.userEdit;
+export const checkDeleteUser = state => state.user.userDelete;
+export const pendingUser = state => state.user.pending;
 export default UserSlice.reducer;
