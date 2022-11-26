@@ -115,8 +115,12 @@ const Record = () => {
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{mapel?.nama_mapel ? mapel?.nama_mapel : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{mapel.kkm ? mapel?.kkm : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{mapel.level ? mapel?.level : '-'}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{mapel?.jurusan.nama_jurusan ? mapel?.jurusan?.nama_jurusan : '-'}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{mapel?.jurusan.kode_jurusan ? mapel?.jurusan?.kode_jurusan : '-'}</td>
+                                                    <td className={`p-3 whitespace-nowrap text-gray-700 text-sm `}>{mapel?.jurusan.nama_jurusan ? mapel?.jurusan?.nama_jurusan : '-'}</td>
+                                                    <td className={`p-3 whitespace-nowrap text-gray-700 text-sm`}>
+                                                        <span className={`py-0.3 px-1 rounded-sm ${mapel?.jurusan.kode_jurusan === 'RPL' ? 'bg-yellow-500 text-white' : ''} ${mapel?.jurusan.kode_jurusan === 'TKJ' ? 'bg-rose-500 text-white' : ''} ${mapel?.jurusan.kode_jurusan === 'MMK' ? 'bg-violet-500 text-white' : ''}`}>
+                                                            {mapel?.jurusan.kode_jurusan ? mapel?.jurusan?.kode_jurusan : '-'}
+                                                        </span>
+                                                    </td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
                                                         <button
                                                             className='text-sm md:text-xl text-black mr-1 bg-white font-medium md:font-semibold py-1 px-3 hover:text-amber-400'

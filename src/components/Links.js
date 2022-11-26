@@ -7,7 +7,6 @@ export const AdminMenu = [
             { title: 'Home', link: '/dashboard' },
             { title: 'Profil', link: '/dashboard/profil' },
             { title: 'Data User', link: '/dashboard/data/user' },
-            { title: 'Registrasi', link: '/dashboard/data/registrasi' },
         ],
     },
     { title: 'Data Mapel', link: '/dashboard/data/mapel', spacing: true },

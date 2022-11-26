@@ -45,7 +45,7 @@ const Login = () => {
                 navigate('/');
             }
         }
-    }, [handleClick]);
+    }, [navigate, token, users]);
 
     return (
         <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full '>

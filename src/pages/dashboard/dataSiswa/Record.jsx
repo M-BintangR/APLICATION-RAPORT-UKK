@@ -78,13 +78,13 @@ const Record = () => {
                     {!pending && (
                         <div>
                             <div className="mt-5 mb-8 bg-slate-100 rounded-md py-3 px-4">
-                                <h1 className='text-xl md:text-2xl font-semibold '>Data Mapel
+                                <h1 className='text-xl md:text-2xl font-semibold '>Data Siswa
                                     <button
                                         className=' py-1 px-2 md:py-2 md:px-3 text-xs float-right bg-green-600 hover:bg-green-500 text-white rounded-md uppercase md:text-sm'
                                         onClick={() => setShowModalCreate(prev => prev = true)}
                                     >Tambah</button>
                                 </h1>
-                                <p>Kelola Data Mapel</p>
+                                <p>Kelola Data Siswa</p>
                             </div>
                             <h1 className='text-lg md:text-xl pb-2 font-medium md:font-semibold md:my-2'>Record Data
                                 <div className="float-right">
@@ -114,12 +114,27 @@ const Record = () => {
                                                 <>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.nama ? siswa?.nama : '-'}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.kelas?.nama_kelas ? siswa?.kelas?.nama_kelas : '-'}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.jurusan?.kode_jurusan ? siswa?.jurusan?.kode_jurusan : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
+                                                        <span className='mr-1'>
+                                                            {siswa?.kelas?.level ? siswa?.kelas?.level : '-'}
+                                                        </span>
+                                                        <span>
+                                                            {siswa?.kelas?.nama_kelas ? siswa?.kelas?.nama_kelas : '-'}
+                                                        </span>
+                                                    </td>
+                                                    <td className='p-3 whitespace-nowrap text-sm'>
+                                                        <span className={`py-0.3 px-1 rounded-sm ${siswa?.jurusan.kode_jurusan === 'RPL' ? 'bg-yellow-500 text-white' : ''} ${siswa?.jurusan.kode_jurusan === 'TKJ' ? 'bg-rose-500 text-white' : ''} ${siswa?.jurusan.kode_jurusan === 'MMK' ? 'bg-violet-500 text-white' : ''}`}>
+                                                            {siswa?.jurusan?.kode_jurusan ? siswa?.jurusan?.kode_jurusan : '-'}
+                                                        </span>
+                                                    </td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.nis ? siswa?.nis : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.nisn ? siswa?.nisn : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.agama ? siswa?.agama : '-'}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{siswa?.jk === "L" ? "Laki-laki" : 'Perempuan'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-white text-sm'>
+                                                        <span className={`py-0.3 px-1 rounded-sm ${siswa?.jk === "L" ? 'bg-teal-500' : 'bg-pink-500'}`}>
+                                                            {siswa?.jk === "L" ? "Laki-laki" : 'Perempuan'}
+                                                        </span>
+                                                    </td>
 
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
                                                         <button

@@ -85,7 +85,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 onChange={handleChange}
                                             />
                                         </div>
-                                    </div>
+                                    </div> 
                                 </div>
                                 <div className="flex flex-row">
                                     <button

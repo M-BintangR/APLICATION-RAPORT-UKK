@@ -53,8 +53,8 @@ const Record = () => {
 
     const TabelJurusans = [
         { title: 'No.', short: true },
-        { title: 'kode_jurusan' },
-        { title: 'nama_jurusan' },
+        { title: 'Kode Jurusan' },
+        { title: 'Nama Jurusan' },
         { title: 'Action' },
     ];
 

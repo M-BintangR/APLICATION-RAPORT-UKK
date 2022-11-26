@@ -74,7 +74,7 @@ const Home = () => {
                                 <p>Hi Selamat Datang Admin!</p>
                             </div>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                            <div className="grid mb-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                                 <div className="bg-slate-100 p-3 flex justify-start rounded-md">
                                     <div className="flex justify-center">
                                         <div className="bg-indigo-700 jutify-self-start self-center text-white p-2 rounded-md mr-4">

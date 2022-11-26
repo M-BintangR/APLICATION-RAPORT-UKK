@@ -89,11 +89,25 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                             >
                                                 {dataKelas && dataKelas.items.map((kelas, i) => (
                                                     kelas.id === dataEditWalas.item.id_kelas && (
-                                                        <option key={i} value={kelas.id}>{kelas?.nama_kelas}</option>
+                                                        <option key={i} value={kelas.id}>
+                                                            <span className='mr-1'>
+                                                                {kelas.level ? kelas?.level : '-'}
+                                                            </span>
+                                                            <span>
+                                                                {kelas.nama_kelas ? kelas?.nama_kelas : '-'}
+                                                            </span>
+                                                        </option>
                                                     )
                                                 ))}
                                                 {dataKelas && dataKelas?.items.map((kelas, i) => (
-                                                    <option key={i} value={kelas.id}>{kelas?.nama_kelas}</option>
+                                                    <option key={i} value={kelas.id}>
+                                                        <span className='mr-1'>
+                                                            {kelas.level ? kelas?.level : '-'}-
+                                                        </span>
+                                                        <span>
+                                                            {kelas.nama_kelas ? kelas?.nama_kelas : '-'}
+                                                        </span>
+                                                    </option>
                                                 ))}
 
                                             </select>

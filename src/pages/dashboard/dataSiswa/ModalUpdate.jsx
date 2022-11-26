@@ -201,11 +201,25 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                             >
                                                 {dataKelas.items && dataKelas.items.map((kelas, i) => (
                                                     kelas.id === dataEditSiswa?.item.id_kelas && (
-                                                        <option key={i} value={kelas?.id}>{kelas?.nama_kelas}</option>
+                                                        <option key={i} value={kelas?.id}>
+                                                            <span>
+                                                                {kelas?.level}-
+                                                            </span>
+                                                            <span>
+                                                                {kelas?.nama_kelas}
+                                                            </span>
+                                                        </option>
                                                     )
                                                 ))}
                                                 {dataKelas.items && dataKelas?.items.map((kelas, i) => (
-                                                    <option key={i} value={kelas?.id}>{kelas?.nama_kelas}</option>
+                                                    <option key={i} value={kelas?.id}>
+                                                        <span>
+                                                            {kelas?.level}-
+                                                        </span>
+                                                        <span>
+                                                            {kelas?.nama_kelas}
+                                                        </span>
+                                                    </option>
                                                 ))}
 
                                             </select>

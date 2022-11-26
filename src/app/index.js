@@ -9,6 +9,7 @@ import KelasSlice from "../features/dashboard/KelasSlice";
 import WalasSlice from "../features/dashboard/WalasSlice";
 import SiswaSlice from "../features/dashboard/SiswaSlice";
 import HomeSlice from "../features/dashboard/HomeSlice";
+import UserSlice from "../features/dashboard/UserSlice";
 
 export const store = configureStore({
     reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
         walas: WalasSlice,
         siswa: SiswaSlice,
         home: HomeSlice,
+        user: UserSlice,
     }
 });
 

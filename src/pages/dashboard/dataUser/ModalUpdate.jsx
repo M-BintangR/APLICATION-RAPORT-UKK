@@ -32,7 +32,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
     }, [dataEditUser]);
 
     const handleChange = (e) => {
-        setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }))
+        setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
     }
 
     const handleClose = () => {
@@ -59,6 +59,9 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         setErrorData(null)
         onClose();
     }
+
+    console.log(inputEdit);
+
 
     return (
         <div>
@@ -134,25 +137,6 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                                 <option value={'Siswa'}>Siswa</option>
                                                 <option value={'Admin'}>Admin</option>
                                             </select>
-                                        </div>
-                                        <div className="mb-3">
-                                            <label className='mb-2' htmlFor="username">Password</label>
-                                            <div>
-                                                {errorData?.password && (
-                                                    errorData?.password.map((error) => (
-                                                        <small className='text-xs text-red-500 font-normal'>{error}</small>
-                                                    ))
-                                                )}
-                                            </div>
-                                            <input
-                                                type="password"
-                                                name='password'
-                                                id='password'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.password ? 'border-red-500' : 'border-gray-300'}`}
-                                                placeholder='Password'
-                                                defaultValue={dataEditUser?.item.password}
-                                                onChange={handleChange}
-                                            />
                                         </div>
                                     </div>
                                 </div>

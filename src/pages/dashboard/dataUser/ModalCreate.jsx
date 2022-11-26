@@ -121,9 +121,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                             </div>
                                             <input
                                                 type="password"
-                                                name='pasword'
-                                                id='pasword'
-                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.pasword ? 'border-red-500' : 'border-gray-300'}`}
+                                                name='password'
+                                                id='password'
+                                                className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.password ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Password'
                                                 onChange={handleChange}
                                             />
