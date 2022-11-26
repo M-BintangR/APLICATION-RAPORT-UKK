@@ -41,7 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/data/user', [UserController::class, 'index']);
         Route::post('/data/user', [UserController::class, 'store']);
         Route::get('/data/user/{user:id}/edit', [UserController::class, 'edit']);
-        Route::post('/data/user/{user:id}', [UserController::class, 'update']);
+        Route::put('/data/user/{user:id}', [UserController::class, 'update']);
         Route::delete('/data/user/{user:id}', [UserController::class, 'destroy']);
         Route::get('/data/user/{query}', [UserController::class, 'search']);
 
@@ -50,7 +50,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/data/mapel', [MapelController::class, 'index']);
         Route::post('/data/mapel', [MapelController::class, 'store']);
         Route::get('/data/mapel/{mapel:id}/edit', [MapelController::class, 'edit']);
-        Route::put('/data/mapel/{mapel:id}', [MapelController::class, 'update']);
+        Route::post('/data/mapel/{mapel:id}', [MapelController::class, 'update']);
         Route::delete('/data/mapel/{mapel:id}', [MapelController::class, 'destroy']);
         Route::get('/data/mapel/{query}', [MapelController::class, 'search']);
 
