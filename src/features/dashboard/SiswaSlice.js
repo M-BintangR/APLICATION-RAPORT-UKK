@@ -152,7 +152,7 @@ const SiswaSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //? SISWA UPDATE
+            //? SISWA DELETE
 
             .addCase(siswaDelete.fulfilled, (state, action) => {
                 state.siswaDelete = action.payload;

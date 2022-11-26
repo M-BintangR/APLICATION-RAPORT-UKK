@@ -10,6 +10,15 @@ export const GURU_EDIT_URL = 'http://127.0.0.1:8000/api/admin/data/guru/';
 export const GURU_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/guru/';
 export const GURU_SEARCH_URL = 'http://127.0.0.1:8000/api/admin/data/guru/';
 
+//? USER URL
+
+export const USER_RECORD_URL = 'http://127.0.0.1:8000/api/admin/data/user';
+export const USER_DELETE_URL = 'http://127.0.0.1:8000/api/admin/data/user/';
+export const USER_CREATE_URL = 'http://127.0.0.1:8000/api/admin/data/user';
+export const USER_EDIT_URL = 'http://127.0.0.1:8000/api/admin/data/user/';
+export const USER_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/user/';
+export const USER_SEARCH_URL = 'http://127.0.0.1:8000/api/admin/data/user/';
+
 //? MAPEL URL
 export const MAPEL_RECORD_URL = 'http://127.0.0.1:8000/api/admin/data/mapel';
 export const MAPEL_CREATE_URL = 'http://127.0.0.1:8000/api/admin/data/mapel';
