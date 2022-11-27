@@ -158,17 +158,19 @@ const Sidebar = (props) => {
                                         <FiLogOut className='float-right font-semibold' />
                                     </div>
                                 </li>
-                                <li
-                                    className={`text-dark-purple hover:text-green-600 text-sm flex items-center justify-between gap-x-4 cursor-pointer p-2 hover:bg-slate-400 rounded-md duration-300 my-1 mx-1 bg-slate-300 w-32`}
-                                >
-                                    <div className="text-left font-medium ">
-                                        Profil
-                                    </div>
-                                    <div className='text-right'>
-                                        <CgProfile
-                                            className='float-right font-semibold' />
-                                    </div>
-                                </li>
+                                <Link to={'/dashboard/profil'}>
+                                    <li
+                                        className={`text-dark-purple hover:text-green-600 text-sm flex items-center justify-between gap-x-4 cursor-pointer p-2 hover:bg-slate-400 rounded-md duration-300 my-1 mx-1 bg-slate-300 w-32`}
+                                    >
+                                        <div className="text-left font-medium ">
+                                            Profil
+                                        </div>
+                                        <div className='text-right'>
+                                            <CgProfile
+                                                className='float-right font-semibold' />
+                                        </div>
+                                    </li>
+                                </Link>
                             </ul>
                         )}
                     </div>
