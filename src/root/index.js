@@ -12,6 +12,7 @@ import RecordMapel from '../pages/dashboard/dataMapel/Record';
 import Home from '../pages/dashboard/Home';
 import { Navigate } from 'react-router-dom';
 import RequireAdmin from '../middleware/RequireAdmin';
+import Profil from '../pages/dashboard/Profil';
 
 
 
@@ -87,6 +88,13 @@ const Root = () => {
                             </RequireAdmin>
                         } />
 
+                    <Route
+                        path='/dashboard/profil'
+                        element={
+                            <RequireAdmin>
+                                <Profil />
+                            </RequireAdmin>
+                        } />
 
 
                     <Route index path='/' element={<Login />} />

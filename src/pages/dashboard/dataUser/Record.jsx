@@ -107,7 +107,11 @@ const Record = () => {
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{user.nama_pengguna ? user?.nama_pengguna : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{user.username ? user?.username : '-'}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{user?.role ? user?.role : '-'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-white uppercase text-sm'>
+                                                        <span className={`py-0.3 px-1 rounded-sm ${user?.role === "admin" ? 'bg-green-600' : ''} ${user?.role === "guru" ? 'bg-amber-600' : ''} ${user?.role === "walas" ? 'bg-blue-600' : ''} ${user?.role === "siswa" ? 'bg-red-600' : ''}`}>
+                                                            {user?.role ? user?.role : '-'}
+                                                        </span>
+                                                    </td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
                                                         <button
                                                             className='text-sm md:text-xl text-black mr-1 bg-white font-medium md:font-semibold py-1 px-3 hover:text-amber-400'

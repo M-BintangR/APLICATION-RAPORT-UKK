@@ -108,7 +108,11 @@ const Record = () => {
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{tapel.tahun_pelajaran ? tapel?.tahun_pelajaran : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{tapel.semester ? tapel?.semester : '-'}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{tapel?.aktif === '1' ? 'Aktif' : 'Tidak Aktif'}</td>
+                                                    <td className='p-3 whitespace-nowrap text-white text-sm'>
+                                                        <span className={`py-0.3 px-1 rounded-sm ${tapel?.aktif === "1" ? 'bg-green-600' : 'bg-red-600'}`}>
+                                                            {tapel?.aktif === '1' ? 'Aktif' : 'Tidak Aktif'}
+                                                        </span>
+                                                    </td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
                                                         <button
                                                             className='text-sm md:text-xl text-black mr-1 bg-white font-medium md:font-semibold py-1 px-3 hover:text-amber-400'

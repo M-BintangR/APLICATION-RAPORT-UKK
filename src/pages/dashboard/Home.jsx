@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { homeRecord, pendingHomeDashboard, selectAllHome } from '../../features/dashboard/HomeSlice';
 import { IoMdSchool } from 'react-icons/io';
-import { FaChalkboardTeacher, FaBook, FaBookOpen, FaAtom, FaUserFriends, FaSchool } from 'react-icons/fa';
+import { FaChalkboardTeacher, FaBookOpen, FaAtom, FaUserFriends, FaSchool } from 'react-icons/fa';
 
 import { useEffect } from 'react';
 import { BiTimeFive } from 'react-icons/bi';
