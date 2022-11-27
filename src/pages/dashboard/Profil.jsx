@@ -3,8 +3,10 @@ import Sidebar from '../../components/Sidebar'
 import { AdminMenu } from '../../components/Links'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { checkEditUser, pendingUser, userEdit } from '../../features/dashboard/UserSlice'
+import { checkEditUser, checkUpdateUser, pendingUser, userEdit, userRecord, userUpdate } from '../../features/dashboard/UserSlice'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { BiErrorCircle } from 'react-icons/bi'
 
 const Profil = () => {
     const Menus = AdminMenu
@@ -13,6 +15,15 @@ const Profil = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     const dataEditProfil = useSelector(checkEditUser);
     const pending = useSelector(pendingUser);
+    const [errorData, setErrorData] = useState(null);
+    const check = useSelector(checkUpdateUser);
+    const navigate = useNavigate();
+    const [inputEdit, setInputEdit] = useState({
+        nama_pengguna: '',
+        username: '',
+        role: '',
+    });
+
 
     useEffect(() => {
         setIdUser(user.id);
@@ -24,10 +35,32 @@ const Profil = () => {
         }
     }, [dispatch, idUser]);
 
-    const handleChange = () => {
+    useEffect(() => {
+        if (dataEditProfil?.item) {
+            setInputEdit(dataEditProfil?.item);
+        }
+    }, [dataEditProfil]);
 
+    useEffect(() => {
+        if (check.response) setErrorData(check?.response.data.message)
+    }, [check]);
+
+
+    const handleChange = (e) => {
+        setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
     }
 
+    const handleEdit = () => {
+        const data = {
+            nama_pengguna: inputEdit.nama_pengguna,
+            username: inputEdit.username,
+            password: inputEdit.password,
+            role: inputEdit.role,
+            id: idUser,
+        }
+        dispatch(userUpdate(data));
+        setErrorData(null);
+    }
 
     return (
         <div>
@@ -47,12 +80,16 @@ const Profil = () => {
                                     <p>Kelola Data Pribadi</p>
                                 </div>
 
-                                <div className="bg-slate-100 p-3 md:p-5">
+                                {errorData && (
+                                    <div className="bg-slate-50 border-l-4 border-red-500 mb-5 px-5 py-3">
+                                        <BiErrorCircle className='text-2xl text-red-500 inline mr-1' />
+                                        <span className='text-sm md:text-md text-red-500'>{errorData}</span>
+                                    </div>
+                                )}
+
+                                <div className="bg-slate-100 p-3 mb-8 md:p-5">
                                     <div className='mb-16 md:mb-8'>
-                                        <h3 className='md:text-lg md:font-medium'>
-                                            Data profil anda
-                                            <button className='uppercase rounded-md self-start text-white bg-blue-600 hover:bg-blue-700 float-right font-light text-sm md:text-md md:font-medium py-1 px-2 md:py-2 md:px-3'>Reset password</button>
-                                        </h3>
+                                        <button className='uppercase rounded-md self-start text-white bg-blue-600 hover:bg-blue-700 float-right font-light text-sm md:text-md md:font-medium py-1 px-2 md:py-2 md:px-3'>Reset password</button>
                                     </div>
                                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                                         <div className="flex flex-col gap-y-3">
@@ -100,7 +137,10 @@ const Profil = () => {
                                                     <option value="siswa">Siswa</option>
                                                 </select>
                                             </div>
-                                            <button className='uppercase rounded-md self-start text-white bg-green-600 hover:bg-green-700 font-light text-sm md:text-md md:font-medium py-1 px-2 md:py-2 md:px-3 mt-5'>Perbarui</button>
+                                            <button
+                                                className='uppercase rounded-md self-start text-white bg-green-600 hover:bg-green-700 font-light text-sm md:text-md md:font-medium py-1 px-2 md:py-2 md:px-3 mt-5'
+                                                onClick={handleEdit}
+                                            >Perbarui</button>
                                         </div>
                                     </div>
                                 </div>

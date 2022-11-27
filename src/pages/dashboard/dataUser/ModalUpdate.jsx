@@ -60,7 +60,6 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         onClose();
     }
 
-    console.log(inputEdit);
 
 
     return (

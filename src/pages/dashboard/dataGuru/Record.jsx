@@ -61,8 +61,6 @@ const Record = () => {
         { title: 'Action' }
     ];
 
-
-
     return (
         <div >
             <Sidebar Menus={Menus} active={active}>
