@@ -7,23 +7,65 @@ import ModalCreate from './ModalCreate';
 import ModalUpdate from './ModalUpdate';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkPendingJurusan, jurusanDelete, jurusanRecord, jurusanSearch, selectAllJurusan } from '../../../features/dashboard/JurusanSlice';
+import { checkCreateJurusan, checkPendingJurusan, checkUpdateJurusan, jurusanDelete, jurusanRecord, jurusanSearch, selectAllJurusan } from '../../../features/dashboard/JurusanSlice';
 import Alert from '../../../components/Alert';
+import Message from '../../../components/Message';
 
 const Record = () => {
-    const [active, setActive] = useState('Data Jurusan');
-    const Menus = AdminMenu;
-    const [showModalCreate, setShowModalCreate] = useState(false);
-    const [showModalUpdate, setShowModalUpdate] = useState(false);
     const dispatch = useDispatch();
+    const Menus = AdminMenu;
     const pending = useSelector(checkPendingJurusan);
     const dataJurusan = useSelector(selectAllJurusan);
+    const checkCreate = useSelector(checkCreateJurusan);
+    const checkUpdate = useSelector(checkUpdateJurusan);
+    const [active, setActive] = useState('Data Jurusan');
+    const [showModalCreate, setShowModalCreate] = useState(false);
+    const [showModalUpdate, setShowModalUpdate] = useState(false);
     const [idUser, setIdUser] = useState(null);
     const [checkAlert, setCheckAlert] = useState(false);
+    const [errorData, setErrorData] = useState({
+        message: '',
+        status: '',
+    });
+
+    const clearError = () => {
+        setTimeout(() => {
+            setErrorData(null);
+        }, 10500);
+    }
+
+    useEffect(() => {
+        if (checkCreate.response) setErrorData({
+            message: 'Data gagal di tambahkan, isi data dengan benar!',
+            status: checkCreate?.response.status
+        });
+        if (checkCreate.message === 'success') setErrorData({
+            message: 'Data berhasil di tambahkan',
+            status: 200,
+        })
+
+        clearError();
+    }, [checkCreate]);
+
+    useEffect(() => {
+        if (checkUpdate.response) setErrorData({
+            message: 'Data gagal di edit, isi data dengan benar!',
+            status: checkUpdate?.response.status
+        })
+        if (checkUpdate.message === 'success') setErrorData({
+            message: 'Data berhasil di di edit',
+            status: 200,
+        })
+        clearError();
+    }, [checkUpdate]);
 
     useEffect(() => {
         dispatch(jurusanRecord());
     }, [dispatch]);
+
+    const handleSearch = (e) => {
+        dispatch(jurusanSearch(e.target.value));
+    }
 
     const handleUpdate = (id) => {
         setIdUser(id);
@@ -45,10 +87,6 @@ const Record = () => {
             setCheckAlert(false);
         }, 10000)
         dispatch(jurusanRecord());
-    }
-
-    const handleSearch = (e) => {
-        dispatch(jurusanSearch(e.target.value));
     }
 
     const TabelJurusans = [
@@ -80,6 +118,15 @@ const Record = () => {
                                 </h1>
                                 <p>Kelola Data Jurusan</p>
                             </div>
+
+                            {errorData?.status === 422 && (
+                                <Message type={'error'} pesan={errorData.message} />
+                            )}
+
+                            {errorData?.status === 200 && (
+                                <Message type={'success'} pesan={errorData.message} />
+                            )}
+
                             <h1 className='text-lg md:text-xl pb-2 font-medium md:font-semibold md:my-2'>Record Data
                                 <div className="float-right">
                                     <input

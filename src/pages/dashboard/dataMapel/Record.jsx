@@ -5,35 +5,63 @@ import { useState } from 'react';
 import { BiTrash, BiEdit } from 'react-icons/bi';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { mapelDelete, mapelEdit, mapelRecord, mapelSearch, pendingMapel, selectAllMapel } from '../../../features/dashboard/MapelSlice';
+import { checkCreateMapel, checkUpdateMapel, mapelDelete, mapelRecord, mapelSearch, pendingMapel, selectAllMapel } from '../../../features/dashboard/MapelSlice';
 import ModalCreate from './ModalCreate';
 import ModalUpdate from './ModalUpdate';
 import Alert from '../../../components/Alert';
+import Message from '../../../components/Message';
 
 const Record = () => {
-    const [active, setActive] = useState('Data Mapel');
     const Menus = AdminMenu;
     const dispatch = useDispatch();
+    const dataMapel = useSelector(selectAllMapel);
+    const pending = useSelector(pendingMapel);
+    const checkCreate = useSelector(checkCreateMapel);
+    const checkUpdate = useSelector(checkUpdateMapel);
+    const [active, setActive] = useState('Data Mapel');
     const [showModalCreate, setShowModalCreate] = useState(false);
     const [showModalUpdate, setShowModalUpdate] = useState(false);
     const [checkAlert, setCheckAlert] = useState(false);
     const [idUser, setIdUser] = useState();
-    const dataMapel = useSelector(selectAllMapel);
-    const pending = useSelector(pendingMapel);
+    const [errorData, setErrorData] = useState({
+        message: '',
+        status: '',
+    });
+
+    const clearError = () => {
+        setTimeout(() => {
+            setErrorData(null);
+        }, 10500);
+    }
+
+    useEffect(() => {
+        if (checkCreate.response) setErrorData({
+            message: 'Data gagal di tambahkan, isi data dengan benar!',
+            status: checkCreate?.response.status
+        });
+        if (checkCreate.message === 'success') setErrorData({
+            message: 'Data berhasil di tambahkan',
+            status: 200,
+        })
+
+        clearError();
+    }, [checkCreate]);
+
+    useEffect(() => {
+        if (checkUpdate.response) setErrorData({
+            message: 'Data gagal di edit, isi data dengan benar!',
+            status: checkUpdate?.response.status
+        })
+        if (checkUpdate.message === 'success') setErrorData({
+            message: 'Data berhasil di di edit',
+            status: 200,
+        })
+        clearError();
+    }, [checkUpdate]);
 
     useEffect(() => {
         dispatch(mapelRecord());
     }, [dispatch]);
-
-    const TabelMapels = [
-        { title: 'No.', short: true },
-        { title: 'Nama Mapel' },
-        { title: 'KKM' },
-        { title: 'Level' },
-        { title: 'Nama Jurusan' },
-        { title: 'Kode Jurusan' },
-        { title: 'Action' }
-    ];
 
     const handleDelete = (id) => {
         dispatch(mapelDelete(id));
@@ -60,6 +88,15 @@ const Record = () => {
         setShowModalUpdate(prev => prev = true);
     }
 
+    const TabelMapels = [
+        { title: 'No.', short: true },
+        { title: 'Nama Mapel' },
+        { title: 'KKM' },
+        { title: 'Level' },
+        { title: 'Nama Jurusan' },
+        { title: 'Kode Jurusan' },
+        { title: 'Action' }
+    ];
 
 
     return (
@@ -84,6 +121,15 @@ const Record = () => {
                                 </h1>
                                 <p>Kelola Data Mapel</p>
                             </div>
+
+                            {errorData?.status === 422 && (
+                                <Message type={'error'} pesan={errorData.message} />
+                            )}
+
+                            {errorData?.status === 200 && (
+                                <Message type={'success'} pesan={errorData.message} />
+                            )}
+
                             <h1 className='text-lg md:text-xl pb-2 font-medium md:font-semibold md:my-2'>Record Data
                                 <div className="float-right">
                                     <input

@@ -9,29 +9,19 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
     const dataEditGuru = useSelector(checkEditGuru);
     const pending = useSelector(guruPending);
     const dataMapel = useSelector(selectAllMapel);
+    const check = useSelector(checkUpdateGuru);
+    const [errorData, setErrorData] = useState(null);
+    const checkShowModal = isVisible
+        && dataEditGuru.item
+        && !pending && dataMapel.items;
     const [inputEdit, setInputEdit] = useState({
         id_mapel: '',
         nama_guru: '',
     });
-    const [errorData, setErrorData] = useState(null);
-    const check = useSelector(checkUpdateGuru);
-    const checkShowModal = isVisible
-        && dataEditGuru.item
-        && !pending && dataMapel.items;
 
     useEffect(() => {
         isVisible && dispatch(guruEdit(idUser));
     }, [dispatch, idUser, isVisible]);
-
-    const handleClose = () => {
-        onClose();
-        setErrorData(null);
-        setInputEdit({ nama_guru: '', id_mapel: '' });
-    }
-
-    const handleChange = (e) => {
-        setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
 
     useEffect(() => {
         if (dataEditGuru.item) {
@@ -43,6 +33,10 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         if (check.response) setErrorData(check?.response.data.errors);
     }, [check]);
 
+    const handleChange = (e) => {
+        setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    }
+
     const handleEdit = () => {
         const data = {
             nama_guru: inputEdit.nama_guru,
@@ -53,6 +47,12 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         dispatch(guruRecord());
         onClose();
         setErrorData(null);
+    }
+
+    const handleClose = () => {
+        onClose();
+        setErrorData(null);
+        setInputEdit({ nama_guru: '', id_mapel: '' });
     }
 
     return (

@@ -7,6 +7,7 @@ import { checkEditUser, checkUpdateUser, pendingUser, userEdit, userRecord, user
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BiErrorCircle } from 'react-icons/bi'
+import Message from '../../components/Message'
 
 const Profil = () => {
     const Menus = AdminMenu
@@ -81,10 +82,7 @@ const Profil = () => {
                                 </div>
 
                                 {errorData && (
-                                    <div className="bg-slate-50 border-l-4 border-red-500 mb-5 px-5 py-3">
-                                        <BiErrorCircle className='text-2xl text-red-500 inline mr-1' />
-                                        <span className='text-sm md:text-md text-red-500'>{errorData}</span>
-                                    </div>
+                                    <Message type={'error'} pesan={errorData} />
                                 )}
 
                                 <div className="bg-slate-100 p-3 mb-8 md:p-5">

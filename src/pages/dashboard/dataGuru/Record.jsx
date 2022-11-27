@@ -5,22 +5,64 @@ import { AdminMenu } from '../../../components/Links';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createGuruCheck, errorGuru, guruDelete, guruPending, guruRecord, guruSearch } from '../../../features/dashboard/GuruSlice';
+import { checkUpdateGuru, createGuruCheck, guruDelete, guruPending, guruRecord, guruSearch } from '../../../features/dashboard/GuruSlice';
 import { selectAllGuru } from '../../../features/dashboard/GuruSlice';
 import Alert from '../../../components/Alert';
 import ModalCreate from './ModalCreate';
 import ModalUpdate from './ModalUpdate';
+import Message from '../../../components/Message';
 
 const Record = () => {
-    const [active, setActive] = useState('Data Guru');
     const Menus = AdminMenu;
     const dispatch = useDispatch();
     const dataGuru = useSelector(selectAllGuru);
     const dataGuruCheck = useSelector(guruPending);
+    const checkCreate = useSelector(createGuruCheck);
+    const checkUpdate = useSelector(checkUpdateGuru);
+    const [active, setActive] = useState('Data Guru');
     const [checkAlert, setCheckAlert] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [showModalUpdate, setShowModalUpdate] = useState(false);
     const [idUpdateModal, setIdUpdateModal] = useState();
+    const [errorData, setErrorData] = useState({
+        message: '',
+        status: '',
+    });
+
+    const clearError = () => {
+        setTimeout(() => {
+            setErrorData(null);
+        }, 10500);
+    }
+
+    useEffect(() => {
+        if (checkCreate.response) setErrorData({
+            message: 'Data gagal di tambahkan, isi data dengan benar!',
+            status: checkCreate?.response.status
+        });
+        if (checkCreate.message === 'success') setErrorData({
+            message: 'Data berhasil di tambahkan',
+            status: 200,
+        })
+
+        clearError();
+    }, [checkCreate]);
+
+    useEffect(() => {
+        if (checkUpdate.response) setErrorData({
+            message: 'Data gagal di edit, isi data dengan benar!',
+            status: checkUpdate?.response.status
+        })
+        if (checkUpdate.message === 'success') setErrorData({
+            message: 'Data berhasil di di edit',
+            status: 200,
+        })
+        clearError();
+    }, [checkUpdate]);
+
+    useEffect(() => {
+        dispatch(guruRecord());
+    }, [dispatch]);
 
     const handleDelete = (id) => {
         dispatch(guruDelete(id));
@@ -47,9 +89,7 @@ const Record = () => {
         dispatch(guruSearch(e.target.value));
     }
 
-    useEffect(() => {
-        dispatch(guruRecord());
-    }, [dispatch]);
+
 
 
     const TabelGurus = [
@@ -71,6 +111,7 @@ const Record = () => {
                         </div>
                     )}
 
+
                     {!dataGuruCheck && (
                         <div>
                             <div className="mt-5 mb-8 bg-slate-100 rounded-md py-3 px-4">
@@ -82,6 +123,15 @@ const Record = () => {
                                 </h1>
                                 <p>Kelola Data Guru</p>
                             </div>
+
+                            {errorData?.status === 422 && (
+                                <Message type={'error'} pesan={errorData.message} />
+                            )}
+
+                            {errorData?.status === 200 && (
+                                <Message type={'success'} pesan={errorData.message} />
+                            )}
+
                             <h1 className='text-lg md:text-xl pb-2 font-medium md:font-semibold md:my-2'>Record Data
                                 <div className="float-right">
                                     <input

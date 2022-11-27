@@ -3,24 +3,61 @@ import Sidebar from '../../../components/Sidebar';
 import { AdminMenu } from '../../../components/Links';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { pendingWalas, selectAllWalas, walasDelete, walasRecord, walasSearch } from '../../../features/dashboard/WalasSlice';
+import { checkCreateWalas, checkUpdateWalas, pendingWalas, selectAllWalas, walasDelete, walasRecord, walasSearch } from '../../../features/dashboard/WalasSlice';
 import Alert from '../../../components/Alert';
 import ModalCreate from './ModalCreate';
 import ModalUpdate from './ModalUpdate';
 import { BiTrash, BiEdit } from 'react-icons/bi';
 import { useEffect } from 'react';
-
+import Message from '../../../components/Message';
 
 const Record = () => {
-    const [active, setActive] = useState('Data Walas');
+    const dispatch = useDispatch();
     const Menus = AdminMenu;
     const pending = useSelector(pendingWalas);
+    const dataWalas = useSelector(selectAllWalas);
+    const checkCreate = useState(checkCreateWalas);
+    const checkUpdate = useState(checkUpdateWalas);
+    const [active, setActive] = useState('Data Walas');
     const [showModalCreate, setShowModalCreate] = useState(false);
     const [showModalUpdate, setShowModalUpdate] = useState(false);
     const [checkAlert, setCheckAlert] = useState(false);
     const [idUser, setIdUser] = useState(null);
-    const dataWalas = useSelector(selectAllWalas);
-    const dispatch = useDispatch();
+    const [errorData, setErrorData] = useState({
+        message: '',
+        status: '',
+    });
+
+    const clearError = () => {
+        setTimeout(() => {
+            setErrorData(null);
+        }, 10500);
+    }
+
+    useEffect(() => {
+        if (checkCreate.response) setErrorData({
+            message: 'Data gagal di tambahkan, isi data dengan benar!',
+            status: checkCreate?.response.status
+        });
+        if (checkCreate.message === 'success') setErrorData({
+            message: 'Data berhasil di tambahkan',
+            status: 200,
+        })
+
+        clearError();
+    }, [checkCreate]);
+
+    useEffect(() => {
+        if (checkUpdate.response) setErrorData({
+            message: 'Data gagal di edit, isi data dengan benar!',
+            status: checkUpdate?.response.status
+        })
+        if (checkUpdate.message === 'success') setErrorData({
+            message: 'Data berhasil di di edit',
+            status: 200,
+        })
+        clearError();
+    }, [checkUpdate]);
 
     const handleUpdate = (id) => {
         setIdUser(id);
@@ -79,6 +116,15 @@ const Record = () => {
                                 </h1>
                                 <p>Kelola Data Walas</p>
                             </div>
+
+                            {errorData?.status === 422 && (
+                                <Message type={'error'} pesan={errorData.message} />
+                            )}
+
+                            {errorData?.status === 200 && (
+                                <Message type={'success'} pesan={errorData.message} />
+                            )}
+
                             <h1 className='text-lg md:text-xl pb-2 font-medium md:font-semibold md:my-2'>Record Data
                                 <div className="float-right">
                                     <input className='p-1 rounded-md border shadow-sm border-sky-200 text-sm w-[100px] md:w-[150px] bg-slate-100 focus:bg-slate-200 focus:outline-sky-200'

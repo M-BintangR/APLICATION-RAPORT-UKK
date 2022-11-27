@@ -7,20 +7,58 @@ import ModalCreate from './ModalCreate';
 import ModalUpdate from './ModalUpdate';
 import Alert from '../../../components/Alert';
 import { useDispatch, useSelector } from 'react-redux';
-import { kelasDelete, kelasRecord, kelasSearch, pendingKelas, selectAllKelas } from '../../../features/dashboard/KelasSlice';
+import { checkCreateKelas, checkUpdateKelas, kelasDelete, kelasRecord, kelasSearch, pendingKelas, selectAllKelas } from '../../../features/dashboard/KelasSlice';
 import { useEffect } from 'react';
+import Message from '../../../components/Message';
 
 
 const Record = () => {
-    const [active, setActive] = useState('Data Kelas');
+    const dispatch = useDispatch();
     const Menus = AdminMenu;
+    const pending = useSelector(pendingKelas);
+    const dataKelas = useSelector(selectAllKelas);
+    const checkCreate = useSelector(checkCreateKelas);
+    const checkUpdate = useSelector(checkUpdateKelas);
+    const [active, setActive] = useState('Data Kelas');
     const [checkAlert, setCheckAlert] = useState(false);
     const [showModalCreate, setShowModalCreate] = useState(false);
     const [showModalUpdate, setShowModalUpdate] = useState(false);
     const [idUser, setIdUser] = useState(null);
-    const pending = useSelector(pendingKelas);
-    const dataKelas = useSelector(selectAllKelas);
-    const dispatch = useDispatch();
+    const [errorData, setErrorData] = useState({
+        message: '',
+        status: '',
+    });
+
+    const clearError = () => {
+        setTimeout(() => {
+            setErrorData(null);
+        }, 10500);
+    }
+
+    useEffect(() => {
+        if (checkCreate.response) setErrorData({
+            message: 'Data gagal di tambahkan, isi data dengan benar!',
+            status: checkCreate?.response.status
+        });
+        if (checkCreate.message === 'success') setErrorData({
+            message: 'Data berhasil di tambahkan',
+            status: 200,
+        })
+
+        clearError();
+    }, [checkCreate]);
+
+    useEffect(() => {
+        if (checkUpdate.response) setErrorData({
+            message: 'Data gagal di edit, isi data dengan benar!',
+            status: checkUpdate?.response.status
+        })
+        if (checkUpdate.message === 'success') setErrorData({
+            message: 'Data berhasil di di edit',
+            status: 200,
+        })
+        clearError();
+    }, [checkUpdate]);
 
     useEffect(() => {
         dispatch(kelasRecord());
@@ -79,6 +117,15 @@ const Record = () => {
                                 </h1>
                                 <p>Kelola Data Kelas</p>
                             </div>
+
+                            {errorData?.status === 422 && (
+                                <Message type={'error'} pesan={errorData.message} />
+                            )}
+
+                            {errorData?.status === 200 && (
+                                <Message type={'success'} pesan={errorData.message} />
+                            )}
+
                             <h1 className='text-lg md:text-xl pb-2 font-medium md:font-semibold md:my-2'>Record Data
                                 <div className="float-right">
                                     <input
