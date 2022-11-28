@@ -41,15 +41,9 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        $item = $user;
-
-        if ($item) {
-            return response()->json([
-                'message' => 'success',
-                'item' => $item,
-            ]);
+        if ($user) {
+            return response()->json($user);
         }
-
         return response()->json([
             'message' => 'Unauthorizaed',
         ], 401);
