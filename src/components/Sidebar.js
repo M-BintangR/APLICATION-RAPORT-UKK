@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../features/authenticated/logoutAuth';
-import { selectUser } from '../features/authenticated/loginAuth';
+import { akunUser, selectAkunUser } from '../features/authenticated/loginAuth';
 import { useEffect } from 'react';
 import { userSuccess } from '../features/authenticated/loginAuth';
 import { FaAtom, FaBookOpen, FaChalkboardTeacher, FaSchool } from 'react-icons/fa';
@@ -23,7 +23,7 @@ const Sidebar = (props) => {
     const active = props.active;
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const user = useSelector(selectUser);
+    const akun = useSelector(selectAkunUser);
 
     const users = JSON.parse(localStorage.getItem("user"));
     const token = JSON.parse(localStorage.getItem("token"));
@@ -39,6 +39,10 @@ const Sidebar = (props) => {
     useEffect(() => {
         dispatch(userSuccess({ token: token, users: users }));
     }, [token, users, dispatch]);
+
+    useEffect(() => {
+        dispatch(akunUser(users.id));
+    }, []);
 
     return (
         <>
@@ -57,8 +61,8 @@ const Sidebar = (props) => {
                         <h1 className={`text-white origin-left font-medium text-xl duration-300 ${!open && 'scale-0'}`}>Aplikasi Raport</h1>
                     </div>
                     <div className={`bg-light-with mt-2 p-2 rounded-md duration-300 ${open && 'rotate-[360deg]'} ${!open && 'hidden'}`}>
-                        <h3 className='text-md font-medium text-white'>{user?.nama_pengguna}</h3>
-                        <p className='text-sm text-white'>{user?.role}</p>
+                        <h3 className='text-md font-medium text-white'>{akun?.nama_pengguna}</h3>
+                        <p className='text-sm text-white'>{akun?.role}</p>
                     </div>
                     <ul className="pt-2">
                         {Menus.map((menu, index) => (
@@ -135,12 +139,12 @@ const Sidebar = (props) => {
                 <div className={`text-gray-300 duration-300 ${open ? 'pl-80' : 'pl-28'} `}
                 >
 
-                    <div className={`capitalize text-sm md:text-lg ${open ? 'hidden md:block' : 'block'}`}>{user?.role}
+                    <div className={`capitalize text-sm md:text-lg ${open ? 'hidden md:block' : 'block'}`}>{akun?.role}
                         <div
                             className='capitalize float-right top-0 mx-3 pb-2 mr-1 cursor-pointer'
                             onClick={() => setDropdownOpen(!dropdownOpen)}
                         >
-                            {user?.username}
+                            {akun?.username}
                             <BsChevronDown className={`mt-1 mx-2 float-right duration-300 ${!dropdownOpen && 'rotate-180'} mt-2.3`} />
                         </div>
                     </div>

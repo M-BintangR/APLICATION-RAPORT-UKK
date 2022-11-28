@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BiErrorCircle } from 'react-icons/bi'
 import Message from '../../components/Message'
+import { selectAkunUser } from '../../features/authenticated/loginAuth'
 
 const Profil = () => {
     const Menus = AdminMenu
@@ -18,7 +19,6 @@ const Profil = () => {
     const pending = useSelector(pendingUser);
     const [errorData, setErrorData] = useState(null);
     const check = useSelector(checkUpdateUser);
-    const navigate = useNavigate();
     const [inputEdit, setInputEdit] = useState({
         nama_pengguna: '',
         username: '',

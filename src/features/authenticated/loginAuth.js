@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { LOGIN_URL } from "../url/linkURL";
+import { GET_USER_URL, LOGIN_URL } from "../url/linkURL";
 
 
 const initialState = {
@@ -8,12 +8,24 @@ const initialState = {
     status: false,
     token: null,
     users: [],
+    akunUser: {},
 
 };
 
 export const loginUsers = createAsyncThunk(`loginUsers`, async (initialAuth) => {
     try {
         const res = await axios.post(LOGIN_URL, initialAuth)
+        return res.data;
+    } catch (err) {
+        throw err.message;
+    }
+});
+
+export const akunUser = createAsyncThunk(`akunUsers`, async (initialAuth) => {
+    try {
+        const res = await axios.get(GET_USER_URL + initialAuth, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
         return res.data;
     } catch (err) {
         throw err.message;
@@ -43,6 +55,10 @@ export const loginAuth = createSlice({
             .addCase(loginUsers.rejected, (state, action) => {
                 state.error = action.error.message;
                 state.status = false;
+            })
+
+            .addCase(akunUser.fulfilled, (state, action) => {
+                state.akunUser = action.payload;
             });
     }
 
@@ -50,6 +66,7 @@ export const loginAuth = createSlice({
 
 export const selectUser = state => state.users.users[0];
 export const selectTokenUser = state => state.users.token;
+export const selectAkunUser = state => state.users.akunUser;
 export const selectStatusUser = state => state.users.status;
 export const selectErrorUser = state => state.users.error;
 

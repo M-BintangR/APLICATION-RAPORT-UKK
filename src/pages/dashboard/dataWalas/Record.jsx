@@ -16,8 +16,8 @@ const Record = () => {
     const Menus = AdminMenu;
     const pending = useSelector(pendingWalas);
     const dataWalas = useSelector(selectAllWalas);
-    const checkCreate = useState(checkCreateWalas);
-    const checkUpdate = useState(checkUpdateWalas);
+    // const checkCreate = useState(checkCreateWalas);
+    // const checkUpdate = useState(checkUpdateWalas);
     const [active, setActive] = useState('Data Walas');
     const [showModalCreate, setShowModalCreate] = useState(false);
     const [showModalUpdate, setShowModalUpdate] = useState(false);
@@ -28,41 +28,33 @@ const Record = () => {
         status: '',
     });
 
-    const clearError = () => {
-        setTimeout(() => {
-            setErrorData(null);
-        }, 10500);
-    }
+    // useEffect(() => {
+    //     if (checkCreate?.response) setErrorData({
+    //         message: 'Data gagal di tambahkan, isi data dengan benar!',
+    //         status: checkCreate?.response.status
+    //     });
+    //     if (checkCreate?.message === 'success') setErrorData({
+    //         message: 'Data berhasil di tambahkan',
+    //         status: 200,
+    //     })
+    // }, [checkCreate]);
 
-    useEffect(() => {
-        if (checkCreate.response) setErrorData({
-            message: 'Data gagal di tambahkan, isi data dengan benar!',
-            status: checkCreate?.response.status
-        });
-        if (checkCreate.message === 'success') setErrorData({
-            message: 'Data berhasil di tambahkan',
-            status: 200,
-        })
-
-        clearError();
-    }, [checkCreate]);
-
-    useEffect(() => {
-        if (checkUpdate.response) setErrorData({
-            message: 'Data gagal di edit, isi data dengan benar!',
-            status: checkUpdate?.response.status
-        })
-        if (checkUpdate.message === 'success') setErrorData({
-            message: 'Data berhasil di di edit',
-            status: 200,
-        })
-        clearError();
-    }, [checkUpdate]);
+    // useEffect(() => {
+    //     if (checkUpdate?.response) setErrorData({
+    //         message: 'Data gagal di edit, isi data dengan benar!',
+    //         status: checkUpdate?.response.status
+    //     })
+    //     if (checkUpdate?.message === 'success') setErrorData({
+    //         message: 'Data berhasil di di edit',
+    //         status: 200,
+    //     })
+    // }, [checkUpdate]);
 
     const handleUpdate = (id) => {
         setIdUser(id);
         setShowModalUpdate(prev => prev = true);
     }
+
     const handleDelete = (id) => {
         dispatch(walasDelete(id));
         setTimeout(() => {
@@ -111,19 +103,19 @@ const Record = () => {
                                 <h1 className='text-xl md:text-2xl font-semibold '>Data Walas
                                     <button
                                         className=' py-1 px-2 md:py-2 md:px-3 text-xs float-right bg-green-600 hover:bg-green-500 text-white rounded-md uppercase md:text-sm'
-                                        onClick={() => setShowModalCreate(prev => prev = true)}
+                                        onClick={() => setShowModalCreate(true)}
                                     >Tambah</button>
                                 </h1>
                                 <p>Kelola Data Walas</p>
                             </div>
-
+                            {/* 
                             {errorData?.status === 422 && (
                                 <Message type={'error'} pesan={errorData.message} />
                             )}
 
                             {errorData?.status === 200 && (
                                 <Message type={'success'} pesan={errorData.message} />
-                            )}
+                            )} */}
 
                             <h1 className='text-lg md:text-xl pb-2 font-medium md:font-semibold md:my-2'>Record Data
                                 <div className="float-right">
@@ -155,10 +147,10 @@ const Record = () => {
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{walas?.guru?.nama_guru ? walas?.guru?.nama_guru : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
                                                         <span className='mr-1'>
-                                                            {walas.kelas.level ? walas?.kelas?.level : '-'}
+                                                            {walas?.kelas?.level ? walas?.kelas?.level : '-'}
                                                         </span>
                                                         <span>
-                                                            {walas.kelas.nama_kelas ? walas?.kelas?.nama_kelas : '-'}
+                                                            {walas?.kelas?.nama_kelas ? walas?.kelas?.nama_kelas : '-'}
                                                         </span>
                                                     </td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>

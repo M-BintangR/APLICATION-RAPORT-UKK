@@ -6,7 +6,7 @@ import Alert from '../../../components/Alert';
 import ModalUpdate from './ModalUpdate';
 import ModalCreate from './ModalCreate';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkCreateUser, checkUpdateUser, pendingUser, selectAllUser, userDelete, userRecord } from '../../../features/dashboard/UserSlice';
+import { checkCreateUser, checkUpdateUser, pendingUser, selectAllUser, userDelete, userRecord, userSearch } from '../../../features/dashboard/UserSlice';
 import { BiEdit, BiTrash } from 'react-icons/bi';
 import { useEffect } from 'react';
 import Message from '../../../components/Message';
@@ -27,12 +27,6 @@ const Record = () => {
         status: '',
     });
 
-    const clearError = () => {
-        setTimeout(() => {
-            setErrorData(null);
-        }, 10500);
-    }
-
     useEffect(() => {
         if (checkCreate.response) setErrorData({
             message: 'Data gagal di tambahkan, isi data dengan benar!',
@@ -42,8 +36,6 @@ const Record = () => {
             message: 'Data berhasil di tambahkan',
             status: 200,
         })
-
-        clearError();
     }, [checkCreate]);
 
     useEffect(() => {
@@ -55,7 +47,6 @@ const Record = () => {
             message: 'Data berhasil di di edit',
             status: 200,
         })
-        clearError();
     }, [checkUpdate]);
 
     useEffect(() => {
@@ -80,11 +71,11 @@ const Record = () => {
 
     const handleUpdate = (id) => {
         setIdUser(id);
-        setShowModalUpdate(prev => prev = true);
+        setShowModalUpdate(true);
     }
 
     const handleSearch = (e) => {
-        dispatch(userRecord(e.target.value));
+        dispatch(userSearch(e.target.value));
     }
 
     const TabelUser = [

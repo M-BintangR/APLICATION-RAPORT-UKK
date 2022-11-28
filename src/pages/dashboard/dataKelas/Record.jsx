@@ -29,12 +29,6 @@ const Record = () => {
         status: '',
     });
 
-    const clearError = () => {
-        setTimeout(() => {
-            setErrorData(null);
-        }, 10500);
-    }
-
     useEffect(() => {
         if (checkCreate.response) setErrorData({
             message: 'Data gagal di tambahkan, isi data dengan benar!',
@@ -44,8 +38,6 @@ const Record = () => {
             message: 'Data berhasil di tambahkan',
             status: 200,
         })
-
-        clearError();
     }, [checkCreate]);
 
     useEffect(() => {
@@ -57,7 +49,6 @@ const Record = () => {
             message: 'Data berhasil di di edit',
             status: 200,
         })
-        clearError();
     }, [checkUpdate]);
 
     useEffect(() => {

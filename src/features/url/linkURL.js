@@ -1,4 +1,5 @@
 export const LOGIN_URL = 'http://127.0.0.1:8000/api/login';
+export const GET_USER_URL = 'http://127.0.0.1:8000/api/admin/data/user/show/';
 export const LOGOUT_URL = 'http://127.0.0.1:8000/api/logout';
 
 //? GURU URL
