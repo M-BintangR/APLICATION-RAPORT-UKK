@@ -81,7 +81,7 @@ const initialState = {
 }
 
 const KelasSlice = createSlice({
-    name: 'tapel',
+    name: 'kelas',
     initialState,
 
     extraReducers: (builder) => {

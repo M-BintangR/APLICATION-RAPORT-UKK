@@ -18,8 +18,8 @@ const Record = () => {
     const Menus = AdminMenu;
     const pending = useSelector(pendingWalas);
     const dataWalas = useSelector(selectAllWalas);
-    // const checkCreate = useState(checkCreateWalas);
-    // const checkUpdate = useState(checkUpdateWalas);
+    const checkCreate = useSelector(checkCreateWalas);
+    const checkUpdate = useSelector(checkUpdateWalas);
     const [active, setActive] = useState('Data Walas');
     const [showModalCreate, setShowModalCreate] = useState(false);
     const [showModalUpdate, setShowModalUpdate] = useState(false);
@@ -30,27 +30,27 @@ const Record = () => {
         status: '',
     });
 
-    // useEffect(() => {
-    //     if (checkCreate?.response) setErrorData({
-    //         message: 'Data gagal di tambahkan, isi data dengan benar!',
-    //         status: checkCreate?.response.status
-    //     });
-    //     if (checkCreate?.message === 'success') setErrorData({
-    //         message: 'Data berhasil di tambahkan',
-    //         status: 200,
-    //     })
-    // }, [checkCreate]);
+    useEffect(() => {
+        if (checkCreate?.response) setErrorData({
+            message: 'Data gagal di tambahkan, isi data dengan benar!',
+            status: checkCreate?.response.status
+        });
+        if (checkCreate?.message === 'success') setErrorData({
+            message: 'Data berhasil di tambahkan',
+            status: 200,
+        })
+    }, [checkCreate]);
 
-    // useEffect(() => {
-    //     if (checkUpdate?.response) setErrorData({
-    //         message: 'Data gagal di edit, isi data dengan benar!',
-    //         status: checkUpdate?.response.status
-    //     })
-    //     if (checkUpdate?.message === 'success') setErrorData({
-    //         message: 'Data berhasil di di edit',
-    //         status: 200,
-    //     })
-    // }, [checkUpdate]);
+    useEffect(() => {
+        if (checkUpdate?.response) setErrorData({
+            message: 'Data gagal di edit, isi data dengan benar!',
+            status: checkUpdate?.response.status
+        })
+        if (checkUpdate?.message === 'success') setErrorData({
+            message: 'Data berhasil di di edit',
+            status: 200,
+        })
+    }, [checkUpdate]);
 
     const handleUpdate = (id) => {
         setIdUser(id);
@@ -101,14 +101,14 @@ const Record = () => {
                                 </h1>
                                 <p>Kelola Data Walas</p>
                             </div>
-                            {/* 
+
                             {errorData?.status === 422 && (
                                 <Message type={'error'} pesan={errorData.message} />
                             )}
 
                             {errorData?.status === 200 && (
                                 <Message type={'success'} pesan={errorData.message} />
-                            )} */}
+                            )}
 
                             <h1 className='text-lg md:text-xl pb-2 font-medium md:font-semibold md:my-2'>Record Data
                                 <div className="float-right">
