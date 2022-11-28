@@ -44,6 +44,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/data/user/{user:id}', [UserController::class, 'update']);
         Route::delete('/data/user/{user:id}', [UserController::class, 'destroy']);
         Route::get('/data/user/{query}', [UserController::class, 'search']);
+        Route::get('/data/user/{user:id}', [UserController::class, 'show']);
 
         //? Route Data Mapel
 

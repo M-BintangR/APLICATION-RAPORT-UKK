@@ -38,6 +38,23 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function show(User $user)
+    {
+        $item = $user;
+
+        if ($item) {
+            return response()->json([
+                'message' => 'success',
+                'item' => $item,
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Unauthorizaed',
+        ], 401);
+    }
+
     public function create()
     {
     }
