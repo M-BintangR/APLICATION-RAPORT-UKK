@@ -33,6 +33,35 @@ class UserController extends Controller
         ], 401);
     }
 
+    public function resetPassword(Request $request)
+    {
+        $validateData = $request->validate([
+            'password' => ['required'],
+            'password_baru' => ['required'],
+        ]);
+
+        $crendentials = $request->only('password');
+
+        if ($validateData && $crendentials) {
+            if (!auth()->attempt($crendentials)) {
+                return response()->json(['message' => 'Unathorized'], 401);
+            } else {
+                $check = User::updated([
+                    'password' => bcrypt($validateData['password_baru']),
+                ]);
+            }
+        }
+
+        if ($check) {
+            return response()->json([
+                'item' => $check,
+                'message' => 'success',
+            ], 200);
+        }
+
+        return response()->json(['message' => 'Unathorized'], 401);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
