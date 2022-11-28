@@ -12,6 +12,7 @@ import ModalCreate from './ModalCreate';
 import ModalUpdate from './ModalUpdate';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
+import { TabelGurus } from '../../../components/FieldTable';
 
 const Record = () => {
     const Menus = AdminMenu;
@@ -81,18 +82,6 @@ const Record = () => {
     const handleSearch = (e) => {
         dispatch(guruSearch(e.target.value));
     }
-
-
-
-
-    const TabelGurus = [
-        { title: 'No.', short: true },
-        { title: 'Nama Guru' },
-        { title: 'Mapel' },
-        { title: 'KKM' },
-        { title: 'Level' },
-        { title: 'Action' }
-    ];
 
     return (
         <div >

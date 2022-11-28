@@ -11,6 +11,7 @@ import { checkCreateTapel, checkUpdateTapel, pendingTapel, selectAllTapel, tapel
 import { useEffect } from 'react';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
+import { TabelTapel } from '../../../components/FieldTable';
 
 const Record = () => {
     const dispatch = useDispatch();
@@ -79,14 +80,6 @@ const Record = () => {
     const handleSearch = (e) => {
         dispatch(tapelSearch(e.target.value));
     }
-
-    const TabelTapel = [
-        { title: 'No.', short: true },
-        { title: 'Tahun Pelajaran' },
-        { title: 'Semester' },
-        { title: 'Aktif' },
-        { title: 'Action' },
-    ];
 
     return (
         <div >

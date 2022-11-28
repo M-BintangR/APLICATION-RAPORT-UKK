@@ -11,6 +11,8 @@ import { BiEdit, BiTrash } from 'react-icons/bi';
 import { useEffect } from 'react';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
+import { TabelUser } from '../../../components/FieldTable';
+
 const Record = () => {
     const dispatch = useDispatch();
     const Menus = AdminMenu;
@@ -78,14 +80,6 @@ const Record = () => {
     const handleSearch = (e) => {
         dispatch(userSearch(e.target.value));
     }
-
-    const TabelUser = [
-        { title: 'No.', short: true },
-        { title: 'Nama Pengguna' },
-        { title: 'Username' },
-        { title: 'Role' },
-        { title: 'Action' },
-    ];
 
     return (
         <div >

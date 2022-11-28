@@ -11,6 +11,7 @@ import ModalUpdate from './ModalUpdate';
 import { BiTrash, BiEdit } from 'react-icons/bi';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
+import { TabelSiswa } from '../../../components/FieldTable';
 
 const Record = () => {
     const dispatch = useDispatch();
@@ -79,18 +80,6 @@ const Record = () => {
     const handleSearch = (e) => {
         dispatch(siswaSearch(e.target.value));
     }
-
-    const TabelSiswa = [
-        { title: 'No.', short: true },
-        { title: 'Nama' },
-        { title: 'Kelas' },
-        { title: 'Jurusan' },
-        { title: 'NIS' },
-        { title: 'NISN' },
-        { title: 'Agama' },
-        { title: 'Jenis Kelamin' },
-        { title: 'Action' }
-    ];
 
     return (
         <div >

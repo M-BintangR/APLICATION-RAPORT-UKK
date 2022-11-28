@@ -11,6 +11,7 @@ import { checkCreateJurusan, checkPendingJurusan, checkUpdateJurusan, jurusanDel
 import Alert from '../../../components/Alert';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
+import { TabelJurusans } from '../../../components/FieldTable';
 
 const Record = () => {
     const dispatch = useDispatch();
@@ -80,13 +81,6 @@ const Record = () => {
         }, 10000)
         dispatch(jurusanRecord());
     }
-
-    const TabelJurusans = [
-        { title: 'No.', short: true },
-        { title: 'Kode Jurusan' },
-        { title: 'Nama Jurusan' },
-        { title: 'Action' },
-    ];
 
     return (
         <div >

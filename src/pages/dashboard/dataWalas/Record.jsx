@@ -11,6 +11,7 @@ import { BiTrash, BiEdit } from 'react-icons/bi';
 import { useEffect } from 'react';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
+import { TabelWalas } from '../../../components/FieldTable';
 
 const Record = () => {
     const dispatch = useDispatch();
@@ -53,7 +54,7 @@ const Record = () => {
 
     const handleUpdate = (id) => {
         setIdUser(id);
-        setShowModalUpdate(prev => prev = true);
+        setShowModalUpdate(true);
     }
 
     const handleDelete = (id) => {
@@ -79,13 +80,6 @@ const Record = () => {
     const handleSearch = (e) => {
         dispatch(walasSearch(e.target.value));
     }
-
-    const TabelWalas = [
-        { title: 'No.', short: true },
-        { title: 'Nama Guru' },
-        { title: 'Kelas' },
-        { title: 'Action' }
-    ];
 
     return (
         <div >

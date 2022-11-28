@@ -11,6 +11,7 @@ import { checkCreateKelas, checkUpdateKelas, kelasDelete, kelasRecord, kelasSear
 import { useEffect } from 'react';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
+import { TabelKelas } from '../../../components/FieldTable';
 
 
 const Record = () => {
@@ -81,12 +82,6 @@ const Record = () => {
         dispatch(kelasSearch(e.target.value));
     }
 
-    const TabelKelas = [
-        { title: 'No.', short: true },
-        { title: 'Nama Kelas' },
-        { title: 'Level' },
-        { title: 'Action' },
-    ];
     return (
         <div >
             <Sidebar Menus={Menus} active={active}>

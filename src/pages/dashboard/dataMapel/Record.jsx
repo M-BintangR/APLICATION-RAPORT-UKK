@@ -11,6 +11,7 @@ import ModalUpdate from './ModalUpdate';
 import Alert from '../../../components/Alert';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
+import { TabelMapels } from '../../../components/FieldTable';
 
 const Record = () => {
     const Menus = AdminMenu;
@@ -79,16 +80,6 @@ const Record = () => {
         setIdUser(id);
         setShowModalUpdate(prev => prev = true);
     }
-
-    const TabelMapels = [
-        { title: 'No.', short: true },
-        { title: 'Nama Mapel' },
-        { title: 'KKM' },
-        { title: 'Level' },
-        { title: 'Nama Jurusan' },
-        { title: 'Kode Jurusan' },
-        { title: 'Action' }
-    ];
 
     return (
         <div >
