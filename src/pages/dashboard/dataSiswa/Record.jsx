@@ -10,6 +10,7 @@ import ModalCreate from './ModalCreate';
 import ModalUpdate from './ModalUpdate';
 import { BiTrash, BiEdit } from 'react-icons/bi';
 import Message from '../../../components/Message';
+import Loading from '../../../components/Loading';
 
 const Record = () => {
     const dispatch = useDispatch();
@@ -97,9 +98,7 @@ const Record = () => {
                 <div>
 
                     {pending && (
-                        <div className="flex flex-col justify-center items-center">
-                            <div className="self-center mt-10 m-auto bg-amber-300 text-amber-800 p-2 rounded-md">Loading...</div>
-                        </div>
+                        <Loading />
                     )}
 
                     {!pending && (

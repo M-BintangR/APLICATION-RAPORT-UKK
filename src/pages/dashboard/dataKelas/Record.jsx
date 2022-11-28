@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { checkCreateKelas, checkUpdateKelas, kelasDelete, kelasRecord, kelasSearch, pendingKelas, selectAllKelas } from '../../../features/dashboard/KelasSlice';
 import { useEffect } from 'react';
 import Message from '../../../components/Message';
+import Loading from '../../../components/Loading';
 
 
 const Record = () => {
@@ -92,9 +93,7 @@ const Record = () => {
                 <div>
 
                     {pending && (
-                        <div className="flex flex-col justify-center items-center">
-                            <div className="self-center mt-10 m-auto bg-amber-300 text-amber-800 p-2 rounded-md">Loading...</div>
-                        </div>
+                        <Loading />
                     )}
 
                     {!pending && (

@@ -13,6 +13,7 @@ import Home from '../pages/dashboard/Home';
 import { Navigate } from 'react-router-dom';
 import RequireAdmin from '../middleware/RequireAdmin';
 import Profil from '../pages/dashboard/Profil';
+import RequireLogin from '../middleware/RequireLogin';
 
 
 
@@ -97,7 +98,14 @@ const Root = () => {
                         } />
 
 
-                    <Route index path='/' element={<Login />} />
+                    <Route
+                        index
+                        path='/'
+                        element={
+                            <RequireLogin>
+                                <Login />
+                            </RequireLogin>
+                        } />
                     <Route path='*' element={<Navigate to='/' replace />} />
                 </Routes>
             </BrowserRouter>

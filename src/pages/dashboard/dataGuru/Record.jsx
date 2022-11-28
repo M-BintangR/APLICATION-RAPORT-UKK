@@ -11,6 +11,7 @@ import Alert from '../../../components/Alert';
 import ModalCreate from './ModalCreate';
 import ModalUpdate from './ModalUpdate';
 import Message from '../../../components/Message';
+import Loading from '../../../components/Loading';
 
 const Record = () => {
     const Menus = AdminMenu;
@@ -97,10 +98,9 @@ const Record = () => {
         <div >
             <Sidebar Menus={Menus} active={active}>
                 <div>
+
                     {dataGuruCheck && (
-                        <div className="flex flex-col justify-center items-center">
-                            <div className="self-center mt-10 m-auto bg-amber-300 text-amber-800 p-2 rounded-md">Loading...</div>
-                        </div>
+                        <Loading />
                     )}
 
 

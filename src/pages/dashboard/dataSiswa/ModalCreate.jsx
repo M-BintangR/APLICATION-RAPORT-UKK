@@ -46,7 +46,6 @@ const ModalCreate = ({ isVisible, onClose }) => {
         onClose();
     }
 
-    console.log(errorData);
     return (
         <div>
             {isVisible && dataJurusan.items && dataKelas.items && (
