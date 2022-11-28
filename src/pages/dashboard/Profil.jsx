@@ -3,7 +3,7 @@ import Sidebar from '../../components/Sidebar'
 import { AdminMenu } from '../../components/Links'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { checkEditUser, checkUpdateUser, pendingUser, userEdit, userRecord, userUpdate } from '../../features/dashboard/UserSlice'
+import { checkCreateUser, checkEditUser, checkUpdateUser, pendingUser, userEdit, userRecord, userUpdate } from '../../features/dashboard/UserSlice'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BiErrorCircle } from 'react-icons/bi'
@@ -17,14 +17,39 @@ const Profil = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     const dataEditProfil = useSelector(checkEditUser);
     const pending = useSelector(pendingUser);
-    const [errorData, setErrorData] = useState(null);
-    const check = useSelector(checkUpdateUser);
+    const checkCreate = useSelector(checkCreateUser);
+    const checkUpdate = useSelector(checkUpdateUser);
+    const [errorData, setErrorData] = useState({
+        message: '',
+        status: '',
+    });
     const [inputEdit, setInputEdit] = useState({
         nama_pengguna: '',
         username: '',
         role: '',
     });
 
+    useEffect(() => {
+        if (checkCreate?.response) setErrorData({
+            message: 'Data gagal di tambahkan, isi data dengan benar!',
+            status: checkCreate?.response.status
+        });
+        if (checkCreate?.message === 'success') setErrorData({
+            message: 'Data berhasil di tambahkan',
+            status: 200,
+        })
+    }, [checkCreate]);
+
+    useEffect(() => {
+        if (checkUpdate?.response) setErrorData({
+            message: 'Data gagal di edit, isi data dengan benar!',
+            status: checkUpdate?.response.status
+        })
+        if (checkUpdate?.message === 'success') setErrorData({
+            message: 'Data berhasil di di edit',
+            status: 200,
+        })
+    }, [checkUpdate]);
 
     useEffect(() => {
         setIdUser(user.id);
@@ -41,10 +66,6 @@ const Profil = () => {
             setInputEdit(dataEditProfil?.item);
         }
     }, [dataEditProfil]);
-
-    useEffect(() => {
-        if (check.response) setErrorData(check?.response.data.message)
-    }, [check]);
 
 
     const handleChange = (e) => {
@@ -81,8 +102,12 @@ const Profil = () => {
                                     <p>Kelola Data Pribadi</p>
                                 </div>
 
-                                {errorData && (
-                                    <Message type={'error'} pesan={errorData} />
+                                {errorData?.status === 422 && (
+                                    <Message type={'error'} pesan={errorData.message} />
+                                )}
+
+                                {errorData?.status === 200 && (
+                                    <Message type={'success'} pesan={errorData.message} />
                                 )}
 
                                 <div className="bg-slate-100 p-3 mb-8 md:p-5">
