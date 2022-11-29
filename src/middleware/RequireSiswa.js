@@ -10,6 +10,8 @@ const RequireSiswa = ({ children }) => {
     }
     if (user.role === 'siswa') {
         return children;
+    } else {
+        return <Navigate to={'/'} replace />
     }
 }
 

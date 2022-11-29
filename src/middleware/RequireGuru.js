@@ -10,6 +10,8 @@ const RequireGuru = ({ children }) => {
     }
     if (user.role === 'guru') {
         return children;
+    } else {
+        return <Navigate to={'/'} replace />
     }
 }
 

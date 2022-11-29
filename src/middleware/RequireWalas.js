@@ -10,6 +10,8 @@ const RequireWalas = ({ children }) => {
     }
     if (user.role === 'walas') {
         return children;
+    } else {
+        return <Navigate to={'/'} replace />
     }
 }
 

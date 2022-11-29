@@ -10,6 +10,8 @@ const RequireAdmin = ({ children }) => {
     }
     if (user.role === 'admin') {
         return children;
+    } else {
+        return <Navigate to={'/'} replace />
     }
 
 }
