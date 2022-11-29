@@ -49,7 +49,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/data/user/{user:id}', [UserController::class, 'update']);
         Route::delete('/data/user/{user:id}', [UserController::class, 'destroy']);
         Route::get('/data/user/{query}', [UserController::class, 'search']);
-        Route::get('/data/user/show/{user:id}', [UserController::class, 'show']);
         Route::post('/data/user/reset/password/{user:id}', [UserController::class, 'resetPassword']);
 
         //? Route Data Mapel
@@ -123,7 +122,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/dashboard/siswa', [DashboardSiswa::class, 'index']);
     });
 
-
+    Route::get('/data/user/show/{user:id}', [UserController::class, 'show']);
     Route::post('/logout', [LoginController::class, 'logout']);
 });
 
