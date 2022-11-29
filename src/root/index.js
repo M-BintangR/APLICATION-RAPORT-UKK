@@ -14,6 +14,9 @@ import { Navigate } from 'react-router-dom';
 import RequireAdmin from '../middleware/RequireAdmin';
 import Profil from '../pages/dashboard/Profil';
 import RequireLogin from '../middleware/RequireLogin';
+import RequireSiswa from '../middleware/RequireSiswa';
+import RequireGuru from '../middleware/RequireGuru';
+import RequireWalas from '../middleware/RequireWalas';
 
 
 
@@ -106,6 +109,34 @@ const Root = () => {
                                 <Login />
                             </RequireLogin>
                         } />
+
+                    <Route
+                        path='/dashboard-siswa'
+                        element={
+                            <RequireSiswa>
+
+                            </RequireSiswa>
+                        }
+                    />
+
+                    <Route
+                        path='/dashboard-guru'
+                        element={
+                            <RequireGuru>
+
+                            </RequireGuru>
+                        }
+                    />
+
+                    <Route
+                        path='/dashboard-walas'
+                        element={
+                            <RequireWalas>
+
+                            </RequireWalas>
+                        }
+                    />
+
                     <Route path='*' element={<Navigate to='/' replace />} />
                 </Routes>
             </BrowserRouter>
