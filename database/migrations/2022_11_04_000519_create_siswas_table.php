@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->char('nis', 7)->unique();
             $table->string('nama', 100);
-            $table->string('profil')->nullable();
             $table->foreignId('id_kelas');
             $table->foreignId('id_jurusan');
             $table->enum('jk', ['P', 'L']);

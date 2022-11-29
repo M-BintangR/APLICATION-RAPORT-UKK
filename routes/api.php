@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardGuru;
+use App\Http\Controllers\DashboardSiswa;
+use App\Http\Controllers\DashboardWalas;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KelasController;
@@ -13,6 +16,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WalasController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,12 +112,15 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::group(['prefix' => 'guru', 'middleware' => 'guru'], function () {
+        Route::get('/dashboard/guru', [DashboardGuru::class, 'index']);
     });
 
     Route::group(['prefix' => 'walas', 'middleware' => 'walas'], function () {
+        Route::get('/dashboard/walas', [DashboardWalas::class, 'index']);
     });
 
     Route::group(['prefix' => 'siswa', 'middleware' => 'siswa'], function () {
+        Route::get('/dashboard/siswa', [DashboardSiswa::class, 'index']);
     });
 
 
