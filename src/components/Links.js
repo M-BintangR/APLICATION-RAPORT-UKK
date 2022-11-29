@@ -17,3 +17,16 @@ export const AdminMenu = [
     { title: 'Data Tapel', link: '/dashboard/data/tapel' },
     { title: 'Data Kelas', link: '/dashboard/data/kelas' },
 ];
+
+export const GuruMenu = [
+    { title: 'Dashboard', link: '/dashboard-guru' },
+];
+
+export const SiswaMenu = [
+    { title: 'Dashboard', link: '/dashboard-siswa' },
+];
+
+export const WalasMenu = [
+    { title: 'Dashboard', link: '/dashboard-siswa' },
+];
+

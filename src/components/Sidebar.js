@@ -44,6 +44,8 @@ const Sidebar = (props) => {
         dispatch(akunUser(users.id));
     }, []);
 
+    console.log(akun);
+
     return (
         <>
             <div className='fixed z-50 duration-300 bottom-0 left-0 top-0'>
