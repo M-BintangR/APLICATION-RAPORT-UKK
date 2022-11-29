@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use PDO;
 
 class UserController extends Controller
@@ -33,20 +34,21 @@ class UserController extends Controller
         ], 401);
     }
 
-    public function resetPassword(Request $request)
+    public function resetPassword(Request $request, User $user)
     {
         $validateData = $request->validate([
             'password' => ['required'],
             'password_baru' => ['required'],
         ]);
 
+
         $crendentials = $request->only('password');
 
         if ($validateData && $crendentials) {
-            if (!auth()->attempt($crendentials)) {
-                return response()->json(['message' => 'Unathorized'], 401);
+            if (!Hash::check($request->password, $user->password)) {
+                return response()->json(['message' => 'password salah']);
             } else {
-                $check = User::updated([
+                $check = $user->update([
                     'password' => bcrypt($validateData['password_baru']),
                 ]);
             }
@@ -55,11 +57,11 @@ class UserController extends Controller
         if ($check) {
             return response()->json([
                 'item' => $check,
-                'message' => 'success',
+                'message' => 'password berhasil di ubah',
             ], 200);
         }
 
-        return response()->json(['message' => 'Unathorized'], 401);
+        return response()->json(['message' => 'Terjadi kesalahan'], 401);
     }
 
     /**

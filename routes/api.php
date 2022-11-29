@@ -11,6 +11,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TapelController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WalasController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,6 +46,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/data/user/{user:id}', [UserController::class, 'destroy']);
         Route::get('/data/user/{query}', [UserController::class, 'search']);
         Route::get('/data/user/show/{user:id}', [UserController::class, 'show']);
+        Route::post('/data/user/reset/password/{user:id}', [UserController::class, 'resetPassword']);
 
         //? Route Data Mapel
 
