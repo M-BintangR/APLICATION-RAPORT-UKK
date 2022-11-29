@@ -2,12 +2,14 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { selectAkunUser } from '../../features/authenticated/loginAuth';
 import { checkResetPassword, resetPassword } from '../../features/dashboard/UserSlice';
 
 
 const ResetPassword = ({ isVisible, onClose }) => {
     const dispatch = useDispatch();
     const check = useSelector(checkResetPassword);
+    const akun = useSelector(selectAkunUser);
     const [errorData, setErrorData] = useState(null);
     const [inputReset, setInputReset] = useState({
         password: '',
@@ -15,11 +17,11 @@ const ResetPassword = ({ isVisible, onClose }) => {
     });
 
     useEffect(() => {
-        if (check.response) setErrorData(check?.response.data.errors)
+        if (check?.response) setErrorData(check?.response.data.errors)
     }, [check]);
 
     const handleChange = (e) => {
-        inputReset(prev => ({ ...prev, [e.target.name]: e.target.value }));
+        setInputReset(prev => ({ ...prev, [e.target.name]: e.target.value }));
     }
 
     const handleClose = () => {
@@ -29,12 +31,16 @@ const ResetPassword = ({ isVisible, onClose }) => {
     }
 
     const handleClick = () => {
-        setInputReset({ password: '', password_baru: '' });
-        dispatch(resetPassword(inputReset));
+        const data = {
+            password: inputReset?.password,
+            password_baru: inputReset?.password_baru,
+            id: akun?.id
+        }
+        dispatch(resetPassword(data));
         onClose();
+        setInputReset({ password: '', password_baru: '' });
         setErrorData(null);
     }
-
 
     return (
         <div>
@@ -63,6 +69,7 @@ const ResetPassword = ({ isVisible, onClose }) => {
                                                 id='password'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.password ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Password Lama'
+                                                defaultValue={inputReset?.password}
                                                 onChange={handleChange}
                                             />
                                         </div>
@@ -81,6 +88,7 @@ const ResetPassword = ({ isVisible, onClose }) => {
                                                 id='password_baru'
                                                 className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:outline-none focus:border-blue-500 block w-full p-2.5 ${errorData?.password_baru ? 'border-red-500' : 'border-gray-300'}`}
                                                 placeholder='Password Baru'
+                                                defaultValue={inputReset?.password_baru}
                                                 onChange={handleChange}
                                             />
                                         </div>
@@ -91,7 +99,7 @@ const ResetPassword = ({ isVisible, onClose }) => {
                                         className='text-white bg-dark-purple hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-3 mr-2'
                                         onClick={handleClick}
                                     >
-                                        Tambah
+                                        Reset
                                     </button>
                                     <button
                                         className='text-white bg-red-700 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-3'

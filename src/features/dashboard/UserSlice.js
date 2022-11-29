@@ -68,10 +68,12 @@ export const userSearch = createAsyncThunk('userSearch', async (query) => {
     }
 });
 
-export const resetPassword = createAsyncThunk('resetPassword', async (initialId) => {
+export const resetPassword = createAsyncThunk('resetPassword', async (initialReset) => {
     try {
-        const res = await axios.post(RESET_PASSWORD_URL + initialId, {
-            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        const res = await axios.post(RESET_PASSWORD_URL + initialReset.id, initialReset, {
+            headers: {
+                'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+            }
         });
         return res.data;
     } catch (err) {

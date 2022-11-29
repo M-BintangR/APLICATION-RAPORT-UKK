@@ -3,12 +3,10 @@ import Sidebar from '../../components/Sidebar'
 import { AdminMenu } from '../../components/Links'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { checkCreateUser, checkEditUser, checkUpdateUser, pendingUser, userEdit, userRecord, userUpdate } from '../../features/dashboard/UserSlice'
+import { checkCreateUser, checkEditUser, checkResetPassword, checkUpdateUser, pendingUser, userEdit, userUpdate } from '../../features/dashboard/UserSlice'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { BiErrorCircle } from 'react-icons/bi'
 import Message from '../../components/Message'
-import { selectAkunUser } from '../../features/authenticated/loginAuth'
+import ResetPassword from './ResetPassword'
 
 const Profil = () => {
     const Menus = AdminMenu
@@ -19,6 +17,8 @@ const Profil = () => {
     const pending = useSelector(pendingUser);
     const checkCreate = useSelector(checkCreateUser);
     const checkUpdate = useSelector(checkUpdateUser);
+    const checkReset = useSelector(checkResetPassword);
+    const [showModalReset, setShowModalReset] = useState(false);
     const [errorData, setErrorData] = useState({
         message: '',
         status: '',
@@ -27,6 +27,10 @@ const Profil = () => {
         nama_pengguna: '',
         username: '',
         role: '',
+    });
+    const [message, setMessage] = useState({
+        message: '',
+        status: '',
     });
 
     useEffect(() => {
@@ -60,6 +64,22 @@ const Profil = () => {
             dispatch(userEdit(idUser))
         }
     }, [dispatch, idUser]);
+
+    useEffect(() => {
+        if (checkReset?.response) {
+            setMessage({
+                message: 'Password gagal di reset',
+                status: checkReset.response.status,
+            });
+        }
+
+        if (checkReset?.item) {
+            setMessage({
+                message: checkReset?.message,
+                status: 200,
+            });
+        }
+    }, [checkReset]);
 
     useEffect(() => {
         if (dataEditProfil?.item) {
@@ -102,6 +122,14 @@ const Profil = () => {
                                     <p>Kelola Data Pribadi</p>
                                 </div>
 
+                                {message?.status === 422 && (
+                                    <Message type={'error'} pesan={message?.message} />
+                                )}
+
+                                {message?.status === 200 && (
+                                    <Message type={'warning'} pesan={message?.message} />
+                                )}
+
                                 {errorData?.status === 422 && (
                                     <Message type={'error'} pesan={errorData.message} />
                                 )}
@@ -112,7 +140,12 @@ const Profil = () => {
 
                                 <div className="bg-slate-100 p-3 mb-8 md:p-5">
                                     <div className='mb-16 md:mb-8'>
-                                        <button className='uppercase rounded-md self-start text-white bg-blue-600 hover:bg-blue-700 float-right font-light text-sm md:text-md md:font-medium py-1 px-2 md:py-2 md:px-3'>Reset password</button>
+                                        <button
+                                            className='uppercase rounded-md self-start text-white bg-blue-600 hover:bg-blue-700 float-right font-light text-sm md:text-md md:font-medium py-1 px-2 md:py-2 md:px-3'
+                                            onClick={() => setShowModalReset(true)}
+                                        >
+                                            Reset password
+                                        </button>
                                     </div>
                                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                                         <div className="flex flex-col gap-y-3">
@@ -174,6 +207,7 @@ const Profil = () => {
                     </div>
 
                 </div>
+                <ResetPassword isVisible={showModalReset} onClose={() => setShowModalReset(false)} />
             </Sidebar>
         </div>
     )
