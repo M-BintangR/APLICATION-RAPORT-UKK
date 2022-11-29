@@ -46,7 +46,7 @@ class UserController extends Controller
 
         if ($validateData && $crendentials) {
             if (!Hash::check($request->password, $user->password)) {
-                return response()->json(['message' => 'password salah']);
+                return response()->json(['message' => 'Password sebelumnya salah!!!']);
             } else {
                 $check = $user->update([
                     'password' => bcrypt($validateData['password_baru']),
@@ -57,11 +57,11 @@ class UserController extends Controller
         if ($check) {
             return response()->json([
                 'item' => $check,
-                'message' => 'password berhasil di ubah',
+                'message' => 'Password berhasil di ubah, silahkan login ulang!',
             ], 200);
         }
 
-        return response()->json(['message' => 'Terjadi kesalahan'], 401);
+        return response()->json(['message' => 'Terjadi Kesalahan!!!'], 401);
     }
 
     /**
