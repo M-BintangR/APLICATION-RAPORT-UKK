@@ -41,6 +41,12 @@ const Login = () => {
         if (token && users) {
             if (users.role === 'admin') {
                 navigate('/dashboard');
+            } else if (users.role === 'siswa') {
+                navigate('/dashboard-siswa');
+            } else if (users.role === 'guru') {
+                navigate('/dashboard-guru');
+            } else if (users.role === 'walas') {
+                navigate('/dashboard-walas');
             } else {
                 navigate('/');
             }
