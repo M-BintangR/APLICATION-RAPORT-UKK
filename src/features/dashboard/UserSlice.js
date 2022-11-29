@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { USER_CREATE_URL, USER_DELETE_URL, USER_EDIT_URL, USER_RECORD_URL, USER_SEARCH_URL, USER_UPDATE_URL } from "../url/linkURL";
+import { RESET_PASSWORD_URL, USER_CREATE_URL, USER_DELETE_URL, USER_EDIT_URL, USER_RECORD_URL, USER_SEARCH_URL, USER_UPDATE_URL } from "../url/linkURL";
 
 export const userRecord = createAsyncThunk('userRecord', async (initialRecord) => {
     try {
@@ -68,11 +68,23 @@ export const userSearch = createAsyncThunk('userSearch', async (query) => {
     }
 });
 
+export const resetPassword = createAsyncThunk('resetPassword', async (initialId) => {
+    try {
+        const res = await axios.post(RESET_PASSWORD_URL + initialId, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
 const initialState = {
     userRecord: {},
     userUpdate: {},
     userDelete: {},
     userCreate: {},
+    resetPassword: {},
     pending: false,
     error: {},
 }
@@ -145,10 +157,16 @@ const UserSlice = createSlice({
                 state.userDelete = action.payload;
             })
 
-            //? TAPEL SEARCH
+            //? USER SEARCH
 
             .addCase(userSearch.fulfilled, (state, action) => {
                 state.userRecord = action.payload;
+            })
+
+            //? PASSWORD RESET
+
+            .addCase(resetPassword.fulfilled, (state, action) => {
+                state.resetPassword = action.payload;
             })
 
     }
@@ -159,6 +177,7 @@ export const selectAllUser = state => state.user.userRecord;
 export const checkCreateUser = state => state.user.userCreate;
 export const checkUpdateUser = state => state.user.userUpdate;
 export const checkEditUser = state => state.user.userEdit;
+export const checkResetPassword = state => state.user.resetPassword;
 export const checkDeleteUser = state => state.user.userDelete;
 export const pendingUser = state => state.user.pending;
 export default UserSlice.reducer;

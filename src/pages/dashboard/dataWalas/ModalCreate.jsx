@@ -7,14 +7,14 @@ import { checkCreateWalas, walasCreate, walasRecord } from '../../../features/da
 
 const ModalCreate = ({ isVisible, onClose }) => {
     const [errorData, setErrorData] = useState();
-    const [inputCreate, setInputCreate] = useState({
-        id_guru: '',
-        id_kelas: '',
-    });
     const dataGuru = useSelector(selectAllGuru);
     const dataKelas = useSelector(selectAllKelas);
     const dispatch = useDispatch();
     const check = useSelector(checkCreateWalas);
+    const [inputCreate, setInputCreate] = useState({
+        id_guru: '',
+        id_kelas: '',
+    });
 
     const handleClose = () => {
         setInputCreate({ id_guru: '', id_kelas: '' });

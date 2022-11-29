@@ -19,6 +19,7 @@ export const USER_CREATE_URL = 'http://127.0.0.1:8000/api/admin/data/user';
 export const USER_EDIT_URL = 'http://127.0.0.1:8000/api/admin/data/user/';
 export const USER_UPDATE_URL = 'http://127.0.0.1:8000/api/admin/data/user/';
 export const USER_SEARCH_URL = 'http://127.0.0.1:8000/api/admin/data/user/';
+export const RESET_PASSWORD_URL = 'http://127.0.0.1:8000/api/admin/data/user/reset/password/';
 
 //? MAPEL URL
 export const MAPEL_RECORD_URL = 'http://127.0.0.1:8000/api/admin/data/mapel';
