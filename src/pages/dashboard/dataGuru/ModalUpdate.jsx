@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { checkEditGuru, checkUpdateGuru, guruEdit, guruPending, guruRecord, guruUpdate } from '../../../features/dashboard/GuruSlice';
 import { selectAllMapel } from '../../../features/dashboard/MapelSlice';
 import { useState } from 'react';
+import { useCallback } from 'react';
 
 const ModalUpdate = ({ isVisible, onClose, idUser }) => {
     const dispatch = useDispatch();

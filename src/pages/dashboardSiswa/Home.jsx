@@ -19,7 +19,7 @@ const Home = () => {
                     {(
                         <div>
                             <div className="mt-5 mb-8 bg-slate-100 rounded-md py-3 px-4">
-                                <h1 className='text-xl md:text-2xl font-semibold '>Dashboard Admin</h1>
+                                <h1 className='text-xl md:text-2xl font-semibold '>Dashboard Siswa</h1>
                                 <p>Hi Selamat Datang Siswa!</p>
                             </div>
 
