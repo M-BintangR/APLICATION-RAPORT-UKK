@@ -111,18 +111,18 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::group(['prefix' => 'guru', 'middleware' => 'guru'], function () {
-        Route::get('/dashboard/guru', [DashboardGuru::class, 'index']);
+        Route::get('/dashboard', [DashboardGuru::class, 'index']);
     });
 
     Route::group(['prefix' => 'walas', 'middleware' => 'walas'], function () {
-        Route::get('/dashboard/walas', [DashboardWalas::class, 'index']);
+        Route::get('/dashboard', [DashboardWalas::class, 'index']);
     });
 
     Route::group(['prefix' => 'siswa', 'middleware' => 'siswa'], function () {
-        Route::get('/dashboard/siswa', [DashboardSiswa::class, 'index']);
+        Route::get('/dashboard', [DashboardSiswa::class, 'index']);
     });
 
-    Route::get('/data/user/show/{user:id}', [UserController::class, 'show']);
+    Route::get('/admin/data/user/show/{user:id}', [UserController::class, 'show']);
     Route::post('/logout', [LoginController::class, 'logout']);
 });
 
