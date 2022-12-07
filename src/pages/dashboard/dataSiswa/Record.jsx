@@ -12,6 +12,7 @@ import { BiTrash, BiEdit } from 'react-icons/bi';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
 import { TabelSiswa } from '../../../components/FieldTable';
+import { useCallback } from 'react';
 
 const Record = () => {
     const dispatch = useDispatch();
@@ -56,7 +57,7 @@ const Record = () => {
         dispatch(siswaRecord());
     }, [dispatch]);
 
-    const handleDelete = (id) => {
+    const handleDelete = useCallback((id) => {
         dispatch(siswaDelete(id));
         setTimeout(() => {
             dispatch(siswaRecord());
@@ -70,16 +71,16 @@ const Record = () => {
             setCheckAlert(false);
         }, 10000)
         dispatch(siswaRecord());
+    }, [dispatch]);
 
-    }
-    const handleUpdate = (id) => {
+    const handleUpdate = useCallback((id) => {
         setIdUser(id);
         setShowModalUpdate(prev => prev = true);
-    }
+    }, []);
 
-    const handleSearch = (e) => {
+    const handleSearch = useCallback((e) => {
         dispatch(siswaSearch(e.target.value));
-    }
+    }, [dispatch]);
 
     return (
         <div >

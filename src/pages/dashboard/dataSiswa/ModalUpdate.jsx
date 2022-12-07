@@ -5,8 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { selectAllKelas } from '../../../features/dashboard/KelasSlice';
 import { selectAllJurusan } from '../../../features/dashboard/JurusanSlice';
+import { useCallback } from 'react';
 
 const ModalUpdate = ({ isVisible, idUser, onClose }) => {
+    const dispatch = useDispatch();
+    const dataEditSiswa = useSelector(checkEditSiswa);
+    const dataKelas = useSelector(selectAllKelas);
+    const dataJurusan = useSelector(selectAllJurusan);
+    const pending = useSelector(pendingSiswa);
+    const check = useSelector(checkUpdateSiswa);
+    const [errorData, setErrorData] = useState(null);
     const [inputEdit, setInputEdit] = useState({
         nis: '',
         nama: '',
@@ -15,14 +23,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
         jk: '',
         agama: '',
         nisn: '',
-    })
-    const dispatch = useDispatch();
-    const dataEditSiswa = useSelector(checkEditSiswa);
-    const dataKelas = useSelector(selectAllKelas);
-    const dataJurusan = useSelector(selectAllJurusan);
-    const pending = useSelector(pendingSiswa);
-    const check = useSelector(checkUpdateSiswa);
-    const [errorData, setErrorData] = useState(null);
+    });
 
     useEffect(() => {
         isVisible && dispatch(siswaEdit(idUser));
@@ -55,15 +56,15 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
         setErrorData(null);
     }
 
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         setErrorData(null);
         onClose();
         setInputEdit({ nis: '', nama: '', id_kelas: '', id_jurusan: '', agama: '', jk: '', nisn: '' })
-    }
+    }, [onClose]);
 
     return (
         <div>

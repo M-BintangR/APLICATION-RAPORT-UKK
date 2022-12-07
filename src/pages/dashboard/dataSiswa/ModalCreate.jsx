@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useCallback } from 'react';
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { jurusanRecord, selectAllJurusan } from '../../../features/dashboard/JurusanSlice';
@@ -29,9 +30,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
         if (check.response) setErrorData(check?.response.data.errors)
     }, [check]);
 
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         setInputCreate(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
     const handleClick = () => {
         dispatch(siswaCreate(inputCreate));
@@ -40,11 +41,12 @@ const ModalCreate = ({ isVisible, onClose }) => {
         setInputCreate({ nis: '', nama: '', id_kelas: '', id_jurusan: '', jk: '', agama: '', nisn: '' });
         dispatch(siswaRecord());
     }
-    const handleClose = () => {
+
+    const handleClose = useCallback(() => {
         setInputCreate({ nis: '', nama: '', id_kelas: '', id_jurusan: '', jk: '', agama: '', nisn: '' });
         setErrorData(null);
         onClose();
-    }
+    }, [onClose]);
 
     return (
         <div>
