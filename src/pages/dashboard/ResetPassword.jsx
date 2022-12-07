@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react';
+import { useCallback } from 'react';
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAkunUser } from '../../features/authenticated/loginAuth';
@@ -20,15 +21,15 @@ const ResetPassword = ({ isVisible, onClose }) => {
         if (check?.response) setErrorData(check?.response.data.errors)
     }, [check]);
 
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         setInputReset(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         setInputReset({ password: '', password_baru: '' });
         setErrorData(null);
         onClose();
-    }
+    }, [onClose]);
 
     const handleClick = () => {
         const data = {
@@ -50,7 +51,7 @@ const ResetPassword = ({ isVisible, onClose }) => {
                         <div className="md:w-[600px] flex flex-col">
                             <div className="py-6 px-6 lg:px-8 text-left">
                                 <h3 className="mb-5 text-xl font-medium text-gray-900">
-                                    Tambah Data
+                                    Reset Password
                                 </h3>
                                 <div className='space-x-6'>
                                     <div>

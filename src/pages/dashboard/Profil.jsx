@@ -7,6 +7,7 @@ import { checkCreateUser, checkEditUser, checkResetPassword, checkUpdateUser, pe
 import { useState } from 'react'
 import Message from '../../components/Message'
 import ResetPassword from './ResetPassword'
+import { useCallback } from 'react'
 
 const Profil = () => {
     const Menus = AdminMenu
@@ -88,9 +89,9 @@ const Profil = () => {
     }, [dataEditProfil]);
 
 
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, [])
 
     const handleEdit = () => {
         const data = {
