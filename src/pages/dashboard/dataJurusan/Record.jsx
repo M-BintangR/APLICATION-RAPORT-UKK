@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import Sidebar from '../../../components/Sidebar';
 import { AdminMenu } from '../../../components/Links';
 import { useState } from 'react';
@@ -56,17 +56,16 @@ const Record = () => {
         dispatch(jurusanRecord());
     }, [dispatch]);
 
-    const handleSearch = (e) => {
+    const handleSearch = useCallback((e) => {
         dispatch(jurusanSearch(e.target.value));
-    }
+    }, [dispatch]);
 
-    const handleUpdate = (id) => {
+    const handleUpdate = useCallback((id) => {
         setIdUser(id);
-
         setShowModalUpdate(prev => prev = true);
-    }
+    }, []);
 
-    const handleDelete = (id) => {
+    const handleDelete = useCallback((id) => {
         dispatch(jurusanDelete(id));
         setTimeout(() => {
             dispatch(jurusanRecord());
@@ -80,7 +79,7 @@ const Record = () => {
             setCheckAlert(false);
         }, 10000)
         dispatch(jurusanRecord());
-    }
+    }, [dispatch]);
 
     return (
         <div >

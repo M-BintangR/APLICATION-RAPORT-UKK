@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useCallback } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkCreateJurusan, jurusanCreate, jurusanRecord } from '../../../features/dashboard/JurusanSlice';
@@ -13,10 +14,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
 
     const check = useSelector(checkCreateJurusan);
 
-
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         setInputCreate(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
     const handleClick = () => {
         dispatch(jurusanCreate(inputCreate));
@@ -30,11 +30,11 @@ const ModalCreate = ({ isVisible, onClose }) => {
         if (check.response) setErrorData(check?.response.data.errors)
     }, [check]);
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         setInputCreate({ nama_jurusan: '', kode_jurusan: '' });
         setErrorData(null);
         onClose();
-    }
+    }, [onClose]);
 
     return (
         <div>
@@ -85,7 +85,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 onChange={handleChange}
                                             />
                                         </div>
-                                    </div> 
+                                    </div>
                                 </div>
                                 <div className="flex flex-row">
                                     <button

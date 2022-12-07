@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
+import { useCallback } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkEditJurusan, checkPendingJurusan, checkUpdateJurusan, jurusanEdit, jurusanRecord, jurusanUpdate } from '../../../features/dashboard/JurusanSlice';
@@ -24,15 +25,15 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
     }, [check]);
 
 
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         onClose();
         setErrorData(null);
         setInputEdit({ nama_jurusan: '', kode_jurusan: '' });
-    }
+    }, [onClose]);
 
     useEffect(() => {
         if (dataEditJurusan.item) {
