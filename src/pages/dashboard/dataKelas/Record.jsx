@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
 import { TabelKelas } from '../../../components/FieldTable';
+import { useCallback } from 'react';
 
 
 const Record = () => {
@@ -57,7 +58,7 @@ const Record = () => {
         dispatch(kelasRecord());
     }, [dispatch]);
 
-    const handleDelete = (id) => {
+    const handleDelete = useCallback((id) => {
         dispatch(kelasDelete(id));
         setTimeout(() => {
             dispatch(kelasRecord());
@@ -71,16 +72,16 @@ const Record = () => {
             setCheckAlert(false);
         }, 10000)
         dispatch(kelasRecord());
-    }
+    }, [dispatch]);
 
-    const handleUpdate = (id) => {
+    const handleUpdate = useCallback((id) => {
         setIdUser(id);
         setShowModalUpdate(prev => prev = true);
-    }
+    }, []);
 
-    const handleSearch = (e) => {
+    const handleSearch = useCallback((e) => {
         dispatch(kelasSearch(e.target.value));
-    }
+    }, [dispatch]);
 
     return (
         <div >

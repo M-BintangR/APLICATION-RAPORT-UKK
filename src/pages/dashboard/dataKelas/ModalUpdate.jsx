@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
+import { useCallback } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkEditKelas, checkUpdateKelas, kelasEdit, kelasRecord, kelasUpdate, pendingKelas } from '../../../features/dashboard/KelasSlice';
@@ -24,15 +25,15 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
         if (check.response) setErrorData(check?.response.data.errors)
     }, [check]);
 
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         onClose();
         setErrorData(null);
         setInputEdit({ nama_kelas: '', level: '' });
-    }
+    }, [onClose]);
 
     useEffect(() => {
         if (dataEditKelas.item) {

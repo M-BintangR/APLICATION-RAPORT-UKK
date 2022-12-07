@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
+import { useCallback } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkCreateKelas, kelasCreate, kelasRecord } from '../../../features/dashboard/KelasSlice';
@@ -13,9 +14,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
     const check = useSelector(checkCreateKelas);
     const dispatch = useDispatch();
 
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         setInputCreate(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
     const handleClick = () => {
         dispatch(kelasCreate(inputCreate));
@@ -29,10 +30,10 @@ const ModalCreate = ({ isVisible, onClose }) => {
         if (check.response) setErrorData(check?.response.data.errors)
     }, [check]);
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         onClose();
         setErrorData(null);
-    }
+    }, [onClose]);
 
     return (
         <div>
