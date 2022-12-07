@@ -91,7 +91,7 @@ const Profil = () => {
 
     const handleChange = useCallback((e) => {
         setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }, [])
+    }, []);
 
     const handleEdit = () => {
         const data = {
@@ -201,8 +201,6 @@ const Profil = () => {
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                         )}
                     </div>
