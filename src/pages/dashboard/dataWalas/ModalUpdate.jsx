@@ -97,15 +97,10 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                                 ))}
                                                 {dataKelas && dataKelas?.items.map((kelas, i) => (
                                                     <option key={i} value={kelas.id}>
-                                                        <span className='mr-1'>
-                                                            {kelas.level ? kelas?.level : '-'}-
-                                                        </span>
-                                                        <span>
-                                                            {kelas.nama_kelas ? kelas?.nama_kelas : '-'}
-                                                        </span>
+                                                        {kelas.level ? kelas?.level : '-'}-
+                                                        {kelas.nama_kelas ? kelas?.nama_kelas : '-'}
                                                     </option>
                                                 ))}
-
                                             </select>
                                         </div>
                                         <div className="mb-3">
