@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { checkEditGuru, checkUpdateGuru, guruEdit, guruPending, guruRecord, guruUpdate } from '../../../features/dashboard/GuruSlice';
 import { selectAllMapel } from '../../../features/dashboard/MapelSlice';
 import { useState } from 'react';
+import { useCallback } from 'react';
 
 const ModalUpdate = ({ isVisible, onClose, idUser }) => {
     const dispatch = useDispatch();
@@ -33,9 +34,9 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         if (check.response) setErrorData(check?.response.data.errors);
     }, [check]);
 
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
     const handleEdit = () => {
         const data = {
@@ -49,11 +50,11 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         setErrorData(null);
     }
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         onClose();
         setErrorData(null);
         setInputEdit({ nama_guru: '', id_mapel: '' });
-    }
+    }, [onClose]);
 
     return (
         <div>

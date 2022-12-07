@@ -13,6 +13,7 @@ import ModalUpdate from './ModalUpdate';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
 import { TabelGurus } from '../../../components/FieldTable';
+import { useCallback } from 'react';
 
 const Record = () => {
     const Menus = AdminMenu;
@@ -58,7 +59,7 @@ const Record = () => {
         dispatch(guruRecord());
     }, [dispatch]);
 
-    const handleDelete = (id) => {
+    const handleDelete = useCallback((id) => {
         dispatch(guruDelete(id));
         setTimeout(() => {
             dispatch(guruRecord());
@@ -72,16 +73,16 @@ const Record = () => {
             setCheckAlert(false);
         }, 10000)
         dispatch(guruRecord());
-    }
+    }, [dispatch]);
 
-    const hanldeUpdate = (id) => {
+    const hanldeUpdate = useCallback((id) => {
         setShowModalUpdate(prev => prev = true);
         setIdUpdateModal(prev => prev = id);
-    }
+    }, []);
 
-    const handleSearch = (e) => {
+    const handleSearch = useCallback((e) => {
         dispatch(guruSearch(e.target.value));
-    }
+    }, [dispatch]);
 
     return (
         <div >

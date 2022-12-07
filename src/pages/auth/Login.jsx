@@ -7,6 +7,7 @@ import { loginUsers, selectErrorUser, selectStatusUser, selectUser } from '../..
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Message from '../../components/Message';
+import { useCallback } from 'react';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -22,11 +23,12 @@ const Login = () => {
         password: '',
     });
 
-    const handleInput = e => {
+    const handleInput = useCallback((e) => {
         setLoginInput(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
-    const handleClick = () => {
+    const handleClick = (e) => {
+        e.preventDefault();
         try {
             const data = {
                 username: loginInput.username,
@@ -35,7 +37,7 @@ const Login = () => {
             dispatch(loginUsers(data));
             setLoginInput({ username: '', password: '' });
         } catch (err) {
-
+            throw err;
         }
     }
 
@@ -83,38 +85,41 @@ const Login = () => {
                             <p className='text-sm font-medium block text-white origin-left'>Aplikasi Raport</p>
                         </h1>
                     </div>
-                    <div className="flex flex-col text-gray-400 py-2 ">
-                        <label htmlFor="">Username</label>
-                        <input
-                            className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none'
-                            type="text"
-                            name="username"
-                            value={loginInput?.username}
-                            onChange={handleInput}
-                        />
-                    </div>
-                    <div className="flex flex-col text-gray-400 py-2 ">
-                        <label htmlFor="">Password</label>
-                        <input
-                            className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none'
-                            type="password"
-                            name='password'
-                            value={loginInput?.password}
-                            onChange={handleInput}
-                        />
-                    </div>
-                    <div className="flex justify-between text-gray-400 py-2 ">
-                        <p className='flex items-center'>
-                            <input className='mr-2' type="checkbox" />Remember Me
-                        </p>
-                        <p>Forgot Passowrd</p>
-                    </div>
-                    <button
-                        type={`${status ? 'disable' : 'submit'}`}
-                        className={`w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/10 rounded-lg hover:shadow-teal-500/50 text-white font-bold`}
-                        onClick={handleClick}
-                    >{status ? 'loading...' : 'Sign In'}
-                    </button>
+                    <form onSubmit={handleClick}>
+                        <div className="flex flex-col text-gray-400 py-2 ">
+                            <label htmlFor="">Username</label>
+                            <input
+                                className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none'
+                                type="text"
+                                name="username"
+                                value={loginInput?.username}
+                                onChange={handleInput}
+                            />
+                        </div>
+                        <div className="flex flex-col text-gray-400 py-2 ">
+                            <label htmlFor="">Password</label>
+                            <input
+                                className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none'
+                                type="password"
+                                name='password'
+                                value={loginInput?.password}
+                                onChange={handleInput}
+                            />
+                        </div>
+                        <div className="flex justify-between text-gray-400 py-2 ">
+                            <p className='flex items-center'>
+                                <input className='mr-2' type="checkbox" />Remember Me
+                            </p>
+                            <p>Forgot Passowrd</p>
+                        </div>
+                        <button
+                            type={`${status ? 'disable' : 'submit'}`}
+                            className={`w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/10 rounded-lg hover:shadow-teal-500/50 text-white font-bold`}
+                            onClick={handleClick}
+                        >{status ? 'loading...' : 'Sign In'}
+                        </button>
+                    </form>
+
                 </div>
             </div>
         </div>

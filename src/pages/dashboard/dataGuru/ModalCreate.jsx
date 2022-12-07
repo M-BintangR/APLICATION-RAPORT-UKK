@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createGuruCheck, guruCreate, guruRecord } from '../../../features/dashboard/GuruSlice';
@@ -21,9 +22,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
         dispatch(mapelRecord());
     }, [dispatch]);
 
-    const handleChange = e => {
+    const handleChange = useCallback((e) => {
         setInputGuru(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
     const handleClick = () => {
         dispatch(guruCreate(inputGuru));
@@ -33,11 +34,11 @@ const ModalCreate = ({ isVisible, onClose }) => {
         dispatch(guruRecord());
     }
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         setInputGuru({ nama_guru: '', id_mapel: '' });
         setErrorData(null);
         onClose();
-    }
+    }, [onClose]);
 
     return (
         <div>
