@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
 import { TabelTapel } from '../../../components/FieldTable';
+import { useCallback } from 'react';
 
 const Record = () => {
     const dispatch = useDispatch();
@@ -56,7 +57,7 @@ const Record = () => {
         dispatch(tapelRecord());
     }, [dispatch]);
 
-    const handleDelete = (id) => {
+    const handleDelete = useCallback((id) => {
         dispatch(tapelDelete(id));
         setTimeout(() => {
             dispatch(tapelRecord());
@@ -70,16 +71,16 @@ const Record = () => {
             setCheckAlert(false);
         }, 10000)
         dispatch(tapelRecord());
-    }
+    }, [dispatch]);
 
-    const handleUpdate = (id) => {
+    const handleUpdate = useCallback((id) => {
         setIdUser(id);
         setShowModalUpdate(prev => prev = true);
-    }
+    }, []);
 
-    const handleSearch = (e) => {
+    const handleSearch = useCallback((e) => {
         dispatch(tapelSearch(e.target.value));
-    }
+    }, [dispatch]);
 
     return (
         <div >

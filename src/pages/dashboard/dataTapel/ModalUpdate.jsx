@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { useCallback } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkEditTapel, checkUpdateTapel, pendingTapel, tapelEdit, tapelRecord, tapelUpdate } from '../../../features/dashboard/TapelSlice';
@@ -24,11 +25,11 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         if (check.response) setErrorData(check?.response.data.errors)
     }, [check]);
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         onClose();
         setErrorData(null)
         setInputEdit({ tahun_pelajaran: '', semester: '', aktif: '' });
-    }
+    }, [onClose]);
 
     useEffect(() => {
         if (dataEditTapel.item) {
@@ -49,9 +50,9 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         onClose();
     }
 
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
     return (
         <div>

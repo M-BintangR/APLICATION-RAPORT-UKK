@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useCallback } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkCreateTapel, tapelCreate, tapelRecord } from '../../../features/dashboard/TapelSlice';
@@ -13,9 +14,9 @@ const ModalCreate = ({ isVisible, onClose }) => {
     const check = useSelector(checkCreateTapel);
     const dispatch = useDispatch();
 
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         setInputCreate(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
     const handleClick = () => {
         dispatch(tapelCreate(inputCreate));
@@ -29,11 +30,11 @@ const ModalCreate = ({ isVisible, onClose }) => {
         if (check.response) setErrorData(check?.response.data.errors)
     }, [check]);
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         setInputCreate({ tahun_pelaran: '', semester: '', aktif: '' });
         onClose();
         setErrorData(null);
-    }
+    }, [onClose]);
 
 
     return (
