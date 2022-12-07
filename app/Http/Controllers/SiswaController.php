@@ -17,7 +17,7 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $items = Siswa::with(['kelas', 'jurusan'])->get();
+        $items = Siswa::with(['kelas', 'jurusan'])->latest()->get();
 
         if ($items) {
             return response()->json([
@@ -68,7 +68,7 @@ class SiswaController extends Controller
             })->orWhereHas('jurusan', function ($data) use ($query) {
                 $data
                     ->where('kode_jurusan', 'like', "%{$query}%");
-            })->get();
+            })->latest()->get();
 
         if ($query) {
             return response()->json([

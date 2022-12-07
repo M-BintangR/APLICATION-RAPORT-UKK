@@ -14,7 +14,7 @@ class KelasController extends Controller
      */
     public function index()
     {
-        $items = Kelas::all();
+        $items = Kelas::latest()->get();
 
         if ($items) {
             return response()->json([
@@ -51,7 +51,7 @@ class KelasController extends Controller
     {
         $search = Kelas::where('nama_kelas', 'like', "%{$query}%")
             ->orWhere('level', 'like', "%{$query}%")
-            ->get();
+            ->latest()->get();
 
         if ($query) {
             return response()->json([

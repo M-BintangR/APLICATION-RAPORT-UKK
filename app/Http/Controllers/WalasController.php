@@ -17,7 +17,7 @@ class WalasController extends Controller
      */
     public function index()
     {
-        $item = Walas::with(['guru', 'kelas'])->get();
+        $item = Walas::with(['guru', 'kelas'])->latest()->get();
 
         if ($item) {
             return response()->json([
@@ -59,7 +59,7 @@ class WalasController extends Controller
         })->orWhereHas('kelas', function ($data) use ($query) {
             $data
                 ->where('nama_kelas', 'like', "%{$query}%");
-        })->get();
+        })->latest()->get();
 
         if ($query) {
             return response()->json([

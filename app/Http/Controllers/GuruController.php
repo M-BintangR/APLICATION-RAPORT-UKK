@@ -16,7 +16,7 @@ class GuruController extends Controller
      */
     public function index()
     {
-        $items = Guru::with(['mapel', 'walas'])->get();
+        $items = Guru::with(['mapel', 'walas'])->latest()->get();
 
         if ($items) {
             return response()->json([
@@ -49,7 +49,7 @@ class GuruController extends Controller
                 ->where('nama_mapel', 'like', "%{$request}%")
                 ->orWhere('kkm', 'like', "%{$request}%")
                 ->orWhere('level', 'like', "%{$request}%");
-        })->get();
+        })->latest()->get();
 
         if ($request) {
             return response()->json([

@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $items = User::all();
+        $items = User::latest()->get();
 
         if ($items) {
             return response()->json([
@@ -95,7 +95,7 @@ class UserController extends Controller
     {
         $search = User::where('nama_pengguna', 'like', "%{$query}%")
             ->orWhere('username', 'like', "%{$query}%")
-            ->orWhere('role', 'like', "%{$query}%")->get();
+            ->orWhere('role', 'like', "%{$query}%")->latest()->get();
 
         if ($query) {
             return response()->json([

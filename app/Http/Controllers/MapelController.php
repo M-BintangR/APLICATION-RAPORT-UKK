@@ -16,7 +16,7 @@ class MapelController extends Controller
      */
     public function index()
     {
-        $items = Mapel::with(['jurusan'])->get();
+        $items = Mapel::with(['jurusan'])->latest()->get();
 
         if ($items) {
             return response()->json([
@@ -61,7 +61,7 @@ class MapelController extends Controller
             $data
                 ->where('nama_jurusan', 'like', "%{$query}%")
                 ->orWhere('kode_jurusan', 'like', "%{$query}%");
-        })->get();
+        })->latest()->get();
 
         if ($query) {
             return response()->json([
