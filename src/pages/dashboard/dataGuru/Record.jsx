@@ -143,7 +143,6 @@ const Record = () => {
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data.nama_guru ? data?.nama_guru : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data?.mapel.nama_mapel ? data?.mapel?.nama_mapel : '-'}</td>
-                                                    <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{data?.mapel.kkm ? data?.mapel.kkm : '-'}</td>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>
                                                         <span className='p-1.5 text-xs font-medium uppercase tracking-wider text-yellow-800 bg-yellow-200 rounded-lg bg-opacity-50'>
                                                             {data?.mapel.level ? data?.mapel.level : '-'}

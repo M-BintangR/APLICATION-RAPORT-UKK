@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from '../pages/auth/Login';
-import RecordGuru from '../pages/dashboard/dataGuru/Record';
 import RecordJurusan from '../pages/dashboard/dataJurusan/Record';
 import RecordKelas from '../pages/dashboard/dataKelas/Record';
 import RecordSiswa from '../pages/dashboard/dataSiswa/Record';
+import RecordGuru from '../pages/dashboard/dataGuru/Record';
 import RecordTapel from '../pages/dashboard/dataTapel/Record';
 import RecordWalas from '../pages/dashboard/dataWalas/Record';
 import RecordUser from '../pages/dashboard/dataUser/Record';

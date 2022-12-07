@@ -3,9 +3,10 @@ import loginImage from '../../img/loginImage.jpg';
 import { MdSchool } from 'react-icons/md';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUsers, selectStatusUser } from '../../features/authenticated/loginAuth';
+import { loginUsers, selectErrorUser, selectStatusUser, selectUser } from '../../features/authenticated/loginAuth';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Message from '../../components/Message';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -13,7 +14,8 @@ const Login = () => {
     const navigate = useNavigate();
     const token = JSON.parse(localStorage.getItem("token"));
     const users = JSON.parse(localStorage.getItem("user"));
-
+    const checkUser = useSelector(selectErrorUser);
+    const [errorData, setErrorData] = useState(null);
 
     const [loginInput, setLoginInput] = useState({
         username: '',
@@ -38,6 +40,13 @@ const Login = () => {
     }
 
     useEffect(() => {
+        if (checkUser) setErrorData({
+            message: 'Login gagal. isi data dengan benar!!!',
+            status: 422,
+        });
+    }, [checkUser]);
+
+    useEffect(() => {
         if (token && users) {
             if (users.role === 'admin') {
                 navigate('/dashboard');
@@ -60,6 +69,11 @@ const Login = () => {
             </div>
 
             <div className="bg-hard-purple flex flex-col justify-center">
+                {errorData?.status === 422 && (
+                    <div className="mx-auto">
+                        <Message type={'warning'} pesan={errorData.message} />
+                    </div>
+                )}
                 <div className="max-w-[400px] w-full mx-auto bg-gray-900 p-8 px-8 rounded-lg dark:text-white font-bold ">
                     <div className="inline-flex mx-1 my-2 mb-3">
                         <MdSchool

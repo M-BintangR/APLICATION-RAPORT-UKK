@@ -56,7 +56,6 @@ export const loginAuth = createSlice({
                 state.error = action.error.message;
                 state.status = false;
             })
-
             .addCase(akunUser.fulfilled, (state, action) => {
                 state.akunUser = action.payload;
             });
