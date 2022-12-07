@@ -181,12 +181,8 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 <option>- Pilih Kelas -</option>
                                                 {dataKelas?.items.map((kelas, i) => (
                                                     <option key={i} value={kelas?.id}>
-                                                        <span>
-                                                            {kelas?.level}-
-                                                        </span>
-                                                        <span>
-                                                            {kelas?.nama_kelas}
-                                                        </span>
+                                                        {kelas?.level}-
+                                                        {kelas?.nama_kelas}
                                                     </option>
                                                 ))}
                                             </select>

@@ -202,26 +202,17 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                                 {dataKelas.items && dataKelas.items.map((kelas, i) => (
                                                     kelas.id === dataEditSiswa?.item.id_kelas && (
                                                         <option key={i} value={kelas?.id}>
-                                                            <span>
-                                                                {kelas?.level}-
-                                                            </span>
-                                                            <span>
-                                                                {kelas?.nama_kelas}
-                                                            </span>
+                                                            {kelas?.level}-
+                                                            {kelas?.nama_kelas}
                                                         </option>
                                                     )
                                                 ))}
                                                 {dataKelas.items && dataKelas?.items.map((kelas, i) => (
                                                     <option key={i} value={kelas?.id}>
-                                                        <span>
-                                                            {kelas?.level}-
-                                                        </span>
-                                                        <span>
-                                                            {kelas?.nama_kelas}
-                                                        </span>
+                                                        {kelas?.level}-
+                                                        {kelas?.nama_kelas}
                                                     </option>
                                                 ))}
-
                                             </select>
                                         </div>
                                     </div>
