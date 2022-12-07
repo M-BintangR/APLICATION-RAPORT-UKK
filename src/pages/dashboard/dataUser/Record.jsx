@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
 import { TabelUser } from '../../../components/FieldTable';
+import { useCallback } from 'react';
 
 const Record = () => {
     const dispatch = useDispatch();
@@ -56,7 +57,7 @@ const Record = () => {
         dispatch(userRecord());
     }, [dispatch]);
 
-    const handleDelete = (id) => {
+    const handleDelete = useCallback((id) => {
         dispatch(userDelete(id));
         setTimeout(() => {
             dispatch(userRecord());
@@ -70,16 +71,16 @@ const Record = () => {
             setCheckAlert(false);
         }, 10000)
         dispatch(userRecord());
-    }
+    }, [dispatch]);
 
-    const handleUpdate = (id) => {
+    const handleUpdate = useCallback((id) => {
         setIdUser(id);
         setShowModalUpdate(true);
-    }
+    }, []);
 
-    const handleSearch = (e) => {
+    const handleSearch = useCallback((e) => {
         dispatch(userSearch(e.target.value));
-    }
+    }, [dispatch]);
 
     return (
         <div >

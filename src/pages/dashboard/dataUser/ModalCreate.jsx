@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
+import { useCallback } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkCreateUser, userCreate, userRecord } from '../../../features/dashboard/UserSlice';
@@ -20,15 +21,15 @@ const ModalCreate = ({ isVisible, onClose }) => {
     }, [check]);
 
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         setInputCreate({ nama_pengguna: '', username: '', password: '', role: '' });
         onClose();
         setErrorData(null);
-    }
+    }, [onClose]);
 
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         setInputCreate(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
     const handleClick = () => {
         dispatch(userCreate(inputCreate));

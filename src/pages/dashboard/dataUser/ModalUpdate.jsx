@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react';
+import { useCallback } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { checkEditUser, checkUpdateUser, pendingUser, userEdit, userRecord, userUpdate } from '../../../features/dashboard/UserSlice';
@@ -31,11 +32,11 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         }
     }, [dataEditUser]);
 
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         onClose();
         setErrorData(null)
         setInputEdit({
@@ -44,7 +45,7 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
             password: '',
             role: '',
         });
-    }
+    }, [onClose]);
 
     const handleEdit = () => {
         const data = {
