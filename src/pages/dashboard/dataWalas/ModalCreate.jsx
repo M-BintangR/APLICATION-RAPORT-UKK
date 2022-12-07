@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useCallback } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { guruRecord, selectAllGuru } from '../../../features/dashboard/GuruSlice';
@@ -16,15 +17,15 @@ const ModalCreate = ({ isVisible, onClose }) => {
         id_kelas: '',
     });
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         setInputCreate({ id_guru: '', id_kelas: '' });
         onClose();
         setErrorData(null);
-    }
+    }, [onClose]);
 
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         setInputCreate(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
     useEffect(() => {
         if (check.response) setErrorData(check?.response.data.errors)

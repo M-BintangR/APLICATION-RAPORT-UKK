@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
 import { TabelWalas } from '../../../components/FieldTable';
+import { useCallback } from 'react';
 
 const Record = () => {
     const dispatch = useDispatch();
@@ -52,12 +53,12 @@ const Record = () => {
         })
     }, [checkUpdate]);
 
-    const handleUpdate = (id) => {
+    const handleUpdate = useCallback((id) => {
         setIdUser(id);
         setShowModalUpdate(true);
-    }
+    }, []);
 
-    const handleDelete = (id) => {
+    const handleDelete = useCallback((id) => {
         dispatch(walasDelete(id));
         setTimeout(() => {
             dispatch(walasRecord());
@@ -71,15 +72,15 @@ const Record = () => {
             setCheckAlert(false);
         }, 10000)
         dispatch(walasRecord());
-    }
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(walasRecord());
     }, [dispatch]);
 
-    const handleSearch = (e) => {
+    const handleSearch = useCallback((e) => {
         dispatch(walasSearch(e.target.value));
-    }
+    }, [dispatch]);
 
     return (
         <div >

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useCallback } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,11 +20,11 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
         id_guru: '',
     });
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         onClose();
         setErrorData(null);
         setInputEdit({ id_guru: '', id_kelas: '' });
-    }
+    }, [onClose]);
 
     useEffect(() => {
         isVisible && dispatch(walasEdit(idUser));
@@ -34,9 +35,9 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
     }, [check]);
 
 
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
     useEffect(() => {
         if (dataEditWalas.item) {
