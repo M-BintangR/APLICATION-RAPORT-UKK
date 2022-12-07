@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { checkEditMapel, checkUpdateMapel, mapelEdit, mapelRecord, mapelUpdate, pendingMapel } from '../../../features/dashboard/MapelSlice';
 import { selectAllJurusan } from '../../../features/dashboard/JurusanSlice';
 import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 const ModalUpdate = ({ isVisible, onClose, idUser }) => {
     const dispatch = useDispatch();
@@ -18,11 +19,11 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         id_jurusan: '',
     });
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         onClose();
         setErrorData(null);
         setInputEdit({ nama_mapel: '', kkm: '', level: '', id_jurusan: '' });
-    }
+    }, [onClose]);
 
     useEffect(() => {
         isVisible && dispatch(mapelEdit(idUser));
@@ -52,9 +53,9 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
         onClose();
     }
 
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         setInputEdit(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
 
     return (

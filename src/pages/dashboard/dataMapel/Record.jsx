@@ -12,6 +12,7 @@ import Alert from '../../../components/Alert';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
 import { TabelMapels } from '../../../components/FieldTable';
+import { useCallback } from 'react';
 
 const Record = () => {
     const Menus = AdminMenu;
@@ -56,7 +57,7 @@ const Record = () => {
         dispatch(mapelRecord());
     }, [dispatch]);
 
-    const handleDelete = (id) => {
+    const handleDelete = useCallback((id) => {
         dispatch(mapelDelete(id));
         setTimeout(() => {
             dispatch(mapelRecord());
@@ -70,16 +71,16 @@ const Record = () => {
             setCheckAlert(false);
         }, 10000)
         dispatch(mapelRecord());
-    }
+    }, [dispatch]);
 
-    const handleSearch = (e) => {
+    const handleSearch = useCallback((e) => {
         dispatch(mapelSearch(e.target.value));
-    }
+    }, [dispatch]);
 
-    const handleUpdate = (id) => {
+    const handleUpdate = useCallback((id) => {
         setIdUser(id);
         setShowModalUpdate(prev => prev = true);
-    }
+    }, []);
 
     return (
         <div >

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { jurusanRecord, selectAllJurusan } from '../../../features/dashboard/JurusanSlice';
 import { useState } from 'react';
 import { checkCreateMapel, mapelCreate, mapelRecord } from '../../../features/dashboard/MapelSlice';
+import { useCallback } from 'react';
 
 const Create = ({ isVisible, onClose }) => {
     const dispatch = useDispatch();
@@ -17,9 +18,9 @@ const Create = ({ isVisible, onClose }) => {
         id_jurusan: '',
     });
 
-    const handleChange = e => {
+    const handleChange = useCallback((e) => {
         setInputCreate(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    }, []);
 
     const handleClick = () => {
         dispatch(mapelCreate(inputCreate));
@@ -37,11 +38,11 @@ const Create = ({ isVisible, onClose }) => {
         dispatch(jurusanRecord());
     }, [dispatch]);
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         setInputCreate({ nama_mapel: '', kkm: '', level: '', id_jurusan: '' });
         setErrorData(null);
         onClose();
-    }
+    }, [onClose]);
 
     return (
         <div>
