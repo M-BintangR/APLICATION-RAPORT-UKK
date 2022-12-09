@@ -14,6 +14,17 @@ export const tapelRecord = createAsyncThunk('tapelRecord', async () => {
     }
 });
 
+export const paginateTapel = createAsyncThunk('tapelPaginate', async (pageLink) => {
+    try {
+        const res = await axios.get(pageLink, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+})
+
 export const tapelCreate = createAsyncThunk('tapelCreate', async (initialCreate) => {
     try {
         const res = await axios.post(TAPEL_CREATE_URL, initialCreate, {
@@ -162,6 +173,10 @@ const TapelSlice = createSlice({
             //? TAPEL SEARCH
 
             .addCase(tapelSearch.fulfilled, (state, action) => {
+                state.tapelRecord = action.payload;
+            })
+
+            .addCase(paginateTapel.fulfilled, (state, action) => {
                 state.tapelRecord = action.payload;
             })
 
