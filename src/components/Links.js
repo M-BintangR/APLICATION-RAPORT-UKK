@@ -19,14 +19,38 @@ export const AdminMenu = [
 ];
 
 export const GuruMenu = [
-    { title: 'Dashboard', link: '/dashboard-guru' },
+    {
+        title: 'Dashboard', link: '/dashboard-guru',
+        submenu: true,
+        submenuItems: [
+            { title: 'Home', link: '/dashboard' },
+            { title: 'Profil', link: '/dashboard/profil' },
+            { title: 'Data User', link: '/dashboard/data/user' },
+        ],
+    },
 ];
 
 export const SiswaMenu = [
-    { title: 'Dashboard', link: '/dashboard-siswa' },
+    {
+        title: 'Dashboard', link: '/dashboard-siswa',
+        submenu: true,
+        submenuItems: [
+            { title: 'Home', link: '/dashboard' },
+            { title: 'Profil', link: '/dashboard/profil' },
+            { title: 'Data User', link: '/dashboard/data/user' },
+        ],
+    },
 ];
 
 export const WalasMenu = [
-    { title: 'Dashboard', link: '/dashboard-siswa' },
+    {
+        title: 'Dashboard', link: '/dashboard-siswa',
+        submenu: true,
+        submenuItems: [
+            { title: 'Home', link: '/dashboard' },
+            { title: 'Profil', link: '/dashboard/profil' },
+            { title: 'Data User', link: '/dashboard/data/user' },
+        ],
+    },
 ];
 
