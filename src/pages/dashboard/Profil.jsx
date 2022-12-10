@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { checkCreateUser, checkEditUser, checkResetPassword, checkUpdateUser, pendingUser, userEdit, userUpdate } from '../../features/dashboard/UserSlice'
 import { useState } from 'react'
-import Message from '../../components/Message'
 import ResetPassword from './ResetPassword'
 import { useCallback } from 'react'
+import swal from 'sweetalert'
 
 const Profil = () => {
     const Menus = AdminMenu
@@ -20,41 +20,18 @@ const Profil = () => {
     const checkUpdate = useSelector(checkUpdateUser);
     const checkReset = useSelector(checkResetPassword);
     const [showModalReset, setShowModalReset] = useState(false);
-    const [errorData, setErrorData] = useState({
-        message: '',
-        status: '',
-    });
     const [inputEdit, setInputEdit] = useState({
         nama_pengguna: '',
         username: '',
         role: '',
     });
-    const [message, setMessage] = useState({
-        message: '',
-        status: '',
-    });
 
     useEffect(() => {
-        if (checkCreate?.response) setErrorData({
-            message: 'Data gagal di tambahkan, isi data dengan benar!',
-            status: checkCreate?.response.status
-        });
-        if (checkCreate?.message === 'success') setErrorData({
-            message: 'Data berhasil di tambahkan',
-            status: 200,
-        })
-    }, [checkCreate]);
-
-    useEffect(() => {
-        if (checkUpdate?.response) setErrorData({
-            message: 'Data gagal di edit, isi data dengan benar!',
-            status: checkUpdate?.response.status
-        })
-        if (checkUpdate?.message === 'success') setErrorData({
-            message: 'Data berhasil di di edit',
-            status: 200,
-        })
-    }, [checkUpdate]);
+        checkCreate.response && swal("Gagal!", "Data gagal di tambahkan, isi data dengan benar!", "error");
+        checkCreate.message === 'success' && swal('Berhasil!', "Data berhasil di tambahkan", "success");
+        checkUpdate.response && swal("Gagal!", "Data gagal di edit, isi data dengan benar!", "error");
+        checkUpdate.message === 'success' && swal("Berhasil!", "Data berhasil di edit", "success");
+    }, [checkCreate, checkUpdate]);
 
     useEffect(() => {
         setIdUser(user.id);
@@ -67,19 +44,8 @@ const Profil = () => {
     }, [dispatch, idUser]);
 
     useEffect(() => {
-        if (checkReset?.response) {
-            setMessage({
-                message: 'Password gagal di reset',
-                status: checkReset.response.status,
-            });
-        }
-
-        if (checkReset?.item) {
-            setMessage({
-                message: checkReset?.message,
-                status: 200,
-            });
-        }
+        checkReset?.response && swal("Gagal!", "Password gagal di reset!", "warning");
+        checkReset?.item && swal("Berhasil!", "Password berhasil di reset, silahkan login ulang!", "success");
     }, [checkReset]);
 
     useEffect(() => {
@@ -102,7 +68,6 @@ const Profil = () => {
             id: idUser,
         }
         dispatch(userUpdate(data));
-        setErrorData(null);
     }
 
     return (
@@ -122,23 +87,6 @@ const Profil = () => {
                                     <h1 className='text-xl md:text-2xl font-semibold '>Profil Anda</h1>
                                     <p>Kelola Data Pribadi</p>
                                 </div>
-
-                                {message?.status === 422 && (
-                                    <Message type={'error'} pesan={message?.message} />
-                                )}
-
-                                {message?.status === 200 && (
-                                    <Message type={'warning'} pesan={message?.message} />
-                                )}
-
-                                {errorData?.status === 422 && (
-                                    <Message type={'error'} pesan={errorData.message} />
-                                )}
-
-                                {errorData?.status === 200 && (
-                                    <Message type={'success'} pesan={errorData.message} />
-                                )}
-
                                 <div className="bg-slate-100 p-3 mb-8 md:p-5">
                                     <div className='mb-16 md:mb-8'>
                                         <button

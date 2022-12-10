@@ -2,18 +2,17 @@ import React from 'react';
 import Sidebar from '../../../components/Sidebar';
 import { AdminMenu } from '../../../components/Links';
 import { useState } from 'react';
-import Alert from '../../../components/Alert';
 import ModalUpdate from './ModalUpdate';
 import ModalCreate from './ModalCreate';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkCreateUser, checkUpdateUser, paginateUser, pendingUser, selectAllUser, userDelete, userRecord, userSearch } from '../../../features/dashboard/UserSlice';
 import { BiEdit, BiTrash } from 'react-icons/bi';
 import { useEffect } from 'react';
-import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
 import { TabelUser } from '../../../components/FieldTable';
 import { useCallback } from 'react';
 import Paginate from '../../../components/Paginate';
+import swal from 'sweetalert';
 
 const Record = () => {
     const dispatch = useDispatch();
@@ -25,52 +24,31 @@ const Record = () => {
     const [active, setActive] = useState('Data User');
     const [showModalCreate, setShowModalCreate] = useState(false);
     const [showModalUpdate, setShowModalUpdate] = useState(false);
-    const [checkAlert, setCheckAlert] = useState(false);
     const [idUser, setIdUser] = useState(false);
-    const [errorData, setErrorData] = useState({
-        message: '',
-        status: '',
-    });
 
     useEffect(() => {
-        if (checkCreate.response) setErrorData({
-            message: 'Data gagal di tambahkan, isi data dengan benar!',
-            status: checkCreate?.response.status
-        });
-        if (checkCreate.message === 'success') setErrorData({
-            message: 'Data berhasil di tambahkan',
-            status: 200,
-        })
-    }, [checkCreate]);
-
-    useEffect(() => {
-        if (checkUpdate.response) setErrorData({
-            message: 'Data gagal di edit, isi data dengan benar!',
-            status: checkUpdate?.response.status
-        })
-        if (checkUpdate.message === 'success') setErrorData({
-            message: 'Data berhasil di di edit',
-            status: 200,
-        })
-    }, [checkUpdate]);
-
-    useEffect(() => {
-        dispatch(userRecord());
-    }, [dispatch]);
+        checkCreate.response && swal("Gagal!", "Data gagal di tambahkan, isi data dengan benar!", "error");
+        checkCreate.message === 'success' && swal('Berhasil!', "Data berhasil di tambahkan", "success");
+        checkUpdate.response && swal("Gagal!", "Data gagal di edit, isi data dengan benar!", "error");
+        checkUpdate.message === 'success' && swal("Berhasil!", "Data berhasil di edit", "success");
+    }, [checkCreate, checkUpdate]);
 
     const handleDelete = useCallback((id) => {
-        dispatch(userDelete(id));
-        setTimeout(() => {
-            dispatch(userRecord());
-        }, 500);
+        swal({
+            title: "Yakin ingin hapus data?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                swal("Berhasil!", "Data berhasil di hapus!", "success");
+                dispatch(userDelete(id));
+                dispatch(userRecord());
+            }
+        });
+    }, [dispatch]);
 
-        setTimeout(() => {
-            setCheckAlert(true);
-        }, 2000)
-
-        setTimeout(() => {
-            setCheckAlert(false);
-        }, 10000)
+    useEffect(() => {
         dispatch(userRecord());
     }, [dispatch]);
 
@@ -103,14 +81,6 @@ const Record = () => {
                                 </h1>
                                 <p>Kelola Data User</p>
                             </div>
-
-                            {errorData?.status === 422 && (
-                                <Message type={'error'} pesan={errorData.message} />
-                            )}
-
-                            {errorData?.status === 200 && (
-                                <Message type={'success'} pesan={errorData.message} />
-                            )}
 
                             <h1 className='text-lg md:text-xl pb-2 font-medium md:font-semibold md:my-2'>Record Data
                                 <div className="float-right">
@@ -170,9 +140,6 @@ const Record = () => {
                         </div>
                     )}
 
-                    {checkAlert && (
-                        <Alert pesan={'Data berhasil dihapus'} />
-                    )}
                 </div>
                 <ModalCreate isVisible={showModalCreate} onClose={() => setShowModalCreate(false)} />
                 <ModalUpdate isVisible={showModalUpdate} onClose={() => setShowModalUpdate(false)} idUser={idUser} />

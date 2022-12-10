@@ -8,11 +8,10 @@ import ModalUpdate from './ModalUpdate';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkCreateJurusan, checkPendingJurusan, checkUpdateJurusan, jurusanDelete, jurusanRecord, jurusanSearch, paginateJurusan, selectAllJurusan } from '../../../features/dashboard/JurusanSlice';
-import Alert from '../../../components/Alert';
-import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
 import { TabelJurusans } from '../../../components/FieldTable';
 import Paginate from '../../../components/Paginate';
+import swal from 'sweetalert';
 
 const Record = () => {
     const dispatch = useDispatch();
@@ -25,33 +24,28 @@ const Record = () => {
     const [showModalCreate, setShowModalCreate] = useState(false);
     const [showModalUpdate, setShowModalUpdate] = useState(false);
     const [idUser, setIdUser] = useState(null);
-    const [checkAlert, setCheckAlert] = useState(false);
-    const [errorData, setErrorData] = useState({
-        message: '',
-        status: '',
-    });
 
     useEffect(() => {
-        if (checkCreate.response) setErrorData({
-            message: 'Data gagal di tambahkan, isi data dengan benar!',
-            status: checkCreate?.response.status
+        checkCreate.response && swal("Gagal!", "Data gagal di tambahkan, isi data dengan benar!", "error");
+        checkCreate.message === 'success' && swal('Berhasil!', "Data berhasil di tambahkan", "success");
+        checkUpdate.response && swal("Gagal!", "Data gagal di edit, isi data dengan benar!", "error");
+        checkUpdate.message === 'success' && swal("Berhasil!", "Data berhasil di edit", "success");
+    }, [checkCreate, checkUpdate]);
+
+    const handleDelete = useCallback((id) => {
+        swal({
+            title: "Yakin ingin hapus data?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                swal("Berhasil!", "Data berhasil di hapus!", "success");
+                dispatch(jurusanDelete(id));
+                dispatch(jurusanRecord());
+            }
         });
-        if (checkCreate.message === 'success') setErrorData({
-            message: 'Data berhasil di tambahkan',
-            status: 200,
-        })
-    }, [checkCreate]);
-
-    useEffect(() => {
-        if (checkUpdate.response) setErrorData({
-            message: 'Data gagal di edit, isi data dengan benar!',
-            status: checkUpdate?.response.status
-        })
-        if (checkUpdate.message === 'success') setErrorData({
-            message: 'Data berhasil di di edit',
-            status: 200,
-        })
-    }, [checkUpdate]);
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(jurusanRecord());
@@ -66,31 +60,13 @@ const Record = () => {
         setShowModalUpdate(prev => prev = true);
     }, []);
 
-    const handleDelete = useCallback((id) => {
-        dispatch(jurusanDelete(id));
-        setTimeout(() => {
-            dispatch(jurusanRecord());
-        }, 500);
-
-        setTimeout(() => {
-            setCheckAlert(true);
-        }, 2000)
-
-        setTimeout(() => {
-            setCheckAlert(false);
-        }, 10000)
-        dispatch(jurusanRecord());
-    }, [dispatch]);
-
     return (
         <div >
             <Sidebar Menus={Menus} active={active}>
                 <div>
-
                     {pending && (
                         <Loading />
                     )}
-
                     {!pending && (
                         <div>
                             <div className="mt-5 mb-8 bg-slate-100 rounded-md py-3 px-4">
@@ -103,13 +79,6 @@ const Record = () => {
                                 <p>Kelola Data Jurusan</p>
                             </div>
 
-                            {errorData?.status === 422 && (
-                                <Message type={'error'} pesan={errorData.message} />
-                            )}
-
-                            {errorData?.status === 200 && (
-                                <Message type={'success'} pesan={errorData.message} />
-                            )}
 
                             <h1 className='text-lg md:text-xl pb-2 font-medium md:font-semibold md:my-2'>Record Data
                                 <div className="float-right">
@@ -165,10 +134,6 @@ const Record = () => {
                             </div>
                             <Paginate items={dataJurusan} dataDispatch={paginateJurusan} />
                         </div>
-                    )}
-
-                    {checkAlert && (
-                        <Alert pesan={'Data berhasil dihapus'} />
                     )}
                 </div>
                 <ModalCreate isVisible={showModalCreate} onClose={() => setShowModalCreate(false)} />
