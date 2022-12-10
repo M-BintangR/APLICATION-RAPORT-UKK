@@ -3,7 +3,7 @@ import Sidebar from '../../../components/Sidebar';
 import { AdminMenu } from '../../../components/Links';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkCreateWalas, checkUpdateWalas, pendingWalas, selectAllWalas, walasDelete, walasRecord, walasSearch } from '../../../features/dashboard/WalasSlice';
+import { checkCreateWalas, checkUpdateWalas, paginateWalas, pendingWalas, selectAllWalas, walasDelete, walasRecord, walasSearch } from '../../../features/dashboard/WalasSlice';
 import Alert from '../../../components/Alert';
 import ModalCreate from './ModalCreate';
 import ModalUpdate from './ModalUpdate';
@@ -13,6 +13,7 @@ import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
 import { TabelWalas } from '../../../components/FieldTable';
 import { useCallback } from 'react';
+import Paginate from '../../../components/Paginate';
 
 const Record = () => {
     const dispatch = useDispatch();
@@ -82,6 +83,8 @@ const Record = () => {
         dispatch(walasSearch(e.target.value));
     }, [dispatch]);
 
+    console.log(dataWalas);
+
     return (
         <div >
             <Sidebar Menus={Menus} active={active}>
@@ -120,7 +123,7 @@ const Record = () => {
                                     />
                                 </div>
                             </h1>
-                            <div className="overflow-x-scroll mt-2 rounded-lg shadow mb-20">
+                            <div className="overflow-x-scroll mt-2 rounded-lg shadow">
                                 <table className='w-full'>
                                     <thead className='bg-slate-900 text-white border-b-2 border-gray-200 py-1'>
                                         <tr >
@@ -134,7 +137,7 @@ const Record = () => {
                                         </tr>
                                     </thead>
                                     <tbody className='divide-y divide-gray-100 '>
-                                        {dataWalas.item && dataWalas.item.map((walas, i) => (
+                                        {dataWalas?.items && dataWalas?.items?.data.map((walas, i) => (
                                             <tr key={i} className={`bg-white`} >
                                                 <>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
@@ -163,12 +166,12 @@ const Record = () => {
                                                         </button>
                                                     </td>
                                                 </>
-
                                             </tr>
                                         ))}
                                     </tbody>
                                 </table>
                             </div>
+                            <Paginate items={dataWalas} dataDispatch={paginateWalas} />
                         </div>
                     )}
 

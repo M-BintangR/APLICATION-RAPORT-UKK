@@ -6,13 +6,14 @@ import Alert from '../../../components/Alert';
 import ModalUpdate from './ModalUpdate';
 import ModalCreate from './ModalCreate';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkCreateUser, checkUpdateUser, pendingUser, selectAllUser, userDelete, userRecord, userSearch } from '../../../features/dashboard/UserSlice';
+import { checkCreateUser, checkUpdateUser, paginateUser, pendingUser, selectAllUser, userDelete, userRecord, userSearch } from '../../../features/dashboard/UserSlice';
 import { BiEdit, BiTrash } from 'react-icons/bi';
 import { useEffect } from 'react';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
 import { TabelUser } from '../../../components/FieldTable';
 import { useCallback } from 'react';
+import Paginate from '../../../components/Paginate';
 
 const Record = () => {
     const dispatch = useDispatch();
@@ -121,7 +122,7 @@ const Record = () => {
                                     />
                                 </div>
                             </h1>
-                            <div className="overflow-x-scroll mt-2 rounded-lg shadow mb-20">
+                            <div className="overflow-x-scroll mt-2 rounded-lg shadow">
                                 <table className='w-full'>
                                     <thead className='bg-slate-900 text-white border-b-2 border-gray-200 py-1'>
                                         <tr >
@@ -133,7 +134,7 @@ const Record = () => {
                                         </tr>
                                     </thead>
                                     <tbody className='divide-y divide-gray-100 '>
-                                        {dataUser?.items && dataUser?.items.map((user, i) => (
+                                        {dataUser?.items && dataUser?.items?.data.map((user, i) => (
                                             <tr key={i} className={`bg-white`} >
                                                 <>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
@@ -165,6 +166,7 @@ const Record = () => {
                                     </tbody>
                                 </table>
                             </div>
+                            <Paginate items={dataUser} dataDispatch={paginateUser} />
                         </div>
                     )}
 

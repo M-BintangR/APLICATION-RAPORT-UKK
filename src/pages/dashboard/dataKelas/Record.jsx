@@ -7,12 +7,13 @@ import ModalCreate from './ModalCreate';
 import ModalUpdate from './ModalUpdate';
 import Alert from '../../../components/Alert';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkCreateKelas, checkUpdateKelas, kelasDelete, kelasRecord, kelasSearch, pendingKelas, selectAllKelas } from '../../../features/dashboard/KelasSlice';
+import { checkCreateKelas, checkUpdateKelas, kelasDelete, kelasRecord, kelasSearch, paginateKelas, pendingKelas, selectAllKelas } from '../../../features/dashboard/KelasSlice';
 import { useEffect } from 'react';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
 import { TabelKelas } from '../../../components/FieldTable';
 import { useCallback } from 'react';
+import Paginate from '../../../components/Paginate';
 
 
 const Record = () => {
@@ -122,7 +123,7 @@ const Record = () => {
                                     />
                                 </div>
                             </h1>
-                            <div className="overflow-x-scroll mt-2 rounded-lg shadow mb-20">
+                            <div className="overflow-x-scroll mt-2 rounded-lg shadow">
                                 <table className='w-full'>
                                     <thead className='bg-slate-900 text-white border-b-2 border-gray-200 py-1'>
                                         <tr >
@@ -134,7 +135,7 @@ const Record = () => {
                                         </tr>
                                     </thead>
                                     <tbody className='divide-y divide-gray-100 '>
-                                        {dataKelas.items && dataKelas?.items.map((kelas, i) => (
+                                        {dataKelas?.items && dataKelas?.items?.data.map((kelas, i) => (
                                             <tr key={i} className={`bg-white`} >
                                                 <>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
@@ -161,6 +162,7 @@ const Record = () => {
                                     </tbody>
                                 </table>
                             </div>
+                            <Paginate items={dataKelas} dataDispatch={paginateKelas} />
                         </div>
                     )}
 

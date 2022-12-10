@@ -7,11 +7,12 @@ import ModalCreate from './ModalCreate';
 import ModalUpdate from './ModalUpdate';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkCreateJurusan, checkPendingJurusan, checkUpdateJurusan, jurusanDelete, jurusanRecord, jurusanSearch, selectAllJurusan } from '../../../features/dashboard/JurusanSlice';
+import { checkCreateJurusan, checkPendingJurusan, checkUpdateJurusan, jurusanDelete, jurusanRecord, jurusanSearch, paginateJurusan, selectAllJurusan } from '../../../features/dashboard/JurusanSlice';
 import Alert from '../../../components/Alert';
 import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
 import { TabelJurusans } from '../../../components/FieldTable';
+import Paginate from '../../../components/Paginate';
 
 const Record = () => {
     const dispatch = useDispatch();
@@ -120,7 +121,7 @@ const Record = () => {
                                     />
                                 </div>
                             </h1>
-                            <div className="overflow-x-scroll mt-2 rounded-lg shadow mb-20">
+                            <div className="overflow-x-scroll mt-2 rounded-lg shadow">
                                 <table className='w-full'>
                                     <thead className='bg-slate-900 text-white border-b-2 border-gray-200 py-1'>
                                         <tr >
@@ -135,7 +136,7 @@ const Record = () => {
                                     </thead>
                                     <tbody className='divide-y divide-gray-100 '>
 
-                                        {dataJurusan.items && dataJurusan?.items.map((jurusan, i) => (
+                                        {dataJurusan?.items && dataJurusan?.items?.data.map((jurusan, i) => (
                                             <tr key={i} className={`bg-white`} >
                                                 <>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
@@ -162,6 +163,7 @@ const Record = () => {
                                     </tbody>
                                 </table>
                             </div>
+                            <Paginate items={dataJurusan} dataDispatch={paginateJurusan} />
                         </div>
                     )}
 
