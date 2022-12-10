@@ -16,7 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $items = User::latest()->get();
+        $items = User::orderBy('created_at', 'desc')
+            ->paginate(5);
 
         if ($items) {
             return response()->json([
@@ -95,7 +96,8 @@ class UserController extends Controller
     {
         $search = User::where('nama_pengguna', 'like', "%{$query}%")
             ->orWhere('username', 'like', "%{$query}%")
-            ->orWhere('role', 'like', "%{$query}%")->latest()->get();
+            ->orWhere('role', 'like', "%{$query}%")->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         if ($query) {
             return response()->json([

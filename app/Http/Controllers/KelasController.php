@@ -14,7 +14,8 @@ class KelasController extends Controller
      */
     public function index()
     {
-        $items = Kelas::latest()->get();
+        $items = Kelas::orderBy('created_at', 'desc')
+            ->paginate(5);
 
         if ($items) {
             return response()->json([
@@ -51,7 +52,8 @@ class KelasController extends Controller
     {
         $search = Kelas::where('nama_kelas', 'like', "%{$query}%")
             ->orWhere('level', 'like', "%{$query}%")
-            ->latest()->get();
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         if ($query) {
             return response()->json([

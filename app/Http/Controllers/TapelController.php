@@ -15,7 +15,8 @@ class TapelController extends Controller
      */
     public function index()
     {
-        $items = Tapel::latest()->get();
+        $items = Tapel::orderBy('created_at', 'desc')
+            ->paginate(5);
 
         if ($items) {
             return response()->json([
@@ -53,7 +54,9 @@ class TapelController extends Controller
     {
         $search = Tapel::where('tahun_pelajaran', 'like', "%{$query}%")
             ->orWhere('semester', 'like', "%{$query}%")
-            ->orWhere('aktif', 'like', "%{$query}")->latest()->get();
+            ->orWhere('aktif', 'like', "%{$query}")
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         if ($query) {
             return response()->json([

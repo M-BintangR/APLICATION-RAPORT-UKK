@@ -14,7 +14,8 @@ class JurusanController extends Controller
      */
     public function index()
     {
-        $items = Jurusan::latest()->get();
+        $items = Jurusan::orderBy('created_at', 'desc')
+            ->paginate(5);
 
         if ($items) {
             return response()->json([
@@ -52,7 +53,9 @@ class JurusanController extends Controller
     public function search($query)
     {
         $search = Jurusan::where('nama_jurusan', 'like', "%{$query}%")
-            ->orWhere('kode_jurusan', 'like', "%{$query}%")->latest()->get();
+            ->orWhere('kode_jurusan', 'like', "%{$query}%")
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         if ($query) {
             return response()->json([

@@ -16,7 +16,9 @@ class GuruController extends Controller
      */
     public function index()
     {
-        $items = Guru::with(['mapel', 'walas'])->latest()->get();
+        $items = Guru::with(['mapel', 'walas'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         if ($items) {
             return response()->json([
@@ -49,7 +51,9 @@ class GuruController extends Controller
                 ->where('nama_mapel', 'like', "%{$request}%")
                 ->orWhere('kkm', 'like', "%{$request}%")
                 ->orWhere('level', 'like', "%{$request}%");
-        })->latest()->get();
+        })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         if ($request) {
             return response()->json([

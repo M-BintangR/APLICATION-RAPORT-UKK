@@ -94,7 +94,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/data/tapel/{tapel:id}/edit', [TapelController::class, 'edit']);
         Route::put('/data/tapel/{tapel:id}', [TapelController::class, 'update']);
         Route::delete('/data/tapel/{tapel:id}', [TapelController::class, 'destroy']);
-        Route::get('/data/tapel/{query}', [TapelController::class, 'search']);
+        Route::get('/data/tapel/{query}', [TapelController::class, 'index']);
 
         //? Route Data Siswa
 

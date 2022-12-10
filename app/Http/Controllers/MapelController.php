@@ -16,7 +16,8 @@ class MapelController extends Controller
      */
     public function index()
     {
-        $items = Mapel::with(['jurusan'])->latest()->get();
+        $items = Mapel::with(['jurusan'])->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         if ($items) {
             return response()->json([
@@ -61,7 +62,8 @@ class MapelController extends Controller
             $data
                 ->where('nama_jurusan', 'like', "%{$query}%")
                 ->orWhere('kode_jurusan', 'like', "%{$query}%");
-        })->latest()->get();
+        })->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         if ($query) {
             return response()->json([

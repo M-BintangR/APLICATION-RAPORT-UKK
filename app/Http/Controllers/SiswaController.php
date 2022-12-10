@@ -17,7 +17,8 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $items = Siswa::with(['kelas', 'jurusan'])->latest()->get();
+        $items = Siswa::with(['kelas', 'jurusan'])->orderBy('created_at', 'desc')
+            ->paginate(5);;
 
         if ($items) {
             return response()->json([
@@ -68,7 +69,8 @@ class SiswaController extends Controller
             })->orWhereHas('jurusan', function ($data) use ($query) {
                 $data
                     ->where('kode_jurusan', 'like', "%{$query}%");
-            })->latest()->get();
+            })->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         if ($query) {
             return response()->json([
