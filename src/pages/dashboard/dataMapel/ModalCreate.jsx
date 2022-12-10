@@ -133,7 +133,7 @@ const Create = ({ isVisible, onClose }) => {
                                                 onChange={handleChange}
                                             >
                                                 <option>- Pilih Jurusan -</option>
-                                                {jurusans?.items.map((jurusan, i) => (
+                                                {jurusans?.items?.data.map((jurusan, i) => (
                                                     <option key={i} value={jurusan?.id}>{jurusan?.kode_jurusan}</option>
                                                 ))}
                                             </select>

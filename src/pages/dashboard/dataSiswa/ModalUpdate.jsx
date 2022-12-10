@@ -200,7 +200,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                                 onChange={handleChange}
                                                 defaultValue={dataEditSiswa?.item.id_kelas}
                                             >
-                                                {dataKelas.items && dataKelas.items.map((kelas, i) => (
+                                                {dataKelas?.items && dataKelas?.items?.data.map((kelas, i) => (
                                                     kelas.id === dataEditSiswa?.item.id_kelas && (
                                                         <option key={i} value={kelas?.id}>
                                                             {kelas?.level}-
@@ -208,7 +208,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                                         </option>
                                                     )
                                                 ))}
-                                                {dataKelas.items && dataKelas?.items.map((kelas, i) => (
+                                                {dataKelas?.items && dataKelas?.items?.data.map((kelas, i) => (
                                                     <option key={i} value={kelas?.id}>
                                                         {kelas?.level}-
                                                         {kelas?.nama_kelas}
@@ -236,12 +236,12 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                                 onChange={handleChange}
                                                 defaultValue={dataEditSiswa?.item.id_jurusan}
                                             >
-                                                {dataJurusan.items && dataJurusan.items.map((jurusan, i) => (
+                                                {dataJurusan?.items && dataJurusan?.items?.data.map((jurusan, i) => (
                                                     jurusan.id === dataEditSiswa?.item.id_jurusan && (
                                                         <option key={i} value={jurusan?.id}>{jurusan?.kode_jurusan}</option>
                                                     )
                                                 ))}
-                                                {dataJurusan.items && dataJurusan?.items.map((jurusan, i) => (
+                                                {dataJurusan?.items && dataJurusan?.items?.data.map((jurusan, i) => (
                                                     <option key={i} value={jurusan?.id}>{jurusan?.kode_jurusan}</option>
                                                 ))}
 

@@ -50,7 +50,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
 
     return (
         <div>
-            {isVisible && dataJurusan.items && dataKelas.items && (
+            {isVisible && dataJurusan?.items && dataKelas?.items && (
                 <div className="fixed inset-0 z-50 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
                     <div className="bg-white p-2 rounded">
                         <div className="md:w-[600px] flex flex-col">
@@ -181,7 +181,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 onChange={handleChange}
                                             >
                                                 <option>- Pilih Kelas -</option>
-                                                {dataKelas?.items.map((kelas, i) => (
+                                                {dataKelas?.items?.data.map((kelas, i) => (
                                                     <option key={i} value={kelas?.id}>
                                                         {kelas?.level}-
                                                         {kelas?.nama_kelas}
@@ -211,7 +211,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 onChange={handleChange}
                                             >
                                                 <option>- Pilih Jurusan -</option>
-                                                {dataJurusan?.items.map((jurusan, i) => (
+                                                {dataJurusan?.items?.data.map((jurusan, i) => (
                                                     <option key={i} value={jurusan?.id}>{jurusan?.kode_jurusan}</option>
                                                 ))}
                                             </select>

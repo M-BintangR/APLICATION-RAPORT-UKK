@@ -77,7 +77,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 onChange={handleChange}
                                             >
                                                 <option>- Pilih Kelas -</option>
-                                                {dataKelas?.items.map((kelas, i) => (
+                                                {dataKelas?.items?.data.map((kelas, i) => (
                                                     <option key={i} value={kelas?.id}>
                                                         {kelas.level ? kelas?.level : '-'}-
                                                         {kelas.nama_kelas ? kelas?.nama_kelas : '-'}
@@ -104,7 +104,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 onChange={handleChange}
                                             >
                                                 <option>- Pilih Guru -</option>
-                                                {dataGuru?.items.map((guru, i) => (
+                                                {dataGuru?.items?.data.map((guru, i) => (
                                                     <option key={i} value={guru?.id}>{guru?.nama_guru}</option>
                                                 ))}
                                             </select>

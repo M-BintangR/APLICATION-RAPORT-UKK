@@ -145,12 +145,12 @@ const ModalUpdate = ({ isVisible, onClose, idUser }) => {
                                                 onChange={handleChange}
                                                 defaultValue={dataEditMapel?.item.id_jurusan}
                                             >
-                                                {dataJurusan && dataJurusan.items.map((jurusan, i) => (
+                                                {dataJurusan && dataJurusan?.items?.data.map((jurusan, i) => (
                                                     jurusan.id === dataEditMapel.item.id_jurusan && (
                                                         <option key={i} value={jurusan?.id}>{jurusan?.kode_jurusan}</option>
                                                     )
                                                 ))}
-                                                {dataJurusan && dataJurusan?.items.map((jurusan, i) => (
+                                                {dataJurusan && dataJurusan?.items?.data.map((jurusan, i) => (
                                                     <option key={i} value={jurusan?.id}>{jurusan?.kode_jurusan}</option>
                                                 ))}
 

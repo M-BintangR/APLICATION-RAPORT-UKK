@@ -89,7 +89,7 @@ const ModalCreate = ({ isVisible, onClose }) => {
                                                 onChange={(e) => handleChange(e)}
                                             >
                                                 <option>-Pilih Mapel Guru-</option>
-                                                {mapels.items && mapels?.items.map((mapel, i) => (
+                                                {mapels.items && mapels?.items?.data.map((mapel, i) => (
                                                     <option key={i} value={mapel?.id}>{mapel?.nama_mapel}</option>
                                                 ))}
                                             </select>

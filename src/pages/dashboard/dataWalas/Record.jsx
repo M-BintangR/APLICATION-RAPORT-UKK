@@ -83,8 +83,6 @@ const Record = () => {
         dispatch(walasSearch(e.target.value));
     }, [dispatch]);
 
-    console.log(dataWalas);
-
     return (
         <div >
             <Sidebar Menus={Menus} active={active}>

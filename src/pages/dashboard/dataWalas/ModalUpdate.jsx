@@ -88,7 +88,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                                 onChange={handleChange}
                                                 defaultValue={dataEditWalas?.item.id_kelas}
                                             >
-                                                {dataKelas && dataKelas.items.map((kelas, i) => (
+                                                {dataKelas && dataKelas?.items?.data.map((kelas, i) => (
                                                     kelas.id === dataEditWalas.item.id_kelas && (
                                                         <option key={i} value={kelas.id}>
                                                             {kelas.level ? kelas?.level : '-'}
@@ -96,7 +96,7 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                                         </option>
                                                     )
                                                 ))}
-                                                {dataKelas && dataKelas?.items.map((kelas, i) => (
+                                                {dataKelas && dataKelas?.items?.data.map((kelas, i) => (
                                                     <option key={i} value={kelas.id}>
                                                         {kelas.level ? kelas?.level : '-'}-
                                                         {kelas.nama_kelas ? kelas?.nama_kelas : '-'}
@@ -122,12 +122,12 @@ const ModalUpdate = ({ isVisible, idUser, onClose }) => {
                                                 onChange={handleChange}
                                                 defaultValue={dataEditWalas?.item.id_kelas}
                                             >
-                                                {dataGuru && dataGuru.items.map((guru, i) => (
+                                                {dataGuru && dataGuru?.items?.data.map((guru, i) => (
                                                     guru.id === dataEditWalas.item.id_guru && (
                                                         <option key={i} value={guru.id}>{guru?.nama_guru}</option>
                                                     )
                                                 ))}
-                                                {dataGuru && dataGuru?.items.map((guru, i) => (
+                                                {dataGuru && dataGuru?.items?.data.map((guru, i) => (
                                                     <option key={i} value={guru.id}>{guru?.nama_guru}</option>
                                                 ))}
 
