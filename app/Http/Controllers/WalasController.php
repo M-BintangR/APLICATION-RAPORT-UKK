@@ -23,7 +23,7 @@ class WalasController extends Controller
 
         if ($item) {
             return response()->json([
-                'item' => $item,
+                'items' => $item,
                 'message' => 'success',
             ], 200);
         }
@@ -66,7 +66,7 @@ class WalasController extends Controller
 
         if ($query) {
             return response()->json([
-                'item' => $search,
+                'items' => $search,
                 'message' => 'success',
             ], 200);
         }
