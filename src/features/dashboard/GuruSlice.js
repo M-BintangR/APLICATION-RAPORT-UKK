@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { GURU_CREATE_URL, GURU_DELETE_URL, GURU_EDIT_URL, GURU_RECORD_URL, GURU_SEARCH_URL, GURU_UPDATE_URL } from "../url/linkURL";
 
@@ -64,6 +64,17 @@ export const guruUpdate = createAsyncThunk('guruUpdate', async (initialUpdate) =
 export const guruSearch = createAsyncThunk('guruSearch', async (query) => {
     try {
         const res = await axios.get(GURU_SEARCH_URL + query, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
+export const paginateGuru = createAsyncThunk('paginateGuru', async (pageLink) => {
+    try {
+        const res = await axios.get(pageLink, {
             headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
         });
         return res.data;
@@ -169,7 +180,11 @@ const GuruSlice = createSlice({
 
             .addCase(guruSearch.fulfilled, (state, action) => {
                 state.items = action.payload;
-            });
+            })
+
+            .addCase(paginateGuru.fulfilled, (state, action) => {
+                state.items = action.payload;
+            })
 
     }
 });

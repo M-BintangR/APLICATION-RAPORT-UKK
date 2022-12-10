@@ -69,6 +69,17 @@ export const walasSearch = createAsyncThunk('walasSearch', async (query) => {
     }
 });
 
+export const paginateWalas = createAsyncThunk('paginateWalas', async (pageLink) => {
+    try {
+        const res = await axios.get(pageLink, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
 const initialState = {
     walasRecord: {},
     walasDelete: {},
@@ -162,7 +173,11 @@ const WalasSlice = createSlice({
 
             .addCase(walasSearch.fulfilled, (state, action) => {
                 state.walasRecord = action.payload;
-            });
+            })
+
+            .addCase(paginateWalas.fulfilled, (state, action) => {
+                state.walasRecord = action.payload;
+            })
     }
 
 });

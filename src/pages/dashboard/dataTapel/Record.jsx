@@ -14,6 +14,8 @@ import Loading from '../../../components/Loading';
 import { TabelTapel } from '../../../components/FieldTable';
 import { useCallback } from 'react';
 import Paginate from '../../../components/Paginate';
+import { paginateTapel } from '../../../features/dashboard/TapelSlice';
+
 
 const Record = () => {
     const dispatch = useDispatch();
@@ -166,7 +168,7 @@ const Record = () => {
                                     </tbody>
                                 </table>
                             </div>
-                            <Paginate items={dataTapel} />
+                            <Paginate items={dataTapel} dataDispatch={paginateTapel} />
                         </div>
                     )}
 

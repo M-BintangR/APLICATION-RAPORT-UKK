@@ -81,6 +81,17 @@ export const resetPassword = createAsyncThunk('resetPassword', async (initialRes
     }
 });
 
+export const paginateUser = createAsyncThunk('paginateUser', async (pageLink) => {
+    try {
+        const res = await axios.get(pageLink, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
 const initialState = {
     userRecord: {},
     userUpdate: {},
@@ -169,6 +180,10 @@ const UserSlice = createSlice({
 
             .addCase(resetPassword.fulfilled, (state, action) => {
                 state.resetPassword = action.payload;
+            })
+
+            .addCase(paginateUser.fulfilled, (state, action) => {
+                state.userRecord = action.payload;
             })
 
     }

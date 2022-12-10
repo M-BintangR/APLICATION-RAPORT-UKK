@@ -69,6 +69,17 @@ export const siswaSearch = createAsyncThunk('siswaSearch', async (query) => {
     }
 });
 
+export const paginateSiswa = createAsyncThunk('paginateSiswa', async (pageLink) => {
+    try {
+        const res = await axios.get(pageLink, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
 const initialState = {
     siswaRecord: {},
     siswaDelete: {},
@@ -162,7 +173,11 @@ const SiswaSlice = createSlice({
 
             .addCase(siswaSearch.fulfilled, (state, action) => {
                 state.siswaRecord = action.payload;
-            });
+            })
+
+            .addCase(paginateSiswa.fulfilled, (state, action) => {
+                state.siswaRecord = action.payload;
+            })
     }
 
 });

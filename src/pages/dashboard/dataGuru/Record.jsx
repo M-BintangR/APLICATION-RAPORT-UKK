@@ -5,7 +5,7 @@ import { AdminMenu } from '../../../components/Links';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkUpdateGuru, createGuruCheck, guruDelete, guruPending, guruRecord, guruSearch } from '../../../features/dashboard/GuruSlice';
+import { checkUpdateGuru, createGuruCheck, guruDelete, guruPending, guruRecord, guruSearch, paginateGuru } from '../../../features/dashboard/GuruSlice';
 import { selectAllGuru } from '../../../features/dashboard/GuruSlice';
 import Alert from '../../../components/Alert';
 import ModalCreate from './ModalCreate';
@@ -14,6 +14,7 @@ import Message from '../../../components/Message';
 import Loading from '../../../components/Loading';
 import { TabelGurus } from '../../../components/FieldTable';
 import { useCallback } from 'react';
+import Paginate from '../../../components/Paginate';
 
 const Record = () => {
     const Menus = AdminMenu;
@@ -124,7 +125,7 @@ const Record = () => {
                                     />
                                 </div>
                             </h1>
-                            <div className="overflow-x-scroll mt-2 rounded-lg shadow mb-20">
+                            <div className="overflow-x-scroll mt-2 rounded-lg shadow">
                                 <table className='w-full'>
                                     <thead className='bg-slate-900 text-white border-b-2 border-gray-200 py-1'>
                                         <tr >
@@ -138,7 +139,7 @@ const Record = () => {
                                         </tr>
                                     </thead>
                                     <tbody className='divide-y divide-gray-100 '>
-                                        {dataGuru.items && dataGuru?.items.map((data, i) => (
+                                        {dataGuru.items && dataGuru?.items.data.map((data, i) => (
                                             < tr key={i} className={`bg-white ${'data-' + data.id}`} >
                                                 <>
                                                     <td className='p-3 whitespace-nowrap text-gray-700 text-sm'>{i + 1}</td>
@@ -169,6 +170,7 @@ const Record = () => {
                                     </tbody>
                                 </table>
                             </div>
+                            <Paginate items={dataGuru} dataDispatch={paginateGuru} />
                         </div>
                     )}
                     {checkAlert && (

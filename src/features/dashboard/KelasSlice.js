@@ -69,6 +69,17 @@ export const kelasSearch = createAsyncThunk('kelasSearch', async (query) => {
     }
 });
 
+export const paginateKelas = createAsyncThunk('paginateKelas', async (pageLink) => {
+    try {
+        const res = await axios.get(pageLink, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
 const initialState = {
     kelasRecord: {},
     kelasDelete: {},
@@ -162,7 +173,11 @@ const KelasSlice = createSlice({
 
             .addCase(kelasSearch.fulfilled, (state, action) => {
                 state.kelasRecord = action.payload;
-            });
+            })
+
+            .addCase(paginateKelas.fulfilled, (state, action) => {
+                state.kelasRecord = action.payload;
+            })
     }
 
 });

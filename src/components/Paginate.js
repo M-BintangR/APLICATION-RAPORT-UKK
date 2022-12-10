@@ -2,14 +2,13 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
-import { paginateTapel } from '../features/dashboard/TapelSlice';
 
-const Paginate = ({ items }) => {
+const Paginate = ({ items, dataDispatch }) => {
     const dispatch = useDispatch();
 
     const paginateAction = (pageLink) => {
         if (pageLink !== null) {
-            dispatch(paginateTapel(pageLink));
+            dispatch(dataDispatch(pageLink));
         }
     }
 
@@ -25,7 +24,7 @@ const Paginate = ({ items }) => {
                                 </button>
                             )}
                             {link?.url && link?.label !== 'Sebelumnya' && link?.label !== 'Berikutnya' && (
-                                <button onClick={() => paginateAction(link?.url)} className={`border-2 h-12 w-12 duration-300 border-indigo-600 hover:bg-indigo-600 hover:text-white border-l-0 ${link?.active && 'bg-indigo-600 text-white'}`}>
+                                <button onClick={() => paginateAction(link?.url)} className={`border-2 h-12 w-12 border-indigo-600 hover:bg-indigo-600 hover:text-white border-l-0 ${link?.active && 'bg-indigo-600 text-white'}`}>
                                     {link?.label}
                                 </button>
                             )}

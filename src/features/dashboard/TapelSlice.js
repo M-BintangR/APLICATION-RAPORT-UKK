@@ -23,7 +23,7 @@ export const paginateTapel = createAsyncThunk('tapelPaginate', async (pageLink) 
     } catch (err) {
         return err;
     }
-})
+});
 
 export const tapelCreate = createAsyncThunk('tapelCreate', async (initialCreate) => {
     try {

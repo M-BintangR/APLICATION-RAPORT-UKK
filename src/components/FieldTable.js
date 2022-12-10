@@ -1,10 +1,6 @@
 
 export const TabelGurus = [
-    {
-        title: 'No.',
-        short: true
-
-    },
+    { title: 'No.', short: true },
     { title: 'Nama Guru' },
     { title: 'Mapel' },
     { title: 'Level' },

@@ -69,6 +69,17 @@ export const jurusanSearch = createAsyncThunk('jurusanSearch', async (query) => 
     }
 });
 
+export const paginateJurusan = createAsyncThunk('paginateJurusan', async (pageLink) => {
+    try {
+        const res = await axios.get(pageLink, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
 const initialState = {
     jurusanRecord: {},
     jurusanDelete: {},
@@ -162,7 +173,11 @@ const JurusanSlice = createSlice({
 
             .addCase(jurusanSearch.fulfilled, (state, action) => {
                 state.jurusanRecord = action.payload;
-            });
+            })
+
+            .addCase(paginateJurusan.fulfilled, (state, action) => {
+                state.jurusanRecord = action.payload;
+            })
 
     }
 

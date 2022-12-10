@@ -69,6 +69,17 @@ export const mapelSearch = createAsyncThunk('mapelSearch', async (query) => {
     }
 });
 
+export const paginateMapel = createAsyncThunk('paginateMapel', async (pageLink) => {
+    try {
+        const res = await axios.get(pageLink, {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}` }
+        });
+        return res.data;
+    } catch (err) {
+        return err;
+    }
+});
+
 const initialState = {
     items: {},
     mapelCreate: {},
@@ -155,7 +166,11 @@ const MapelSlice = createSlice({
 
             .addCase(mapelSearch.fulfilled, (state, action) => {
                 state.items = action.payload;
-            });
+            })
+
+            .addCase(paginateMapel.fulfilled, (state, action) => {
+                state.items = action.payload;
+            })
 
 
 
